@@ -468,7 +468,7 @@ button {
 	overflow: auto;
 	overflow-x: hidden;
 	-webkit-overflow-scrolling: touch;
-	padding: 15px 20px;
+	padding: 13px 0px;
 	position: absolute;
 	top: 120px;
 	width: 100%;
@@ -477,7 +477,11 @@ button {
 	display: block;
 	word-break: break-all;
 	text-align: justify;
-	margin-bottom: 5px;
+	width: 100%;
+	padding: 2px 20px 2px;
+}
+#chat .names .user:nth-child(even) {
+	background: rgba(204, 204, 204, 0.2);
 }
 #connect input {
 	width: 100%;
