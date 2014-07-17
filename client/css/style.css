@@ -257,7 +257,7 @@ button {
 #header button:hover {
 	opacity: 1;
 }
-#header #lt {	
+#header #lt {
 	left: 4px;
 	text-align: left;
 }
@@ -475,7 +475,9 @@ button {
 }
 #chat .names button {
 	display: block;
-	line-height: 1.6em;
+	word-break: break-all;
+	text-align: justify;
+	margin-bottom: 5px;
 }
 #connect input {
 	width: 100%;
