@@ -257,7 +257,7 @@ button {
 #header button:hover {
 	opacity: 1;
 }
-#header #lt {	
+#header #lt {
 	left: 4px;
 	text-align: left;
 }
@@ -468,14 +468,20 @@ button {
 	overflow: auto;
 	overflow-x: hidden;
 	-webkit-overflow-scrolling: touch;
-	padding: 15px 20px;
+	padding: 13px 0px;
 	position: absolute;
 	top: 120px;
 	width: 100%;
 }
 #chat .names button {
 	display: block;
-	line-height: 1.6em;
+	word-break: break-all;
+	text-align: justify;
+	width: 100%;
+	padding: 2px 20px 2px;
+}
+#chat .names .user:nth-child(even) {
+	background: rgba(204, 204, 204, 0.2);
 }
 #connect input {
 	width: 100%;
