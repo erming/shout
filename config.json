@@ -1,0 +1,5 @@
+{
+    // webserver port
+	"port": 9000,
+    "public": true
+}
