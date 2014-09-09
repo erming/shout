@@ -1,4 +1,4 @@
-# Shout [![](https://badge.fury.io/js/shout.png)](https://www.npmjs.org/package/shout)
+# Shout [![](https://badge.fury.io/js/shout.svg)](https://www.npmjs.org/package/shout)
 
 __What is it?__  
 Shout is a web IRC client that you host on your own server.
