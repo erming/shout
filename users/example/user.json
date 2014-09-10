@@ -5,7 +5,7 @@
 		"name": "Rizon",
 		"host": "irc.rizon.net",
 		"port": 6667,
-		"password": "serverpw"
+		"password": "serverpw",
 		"nick": "example",
 		"realname": "Example User",
 		"commands": [
