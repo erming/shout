@@ -7,6 +7,9 @@ var fs = require("fs");
 var http = require("connect");
 var io = require("socket.io");
 
+var local;
+if(config.language != "en") local = require("../localizations/" + config.language + ".json");
+
 var sockets = null;
 var manager = new ClientManager();
 
@@ -40,12 +43,21 @@ module.exports = function(port, host, isPublic) {
 	}
 };
 
+var Helpers = {
+	lookup: function(index, fallback) {
+		if(local)
+			return local[index];
+		else return fallback;
+	}
+}
+
 function index(req, res, next) {
 	if (req.url != "/") return next();
 	return fs.readFile("client/index.html", "utf-8", function(err, file) {
 		var data = _.merge(
 			require("../package.json"),
-			config
+			config,
+			Helpers
 		);
 		res.end(_.template(
 			file,

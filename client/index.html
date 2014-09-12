@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
 	<head>
-
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +42,7 @@
 							</div>
 							<div class="col-xs-12">
 								<label>
-								Username
+								<% lookup("username", "Username"); %>
 								<input class="input" name="user">
 								</label>
 							</div>
@@ -91,29 +90,29 @@
 							</div>
 							<div class="clearfix"></div>
 							<div class="col-xs-12">
-								<h2>User Preferences</h2>
+								<h2><%= lookup("user_preferences", "User Preferences") %></h2>
 							</div>
 							<div class="col-xs-5">
 								<label>
-								Nick
+								<%= lookup("nick", "Nick") %>
 								<input class="input" name="nick" value="shout-user">
 								</label>
 							</div>
 							<div class="col-xs-7">
 								<label>
-								Real Name
+								<%= lookup("real_name", "Real Name") %>
 								<input class="input" name="realname" class="input" value="Shout User">
 								</label>
 							</div>
 							<div class="col-xs-12">
 								<label>
-								Channels
+								<%= lookup("channels", "Channels") %>
 								<input class="input" name="join" class="input" value="#shout-irc">
 								</label>
 							</div>
 							<div class="col-xs-12">
 								<button type="submit" class="btn">
-									Connect
+									<%= lookup("connect", "Connect") %>
 								</button>
 							</div>
 						</div>
