@@ -8,9 +8,7 @@ USER root
 RUN npm install -g shout
 
 # copy server config
-# NOTE: you can skip this step if you want shout to be public, and require no user login
-RUN rm /usr/local/lib/node_modules/shout/config.json
-COPY ./config.json /usr/local/lib/node_modules/shout/config.json
+ADD example-config.json /usr/local/lib/node_modules/shout/config.json
 
 # create user
 RUN useradd -m -d /home/shout -p shout shout
