@@ -4,10 +4,10 @@ __What is it?__
 Shout is a web IRC client that you host on your own server.
 
 __What features does it have?__  
-- Multiple user support
-- Stays connected even when you close the browser
-- Connect from multiple devices at once
-- Responsive layout — works well on your smartphone
+- Multiple user support.
+- Stays connected even when you close the browser.
+- Connect from multiple devices at once.
+- Responsive layout — works well on your smartphone.
 - _.. and more!_
 
 __Ok, you caught my attention. I want to try it!__  
@@ -15,7 +15,7 @@ Here's a Shout server running in public mode, which allows for anonymous connect
 
 ### [Try the Demo](http://demo.shout-irc.com/)
 
-_Clicking the link above will open http://demo.shout-irc.com/_
+_Clicking the link above will open http://demo.shout-irc.com/_.
 
 ## Install
 
@@ -53,7 +53,7 @@ The settings:
 
 __port__  
 The default port to be used.  
-You can override this by running `shout --port 80`
+You can override this by running `shout --port 80`.
 
 __public__  
 Set to either `true|false`.  
