@@ -8,7 +8,7 @@ USER root
 RUN npm install -g shout
 
 # copy server config
-ADD example-config.json /usr/local/lib/node_modules/shout/config.json
+ADD docker-config.json /usr/local/lib/node_modules/shout/config.json
 
 # create user
 RUN useradd -m -d /home/shout -p shout shout
