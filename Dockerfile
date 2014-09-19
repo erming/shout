@@ -23,7 +23,7 @@ USER shout
 
 # add users to shout's folder in home
 # NOTE: you can skip this step if you want shout to be public, and require no user login
-COPY ./users/<username>/user.json /home/shout/.shout/users/<username>/user.json
+# COPY ./users/<username>/user.json /home/shout/.shout/users/<username>/user.json
 
 # expose server port
 EXPOSE 9000
