@@ -14,11 +14,10 @@ module.exports = function(irc, network) {
 				chan: chan.id,
 				users: chan.users
 			});
-			var splitQuitMessage = data.message.split("Quit: ");
 			var msg = new Msg({
 				type: Msg.Type.QUIT,
 				from: data.nick,
-				text: splitQuitMessage[1]
+				text: "(" + data.message + ")"
 			});
 			chan.messages.push(msg);
 			client.emit("msg", {
