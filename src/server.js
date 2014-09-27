@@ -78,8 +78,11 @@ function index(req, res, next) {
 
 function init(socket, client, token) {
 	if (!client) {
-		socket.emit("auth");
+		socket.emit("auth", { allow_registration: config.allow_registration });
 		socket.on("auth", auth);
+		if (!config.public && config.allow_registration) {
+			socket.on("register", register);
+		}
 	} else {
 		socket.on(
 			"input",
@@ -153,8 +156,18 @@ function auth(data) {
 		});
 		if (!success) {
 			if (!data.token) {
-				socket.emit("auth");
+				socket.emit("auth", { allow_registration: config.allow_registration });
 			}
 		}
+	}
+}
+
+function register(data) {
+	var success = manager.addUser(data.user, data.password);
+	if (success) {
+		manager.loadUser(data.user);
+		auth.call(this, data);
+	} else {
+		this.emit("auth", { allow_registration: config.allow_registration });
 	}
 }

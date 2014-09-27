@@ -11,6 +11,15 @@ module.exports = {
 	public: true,
 
 	//
+	// Allow registration over the web.
+	// Only applicable if the server is private.
+	//
+	// @type     boolean
+	// @default  false
+	//
+	allow_registration: false,
+
+	//
 	// Allow connections from this host.
 	//
 	// @type     string

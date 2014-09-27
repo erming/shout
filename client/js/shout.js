@@ -76,6 +76,7 @@ $(function() {
 			refresh();
 			return;
 		}
+		$("#register").toggleClass("hidden", !data.allow_registration);
 		var token = $.cookie("token");
 		if (token) {
 			$.removeCookie("token");
@@ -352,7 +353,6 @@ $(function() {
 		.tab(complete, {hint: false});
 
 	var form = $("#form");
-	var submit = $("#submit");
 
 	form.on("submit", function(e) {
 		e.preventDefault();
@@ -560,7 +560,6 @@ $(function() {
 	});
 
 	var windows = $("#windows");
-	var forms = $("#sign-in, #connect");
 
 	windows.on("show", "#sign-in", function() {
 		var self = $(this);
@@ -578,16 +577,7 @@ $(function() {
 		$(this).select();
 	});
 
-	forms.on("submit", "form", function(e) {
-		e.preventDefault();
-		var event = "auth";
-		var form = $(this);
-		if (form.closest(".window").attr("id") == "connect") {
-			event = "conn";
-			form.find(".btn")
-				.attr("disabled", true)
-				.end();
-		}
+	function submit_form(form, event) {
 		var values = {};
 		$.each(form.serializeArray(), function(i, obj) {
 			if (obj.value !== "") {
@@ -605,6 +595,25 @@ $(function() {
 		socket.emit(
 			event, values
 		);
+	}
+
+	$("#sign-in, #connect").on("submit", "form", function(e) {
+		e.preventDefault();
+		var event = "auth";
+		var form = $(this);
+		if (form.closest(".window").attr("id") == "connect") {
+			event = "conn";
+			form.find(".btn")
+				.attr("disabled", true)
+				.end();
+		}
+		submit_form(form, event);
+	});
+
+	$("#register").on("click", function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		submit_form($(this).closest("form"), "register");
 	});
 
 	Mousetrap.bind([

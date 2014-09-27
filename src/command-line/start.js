@@ -18,7 +18,7 @@ program
 		} else if (program.private) {
 			isPublic = false;
 		}
-		if (!isPublic && !users.length) {
+		if (!isPublic && !config.allow_registration && !users.length) {
 			console.log("");
 			console.log("No users found!");
 			console.log("Create a new user with 'shout add <name>'.");
