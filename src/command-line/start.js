@@ -12,7 +12,13 @@ program
 	.description("Start the server")
 	.action(function() {
 		var users = new ClientManager().getUsers();
-		if (!config.public && !users.length) {
+		var isPublic = config.public;
+		if (program.public) {
+			isPublic = true;
+		} else if (program.private) {
+			isPublic = false;
+		}
+		if (!isPublic && !users.length) {
 			console.log("");
 			console.log("No users found!");
 			console.log("Create a new user with 'shout add <name>'.");
@@ -20,12 +26,6 @@ program
 		} else {
 			var host = program.host || process.env.IP || config.host;
 			var port = program.port || process.env.PORT || config.port;
-			var mode = config.public;
-			if (program.public) {
-				mode = true;
-			} else if (program.private) {
-				mode = false;
-			}
-			shout(port, host, mode);
+			shout(port, host, isPublic);
 		}
 	});
