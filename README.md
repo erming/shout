@@ -8,7 +8,7 @@ __What features does it have?__
 - Stays connected even when you close the browser
 - Connect from multiple devices at once
 - Responsive layout — works well on your smartphone
-- _.. and more!_
+- _... and more!_
 
 __Ok, you caught my attention. I want to try it!__  
 Here's a Shout server running in public mode, which allows for anonymous connections:
