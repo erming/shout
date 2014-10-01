@@ -1,5 +1,4 @@
 var ClientManager = new require("../clientManager");
-var bcrypt = require("bcrypt");
 var fs = require("fs");
 var program = require("commander");
 var mkdirp = require("mkdirp");
@@ -52,10 +51,9 @@ program
 
 function add(manager, name, password) {
 	console.log("");
-	var hash = bcrypt.hashSync(password, 8);
 	manager.addUser(
 		name,
-		hash
+		password
 	);
 	console.log("User '" + name + "' created:");
 	console.log(Helper.resolveHomePath("users", name, "user.json"));

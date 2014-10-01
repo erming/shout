@@ -1,4 +1,5 @@
 var _ = require("lodash");
+var bcrypt = require("bcrypt");
 var fs = require("fs");
 var Client = require("./client");
 var mkdirp = require("mkdirp");
@@ -82,7 +83,7 @@ ClientManager.prototype.addUser = function(name, password) {
 		var path = Helper.resolveHomePath("users", name);
 		var user = {
 			user: name,
-			password: password || "",
+			password: bcrypt.hashSync(password || "", 8),
 			networks: []
 		};
 		fs.mkdirSync(path);
