@@ -8,6 +8,7 @@ $(function() {
 		"/disconnect",
 		"/invite",
 		"/join",
+		"/j", // alias of /join
 		"/kick",
 		"/leave",
 		"/mode",
