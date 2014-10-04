@@ -12,10 +12,15 @@ __What features does it have?__
 - Responsive layout — works well on your smartphone
 - _.. and more!_
 
-## Install
+## Install & Update
 
 ```
 sudo npm install -g shout
+```
+
+Whatch out, doing an install a second time will whipe out your server configuration file so you should instead update with:
+```
+sudo npm update -g shout
 ```
 
 ## Usage
