@@ -705,7 +705,7 @@ $(function() {
 		var users = chat.find(".active")
 			.find(".names .user")
 			.each(function() {
-				words.push($(this).text().replace(/[+%@~]/, ""));
+				words.push($(this).text().replace(/[+%@~]/, "") + ": ");
 			});
 		var channels = sidebar.find(".channel")
 			.each(function() {
