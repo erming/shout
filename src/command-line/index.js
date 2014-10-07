@@ -24,7 +24,7 @@ if (program.home) {
 	var config = Helper.HOME + "/config.js";
 	if (!fs.existsSync(config)) {
 		mkdirp.sync(Helper.HOME);
-		fs.writeFileSync(config, fs.readFileSync(__dirname + "/../../config.js"));
+		fs.writeFileSync(config, fs.readFileSync(__dirname + "/../../config.js.example"));
 	}
 }
 
