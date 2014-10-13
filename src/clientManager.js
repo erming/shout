@@ -191,6 +191,8 @@ ClientManager.prototype.autoload = function(sockets) {
 					}
 				});
 			} else {
+				if(filename.indexOf(".test") != -1)
+					return;
 				// User created.
 				self.loadUser(filename);
 				self.watchUser(filename);
