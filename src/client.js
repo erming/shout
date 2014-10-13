@@ -56,7 +56,8 @@ function Client(sockets, name, config) {
 		id: id++,
 		name: name,
 		networks: [],
-		sockets: sockets
+		sockets: sockets,
+		wasSave: false
 	});
 	var client = this;
 	crypto.randomBytes(48, function(err, buf) {
@@ -357,6 +358,8 @@ Client.prototype.save = function(force) {
 			return;
 		}
 		
+		client.wasSave = true;
+
 		fs.writeFile(
 			path,
 			JSON.stringify(json, null, "  "),

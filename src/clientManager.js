@@ -69,6 +69,10 @@ ClientManager.prototype.reloadUsers = function() {
 ClientManager.prototype.reloadUser = function(name) {
 	var client = this.findClient(name);
 	if (client) {
+		if(client.wasSave) {
+			client.wasSave = false;
+			return;
+		}
 		try {
 			var json = fs.readFileSync(
 				Helper.HOME + "/users/" + name + "/user.json",
