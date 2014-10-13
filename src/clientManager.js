@@ -150,27 +150,23 @@ ClientManager.prototype.watchUser = function(name) {
 		return;
 	}
 	var path = Helper.HOME + "/users/" + client.name + "/user.json";
-	var lastReload = Date.now();
-	client.watcher = fs.watch(path, {persistent: false}, function(event, filename) {
+	client.watcher = fs.watch(path, {persistent: false}, _.debounce(function(event, filename) {
 		switch (event) {
 		case "change":
 			// user.json modified
-			if(Date.now() - lastReload > 50) {
-				self.reloadUser(client.name);
-				lastReload = Date.now();
-			}
+			self.reloadUser(client.name);
 			break;
 		default:
 			break;
 		}
-	});
+	}, 100));
 };
 
 ClientManager.prototype.autoload = function(sockets) {
 	var self = this;
 
 	// Listen to new users being added/removed
-	fs.watch(Helper.HOME + "/users/", { persistent: false }, function(event, filename) {
+	fs.watch(Helper.HOME + "/users/", { persistent: false }, _.debounce(function(event, filename) {
 		switch (event) {
 		case "rename":
 			if(filename === null) {
@@ -201,7 +197,7 @@ ClientManager.prototype.autoload = function(sockets) {
 		default:
 			break;
 		}
-	});
+	}, 100));
 
 	// Listen to user modification
 	_.each(this.clients, function(client) {
