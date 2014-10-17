@@ -690,28 +690,35 @@ $(function() {
 		"command+up",
 		"command+down",
 		"ctrl+up",
-		"ctrl+down"
+		"ctrl+down",
+		"command+k",
+		"command+j",
+		"ctrl+k",
+		"ctrl+j"
 	], function(e, keys) {
 		var channels = sidebar.find(".chan");
 		var index = channels.index(channels.filter(".active"));
 		var direction = keys.split("+").pop();
 		switch (direction) {
 		case "up":
+		case "k":
 			// Loop
 			var upTarget = (channels.length + (index - 1 + channels.length)) % channels.length;
 			channels.eq(upTarget).click();
 			break;
 
 		case "down":
+		case "j":
 			// Loop
 			var downTarget = (channels.length + (index + 1 + channels.length)) % channels.length;
 			channels.eq(downTarget).click();
 			break;
 		}
+		return false;
 	});
 
 	Mousetrap.bind([
-		"command+k",
+		"command+l",
 		"ctrl+l",
 		"ctrl+shift+l"
 	], function (e) {
