@@ -186,6 +186,12 @@ $(function() {
 		var chan = chat.find(target);
 		var from = data.msg.from;
 
+		if ($.type(options.rules) === 'array') {
+			$.each(options.rules, function() {
+				data.msg.text = data.msg.text.replace(new RegExp(this.needle, 'ig'), this.value);
+			});
+		}
+
 		chan.find(".messages")
 			.append(render("msg", {messages: [data.msg]}))
 			.trigger("msg", [
@@ -309,7 +315,7 @@ $(function() {
 			break;
 		}
 	});
-	
+
 	socket.on("topic", function(data) {
 		$("#chan-" + data.chan).find(".header .topic").html(data.topic);
 	});
@@ -338,18 +344,44 @@ $(function() {
 		part: true,
 		thumbnails: true,
 		quit: true,
+		rules: []
 	}, $.cookie("settings"));
 
 	for (var i in options) {
-		if (options[i]) {
+		if (i === 'rules') {
+			$.each(options[i], function() {
+				var ruleEl = $('.opt-rule.hide').clone()
+					.removeClass('hide').appendTo('.opt-rules');
+				ruleEl.find('[name="rule-value"]').val(this.value);
+				ruleEl.find('[name="rule-replace"]').val(this.needle);
+			});
+		} else if (options[i]) {
 			settings.find("input[name=" + i + "]").prop("checked", true);
 		}
+	}
+
+	function parseRules() {
+		options.rules = [];
+		settings.find('.opt-rule').each(function() {
+			var ruleEl = $(this);
+			var replace = ruleEl.find('[name="rule-replace"]').val();
+			var value = ruleEl.find('[name="rule-value"]').val();
+			if (replace) {
+				options.rules.push({needle: replace, value: value});
+			}
+		});
 	}
 
 	settings.on("change", "input", function() {
 		var self = $(this);
 		var name = self.attr("name");
-		options[name] = self.prop("checked");
+		if (self.prop('type') === 'text') {
+			if (self.prop('name').indexOf('rule') === 0) {
+				parseRules();
+			}
+		} else {
+			options[name] = self.prop("checked");
+		}
 		$.cookie(
 			"settings",
 			options, {
@@ -369,8 +401,24 @@ $(function() {
 		if (name == "colors") {
 			chat.toggleClass("no-colors", !self.prop("checked"));
 		}
-	}).find("input")
+	}).find("input[type=checkbox]")
 		.trigger("change");
+
+	$('.ctrl-add-rule').on('click', function() {
+		$('.opt-rule.hide').clone()
+		.removeClass('hide').appendTo('.opt-rules');
+	});
+
+	$('.ctrl-remove-rule').on('click', function() {
+		$(this).closest('.opt-rule').remove();
+		parseRules();
+		$.cookie(
+			"settings",
+			options, {
+				expires: expire(365)
+			}
+		);
+	});
 
 	$("#badge").on("change", function() {
 		var self = $(this);
