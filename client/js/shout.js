@@ -293,20 +293,11 @@ $(function() {
 	});
 
 	socket.on("toggle", function(data) {
+		var settings = $.cookie("settings") || {};
 		var toggle = $("#toggle-" + data.id);
 		toggle.parent().after(render("toggle", {toggle: data}));
-		switch (data.type) {
-		case "link":
-			if (options.links) {
-				toggle.click();
-			}
-			break;
-
-		case "image":
-			if (options.thumbnails) {
-				toggle.click();
-			}
-			break;
+		if (settings.expand) {
+			toggle.click();
 		}
 	});
 	
@@ -329,14 +320,13 @@ $(function() {
 	var options = $.extend({
 		badge: false,
 		colors: false,
+		expand: false,
 		join: true,
-		links: true,
 		mode: true,
 		motd: false,
 		nick: true,
 		notification: true,
 		part: true,
-		thumbnails: true,
 		quit: true,
 	}, $.cookie("settings"));
 
