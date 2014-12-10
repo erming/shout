@@ -50,7 +50,7 @@ function uri(text) {
 
 var regex = {
 	color: /\003([0-9]{1,2})[,]?([0-9]{1,2})?([^\003]+)/,
-	terminator: /\x0D/,
+	terminator: /\x0F/,
 	styles: [
 		[/\002([^\002]+)(\002)?/, ["<b>", "</b>"]],
 		[/\037([^\037]+)(\037)?/, ["<u>", "</u>"]],
@@ -61,7 +61,7 @@ function colors(text) {
 		return text;
 	}
 	if (regex.terminator.test(text)) {
-		return $.map(text.split(regex.terminator), colors);
+		return $.map(text.split(regex.terminator), colors).join("");
 	}
 	if (regex.color.test(text)) {
 		var match, bg;
