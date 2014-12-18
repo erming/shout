@@ -145,27 +145,37 @@ templates['toggle'] = template({"1":function(depth0,helpers,partials,data) {
   var stack1, helperMissing=helpers.helperMissing, buffer = "<div class=\"toggle-content\">\n";
   stack1 = ((helpers.equal || (depth0 && depth0.equal) || helperMissing).call(depth0, (depth0 != null ? depth0.type : depth0), "image", {"name":"equal","hash":{},"fn":this.program(2, data),"inverse":this.program(4, data),"data":data}));
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "</div>\n";
+  return buffer + "\n</div>\n";
 },"2":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "		<a href=\""
     + escapeExpression(((helper = (helper = helpers.link || (depth0 != null ? depth0.link : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"link","hash":{},"data":data}) : helper)))
     + "\" target=\"_blank\">\n			<img src=\""
     + escapeExpression(((helper = (helper = helpers.link || (depth0 != null ? depth0.link : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"link","hash":{},"data":data}) : helper)))
-    + "\">\n		</a>\n";
+    + "\">\n		</a>\n	";
 },"4":function(depth0,helpers,partials,data) {
+  var stack1, helperMissing=helpers.helperMissing, buffer = " ";
+  stack1 = ((helpers.equal || (depth0 && depth0.equal) || helperMissing).call(depth0, (depth0 != null ? depth0.type : depth0), "gfyembed", {"name":"equal","hash":{},"fn":this.program(5, data),"inverse":this.program(7, data),"data":data}));
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + " ";
+},"5":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "\n		<div class=\"gfyitem\" data-title=true data-autoplay=true data-controls=true data-expand=false data-id=\""
+    + escapeExpression(((helper = (helper = helpers.gfyname || (depth0 != null ? depth0.gfyname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"gfyname","hash":{},"data":data}) : helper)))
+    + "\" ></div>\n";
+},"7":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "		<a href=\""
     + escapeExpression(((helper = (helper = helpers.link || (depth0 != null ? depth0.link : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"link","hash":{},"data":data}) : helper)))
     + "\" target=\"_blank\">\n";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.thumb : depth0), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.thumb : depth0), {"name":"if","hash":{},"fn":this.program(8, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "			<div class=\"head\">";
   stack1 = ((helper = (helper = helpers.head || (depth0 != null ? depth0.head : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"head","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
   return buffer + "</div>\n			<div class=\"body\">\n				"
     + escapeExpression(((helper = (helper = helpers.body || (depth0 != null ? depth0.body : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"body","hash":{},"data":data}) : helper)))
-    + "\n			</div>\n		</a>\n";
-},"5":function(depth0,helpers,partials,data) {
+    + "\n			</div>\n		</a>\n	";
+},"8":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "				<img src=\""
     + escapeExpression(((helper = (helper = helpers.thumb || (depth0 != null ? depth0.thumb : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"thumb","hash":{},"data":data}) : helper)))

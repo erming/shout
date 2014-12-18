@@ -42,6 +42,11 @@ module.exports = function(irc, network) {
 		});
 
 		var link = links[0];
+
+		if (/\.gif$/.test(link)) {
+			link = 'http://upload.gfycat.com/transcode?fetchUrl=' + link;
+		}
+
 		fetch(link, function(res) {
 			parse(msg, link, res, client);
 		});
@@ -79,7 +84,11 @@ function parse(msg, url, res, client) {
 	case "image/jpeg":
 		toggle.type = "image";
 		break;
-
+	case "application/json":
+		if (!res.body.hasOwnProperty('gfyname')) return;
+		toggle.type = "gfyembed";
+		toggle.gfyname = res.body.gfyname;
+		break;
 	default:
 		return;
 	}
