@@ -312,7 +312,6 @@ $(function() {
 			}
 			break;
 		case "gfyembed":
-			console.log(options.jiffify);
 			if (options.jiffify) {
 				$('.gfyitem[data-id=' + data.gfyname + ']').each(function() {
 					gfyObject(this).init();
