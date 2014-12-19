@@ -1,7 +1,7 @@
 var _ = require("lodash");
 var cheerio = require("cheerio");
 var Msg = require("../../models/msg");
-var request = require("superagent");
+var request = require("request");
 var Helper = require("../../helper");
 
 module.exports = function(irc, network) {
@@ -48,6 +48,10 @@ module.exports = function(irc, network) {
 	});
 };
 
+function type(str) {
+	return str.split(/ *; */).shift();
+}
+
 function parse(msg, url, res, client) {
 	var toggle = msg.toggle = {
 		id: msg.id,
@@ -58,9 +62,11 @@ function parse(msg, url, res, client) {
 		link: url
 	};
 
-	switch (res.type) {
+	var contentType = type(res.headers['content-type'] || '');
+
+	switch (contentType) {
 	case "text/html":
-		var $ = cheerio.load(res.res.text);
+		var $ = cheerio.load(res.body);
 		toggle.type = "link";
 		toggle.head = $("title").text();
 		toggle.body =
@@ -88,10 +94,10 @@ function parse(msg, url, res, client) {
 }
 
 function fetch(url, cb) {
-	var req = request.get(url);
-	req.end(function(e, res) {
-		if (res) {
-			cb(res);
+	request(url, function(err, res) {
+		if(err) {
+			return;
 		}
+		cb(res);
 	});
 }
