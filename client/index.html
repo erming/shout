@@ -287,5 +287,9 @@
 	<script src="js/shout.templates.js"></script>
 	<script src="js/shout.js"></script>
 
+	<% plugins.forEach(function(file) { %>
+		<script src="plugins/<%= file %>"></script>
+	<% }) %>
+
 	</body>
 </html>
