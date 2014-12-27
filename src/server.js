@@ -121,10 +121,17 @@ function init(socket, client, token) {
 				client.sort(data);
 			}
 		);
+		socket.on(
+			"options",
+			_.debounce(function(data) {
+				client.saveOptions(data);
+			}, 1000)
+		);
 		socket.join(client.id);
 		socket.emit("init", {
 			active: client.activeChannel,
 			networks: client.networks,
+			options: client.options,
 			token: token || ""
 		});
 	}

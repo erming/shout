@@ -111,6 +111,8 @@ $(function() {
 			.show();
 	});
 
+	var options;
+
 	socket.on("init", function(data) {
 		if (data.networks.length === 0) {
 			$("#footer").find(".connect").trigger("click");
@@ -131,6 +133,8 @@ $(function() {
 			);
 			confirmExit();
 		}
+
+		options = initOptions(data.options);
 
 		if (data.token) {
 			$.cookie(
@@ -328,53 +332,6 @@ $(function() {
 	});
 
 	$.cookie.json = true;
-
-	var settings = $("#settings");
-	var options = $.extend({
-		badge: false,
-		colors: false,
-		join: true,
-		links: true,
-		mode: true,
-		motd: false,
-		nick: true,
-		notification: true,
-		part: true,
-		thumbnails: true,
-		quit: true,
-	}, $.cookie("settings"));
-
-	for (var i in options) {
-		if (options[i]) {
-			settings.find("input[name=" + i + "]").prop("checked", true);
-		}
-	}
-
-	settings.on("change", "input", function() {
-		var self = $(this);
-		var name = self.attr("name");
-		options[name] = self.prop("checked");
-		$.cookie(
-			"settings",
-			options, {
-				expires: expire(365)
-			}
-		);
-		if ([
-			"join",
-			"mode",
-			"motd",
-			"nick",
-			"part",
-			"quit",
-		].indexOf(name) !== -1) {
-			chat.toggleClass("hide-" + name, !self.prop("checked"));
-		}
-		if (name == "colors") {
-			chat.toggleClass("no-colors", !self.prop("checked"));
-		}
-	}).find("input")
-		.trigger("change");
 
 	$("#badge").on("change", function() {
 		var self = $(this);
@@ -881,4 +838,54 @@ $(function() {
 			}
 		}
 	);
+
+	function initOptions(serverOptions) {
+
+		var settings = $("#settings");
+		var options = $.extend({
+			badge: false,
+			colors: false,
+			join: true,
+			links: true,
+			mode: true,
+			motd: false,
+			nick: true,
+			notification: true,
+			part: true,
+			thumbnails: true,
+			quit: true,
+		}, serverOptions);
+
+		for (var i in options) {
+			if (options[i]) {
+				settings.find("input[name=" + i + "]").prop("checked", true);
+			}
+		}
+
+		settings.off('change').on("change", "input", function() {
+			var self = $(this);
+			var name = self.attr("name");
+			options[name] = self.prop("checked");
+			socket.emit("settings", options);
+
+			if ([
+				"join",
+				"mode",
+				"motd",
+				"nick",
+				"part",
+				"quit",
+			].indexOf(name) !== -1) {
+				chat.toggleClass("hide-" + name, !self.prop("checked"));
+			}
+			if (name == "colors") {
+				chat.toggleClass("no-colors", !self.prop("checked"));
+			}
+		}).find("input")
+		.trigger("change");
+
+		return options;
+	}
 });
+
+
