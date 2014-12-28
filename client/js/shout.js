@@ -417,6 +417,9 @@ $(function() {
 			clear();
 			return;
 		}
+		text = pluginHandle('oninput', text);
+		if (!text) return;
+
 		socket.emit("input", {
 			target: chat.data("id"),
 			text: text
