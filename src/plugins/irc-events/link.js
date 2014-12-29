@@ -111,14 +111,14 @@ function fetch(url, cb) {
 			var body;
 			try {
 				body = JSON.parse(data);
+				data = {
+				    text: data,
+				    body: body,
+				    type: req.response.headers['content-type'].split(/ *; */).shift()
+				};
 			} catch(e) {
 				body = {};
 			}
-			data = {
-				text: data,
-				body: body,
-				type: req.response.headers['content-type'].split(/ *; */).shift()
-			};
 			cb(data);
 		}));
 }
