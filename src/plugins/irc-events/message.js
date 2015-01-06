@@ -45,7 +45,7 @@ module.exports = function(irc, network) {
           var pusher = new PushBullet(config.pushtokens[irc.me]);
           pusher.note( ''
                      , "Someone's talking to you on IRC!"
-                     , "<" + name + ">: " + text
+                     , "<" + data.from + ">: " + text
                      , function(error, response) {}
                      );
         }
