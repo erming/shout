@@ -241,7 +241,7 @@ module.exports = {
   // Run Shout with Pushbullet support
   //
   // @type     object
-  // @default  false
+  // @default  {}
   //
   pushbullet: {
 
