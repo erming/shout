@@ -1,6 +1,7 @@
 var fs = require("fs");
 var mkdirp = require("mkdirp");
 var moment = require("moment");
+var PushBullet = require('pushbullet');
 var Helper = require("./helper");
 
 module.exports.write = function(user, network, chan, msg) {
@@ -20,6 +21,16 @@ module.exports.write = function(user, network, chan, msg) {
 	var line = "[" + time + "] ";
 
 	var type = msg.type.trim();
+  if (type == "highlight" && (config.pushbullet || {}).enable){
+    if (user in config.pushbullet.tokens) {
+      var pusher = new PushBullet(config.pushbullet.tokens[user]);
+      pusher.note( ''
+                 , "Someone's talking to you on IRC!"
+                 , "<" + msg.from + "> " + msg.text
+                 , function(error, response) {}
+                 );
+    }
+  }
 	if (type == "message" || type == "highlight") {
 		// Format:
 		// [2014-01-01 00:00:00] <Arnold> Put that cookie down.. Now!!

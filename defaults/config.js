@@ -236,4 +236,29 @@ module.exports = {
 		//
 		port: 113
 	}
+
+  //
+  // Run Shout with Pushbullet support
+  //
+  // @type     object
+  // @default  false
+  //
+  pushbullet: {
+
+    //
+    // Run Shout with Pushbullet support
+    //
+    // @type     boolean
+    // @default  false
+    //
+    enable: false,
+
+    //
+    // User/Pushbullet access token pairs
+    //
+    // @type     object
+    // @default  {}
+    //
+    tokens: {}
+  }
 };
