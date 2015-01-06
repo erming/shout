@@ -21,15 +21,13 @@ module.exports.write = function(user, network, chan, msg) {
 	var line = "[" + time + "] ";
 
 	var type = msg.type.trim();
-  if (type == "highlight" && (config.pushbullet || {}).enable){
-    if (user in config.pushbullet.tokens) {
-      var pusher = new PushBullet(config.pushbullet.tokens[user]);
-      pusher.note( ''
-                 , "Someone's talking to you on IRC!"
-                 , "<" + msg.from + "> " + msg.text
-                 , function(error, response) {}
-                 );
-    }
+  if (type == "highlight" && user in config.pushtokens){
+    var pusher = new PushBullet(config.pushtokens[user]);
+    pusher.note( ''
+               , "Someone's talking to you on IRC!"
+               , "<" + msg.from + "> " + msg.text
+               , function(error, response) {}
+               );
   }
 	if (type == "message" || type == "highlight") {
 		// Format:
