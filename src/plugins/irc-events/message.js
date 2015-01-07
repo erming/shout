@@ -6,7 +6,7 @@ var Msg = require("../../models/msg");
 
 module.exports = function(irc, network) {
 	var client = this;
-  var config = Helper.getConfig();
+	var config = Helper.getConfig();
 	irc.on("message", function(data) {
 		if (data.message.indexOf("\u0001") === 0 && data.message.substring(0, 7) != "\u0001ACTION") {
 			// Hide ctcp messages.
@@ -40,16 +40,16 @@ module.exports = function(irc, network) {
 
 		text.split(" ").forEach(function(w) {
 			if (w.toLowerCase().indexOf(irc.me.toLowerCase()) === 0) {
-        type += " highlight";
-        if (irc.me in config.pushtokens) {
-          var pusher = new PushBullet(config.pushtokens[irc.me]);
-          pusher.note( ''
-                     , "Someone's talking to you on IRC!"
-                     , "<" + data.from + ">: " + text
-                     , function(error, response) {}
-                     );
-        }
-      }
+				type += " highlight";
+				if (irc.me in config.pushtokens && chan.id != client.activeChannel) {
+					var pusher = new PushBullet(config.pushtokens[irc.me]);
+					pusher.note( ''
+					           , "Someone's talking to you on IRC!"
+					           , "<" + data.from + ">: " + text
+					           , function(error, response) {}
+					           );
+				}
+			}
 		});
 
 		var self = false;
