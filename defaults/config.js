@@ -235,5 +235,15 @@ module.exports = {
 		// @default  113
 		//
 		port: 113
-	}
+	},
+
+  //
+  // User/Pushbullet access token pairs
+  // If none are provided, Pushbullet integration is disabled
+  //
+  // @type     object
+  // @default  {}
+  //
+  pushtokens: {}
+
 };
