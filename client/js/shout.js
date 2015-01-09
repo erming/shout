@@ -866,7 +866,7 @@ $(function() {
 			var self = $(this);
 			var name = self.attr("name");
 			options[name] = self.prop("checked");
-			socket.emit("settings", options);
+			socket.emit("options", options);
 
 			if ([
 				"join",
