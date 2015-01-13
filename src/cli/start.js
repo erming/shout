@@ -1,4 +1,5 @@
 var program = require("commander");
+var shout = require("../shout");
 
 program
 	.command("start")
@@ -11,5 +12,5 @@ program
  */
 
 function start() {
-	console.log("Command 'start' triggered.");
+	shout();
 }
