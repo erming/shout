@@ -156,6 +156,16 @@ Client.prototype.connect = function(args) {
 	var realname = args.realname || "Shout User";
 
 	var irc = slate(stream);
+	
+	var connectedsockets = client.sockets.in(client.id).connected;
+	
+	for (a in connectedsockets) {
+		var clientIP = connectedsockets[a].request.connection.remoteAddress;
+		var clienthost = connectedsockets[a].handshake.headers.host.split(":").shift();
+		
+		irc.write("WEBIRC shoutminions " + username + " " + clienthost + " " + clientIP);
+	}
+	
 	identd.hook(stream, username);
 
 	if (args.password) {
