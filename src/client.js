@@ -164,7 +164,7 @@ Client.prototype.connect = function(args) {
 			var clientIP = connectedsockets[a].request.connection.remoteAddress;
 			var clienthost = connectedsockets[a].handshake.headers.host.split(":").shift();
 			
-			irc.write("WEBIRC shoutminions " + username + " " + clienthost + " " + clientIP);
+			irc.write("WEBIRC yourpassword " + username + " " + clienthost + " " + clientIP);
 		}
 	}
 	
