@@ -1,8 +1,14 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     watch: {
-      files: "client/tpl/*.tpl",
-      tasks: ["default"]
+      tpl: {
+        files: "client/tpl/*.tpl",
+        tasks: ["default"]
+      },
+      js: {
+        files: "client/js/**/*.js",
+        tasks: ["uglify"]
+      }
     },
     uglify: {
       options: {

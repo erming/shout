@@ -1,3 +1,3 @@
 $(function() {
-	// ..
+	var socket = io();
 });
