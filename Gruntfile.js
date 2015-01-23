@@ -1,9 +1,8 @@
 module.exports = function(grunt) {
-	var libs = "client/js/libs/**/*.js";
 	grunt.initConfig({
 		watch: {
-			files: libs,
-			tasks: ["uglify"]
+			files: "client/tpl/*.tpl",
+			tasks: ["default"]
 		},
 		uglify: {
 			options: {
@@ -11,31 +10,34 @@ module.exports = function(grunt) {
 			},
 			js: {
 				files: {
-					"client/js/libs.min.js": libs
+					"client/dist/shout.min.js": "client/js/**/*.js"
 				}
+			}
+		},
+		clean: {
+			tpl: {
+				src: "client/js/tpl.js"
 			}
 		}
 	});
+	grunt.loadNpmTasks("grunt-contrib-clean")
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.registerTask(
 		"build",
 		function() {
 			grunt.util.spawn({
-				cmd: "node",
-				args: [
-					"node_modules/handlebars/bin/handlebars",
-					"client/views/",
-					"-e", "tpl",
-					"-f", "client/js/shout.templates.js"
-				]
+				cmd: "node_modules/.bin/handlebars",
+				args: ["client/tpl/", "-e", "tpl", "-f", "client/js/tpl.js"]
 			}, function(err) {
-				if (err) console.log(err);
+				if (err) {
+					console.log(err);
+				}
 			});
 		}
 	);
 	grunt.registerTask(
 		"default",
-		["uglify", "build"]
+		["build", "uglify", "clean"]
 	);
 };
