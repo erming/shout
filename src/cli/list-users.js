@@ -1,15 +1,9 @@
 var program = require("commander");
 
 program
-	.command("list-users")
-	.action(list);
-
-/**
- * List all the users in the console.
- *
- * @api private
- */
+  .command("list-users")
+  .action(list);
 
 function list() {
-	console.log("Command 'list-users' triggered.");
+  console.log("Command 'list-users' triggered.");
 }
