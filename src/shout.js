@@ -29,7 +29,8 @@ function serve(req, res, next) {
   }
   var model = {
     shout: JSON.stringify({
-      version: require("../package.json").version
+      version: require("../package.json").version,
+      modes: config("modes")
     })
   };
   return fs.readFile(
