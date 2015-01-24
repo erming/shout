@@ -8,15 +8,15 @@
 
   <title>Shout</title>
 
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="<%= path("css/bootstrap.css") %>">
+  <link rel="stylesheet" href="<%= path("css/style.css") %>">
 
   </head>
   <body>
 
   Hello world.
 
-  <script src="/dist/shout.min.js"></script>
+  <script src="<%= path("dist/shout.min.js") %>"></script>
 
   <script>
   var shout = <%= shout %>;

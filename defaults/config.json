@@ -1,5 +1,6 @@
 {
   "host": "0.0.0.0",
+  "root": "/",
   "port": 8080,
   "modes": {
     "login": true,
