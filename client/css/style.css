@@ -1,5 +1,6 @@
 @import url('//fonts.googleapis.com/css?family=Lato:400,700');
 @import url('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+@import url('//fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700');
 @font-face {
 	font-family: "FontAwesome";
 	src: url("fonts/fontawesome.svg") format("svg"), url("fonts/fontawesome.woff") format("woff");
@@ -446,7 +447,7 @@ button {
 }
 #chat,
 #windows .header {
-	font: 12px Consolas, Menlo, Monaco, "Lucida Console", "DejaVu Sans Mono", "Courier New", monospace;
+	font: 12px "Source Code Pro", Consolas, Menlo, Monaco, "Lucida Console", "DejaVu Sans Mono", "Courier New", monospace;
 	line-height: 1.4;
 }
 #chat button:hover {
@@ -834,8 +835,7 @@ button {
 	top: 6px;
 }
 #form .input {
-	font: 12px Consolas, Menlo, Monaco, "Lucida Console", "DejaVu Sans Mono", "Courier New", monospace;
-	left: 0;
+	font: 12px "Source Code Pro", Consolas, Menlo, Monaco, "Lucida Console", "DejaVu Sans Mono", "Courier New", monospace;	left: 0;
 	height: 34px;
 	margin-right: 64px;
 	position: relative;
