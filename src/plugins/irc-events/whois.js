@@ -24,7 +24,8 @@ module.exports = function(irc, network) {
 			hostname: "from",
 			realname: "is",
 			channels: "on",
-			server: "using"
+			server: "using",
+			away: "is away:"
 		};
 		var i = 0;
 		for (var k in data) {
