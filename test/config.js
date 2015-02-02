@@ -1,8 +1,8 @@
-var assert = require("assert");
+var test = require("tape");
 var config = require("../src/config");
 
-describe("config", function() {
-  it("should get port", function() {
-    assert(typeof config("port") === "number");
-  });
+test("get()", function(t) {
+  t.false(config(""), "should be false");
+  t.equal(typeof config("port"), "number");
+  t.end();
 });
