@@ -46,7 +46,7 @@ module.exports = function(options) {
 	sockets = io(server, {
 		transports: transports
 	});
-        sockets.path(config.rootpath + '/socket.io');
+        sockets.path(config.rootpath + 'socket.io');
 
 	sockets.on("connect", function(socket) {
 		if (config.public) {
