@@ -159,6 +159,8 @@ Client.prototype.connect = function(args) {
 	var irc = slate(stream);
 	
 	if (config.webirc == true) {
+		var connectedsockets = client.sockets.in(client.id).connected;
+		
 		for (a in connectedsockets) {
 			var clientIP = connectedsockets[a].request.connection.remoteAddress;
 			if (clientIP) {
@@ -169,6 +171,7 @@ Client.prototype.connect = function(args) {
 					
 					irc.write("WEBIRC hitmeinthehead " + username + " " + clienthost[0] + " " + clientIP);
 				})
+				break;
 			}
 		}
 	}
