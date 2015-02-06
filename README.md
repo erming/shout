@@ -1,4 +1,5 @@
-# Shout [![](https://badge.fury.io/js/shout.png)](https://www.npmjs.org/package/shout)
+# Shout [![](https://badge.fury.io/js/shout.png)](https://www.npmjs.org/package/shout) [![Code Climate](https://codeclimate.com/github/erming/shout/badges/gpa.svg)](https://codeclimate.com/github/erming/shout)
+
 
 ### [Try the Demo](http://demo.shout-irc.com/)
 
