@@ -4,6 +4,7 @@ var io = require("socket.io");
 var fs = require("fs");
 var _ = require("lodash");
 var path = require("path");
+var version = require("../package.json").version;
 var config = require("./config");
 
 module.exports = shout;
@@ -23,6 +24,19 @@ function shout() {
   sockets.on("connect", function(s) {
     init(s);
   });
+
+  console.log("");
+  console.log("shout@" + version)
+  console.log("");
+  console.log("Config:");
+  console.log("  host  " + config("host"));
+  console.log("  port  " + config("port"));
+  console.log("  root  " + config("root"));
+  console.log("  mode  " + _.keys(_.pick(config("mode"), function(m) { return m; })).join(", "));
+  console.log("");
+  console.log("Server started!");
+  console.log("Press ctrl-c to stop");
+  console.log("");
 };
 
 function serve(req, res, next) {
@@ -33,7 +47,7 @@ function serve(req, res, next) {
   var model = {
     shout: JSON.stringify({
       version: require("../package.json").version,
-      modes: config("modes")
+      mode: config("mode")
     }),
     path: function(file) {
       return path.resolve(

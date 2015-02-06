@@ -8,7 +8,7 @@
     "shout": "index.js"
   },
   "scripts": {
-    "start": "./index.js",
+    "start": "node index start",
     "test": "tape test/*.js | tap-spec"
   },
   "repository": {

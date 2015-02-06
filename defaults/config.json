@@ -1,12 +1,12 @@
 {
   "host": "0.0.0.0",
-  "root": "/",
   "port": 8080,
-  "modes": {
+  "root": "/",
+  "mode": {
     "login": true,
     "guest": true
   },
-  "defaults": {
+  "default": {
     "name": "Freenode",
     "host": "irc.freenode.org",
     "port": 6667,
