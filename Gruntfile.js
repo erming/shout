@@ -1,49 +1,49 @@
+var loadTasks = require("load-grunt-tasks");
+var path = require("path");
+
 module.exports = function(grunt) {
+	loadTasks(grunt);
+
+	grunt.file.setBase("client/");
+
   grunt.initConfig({
-    watch: {
-      tpl: {
-        files: "client/tpl/**/*.tpl",
-        tasks: ["default"]
-      },
-      js: {
-        files: "client/js/**/*.js",
-        tasks: ["uglify"]
-      }
-    },
+		handlebars: {
+			options: {
+				namespace: "JST",
+				processName: function(file) {
+					return path.basename(file, ".tpl");
+				}
+			},
+			dist: {
+				files: {
+					"dist/tmp/tpl.js": ["tpl/**/*.tpl"]
+				}
+			}
+		},
     uglify: {
       options: {
-        compress: false
-      },
-      js: {
-        files: {
-          "client/dist/shout.min.js": "client/js/**/*.js"
-        }
-      }
+				compress: false
+			},
+      dist: {
+				files: {
+					"dist/shout.min.js": ["js/**/*.js", "dist/tmp/*.js"]
+				}
+			}
     },
-    clean: {
+		watch: {
       tpl: {
-        src: "client/js/tpl.js"
-      }
-    }
+        files: ["tpl/*.tpl"],
+        tasks: ["handlebars", "uglify"]
+      },
+			js: {
+				files: ["js/**/*.js"],
+				tasks: ["uglify"]
+			}
+		}
   });
-  grunt.loadNpmTasks("grunt-contrib-clean")
-  grunt.loadNpmTasks("grunt-contrib-uglify");
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.registerTask(
-    "build",
-    function() {
-      grunt.util.spawn({
-        cmd: "node_modules/.bin/handlebars",
-        args: ["client/tpl/", "-e", "tpl", "-f", "client/js/tpl.js"]
-      }, function(err) {
-        if (err) {
-          console.log(err);
-        }
-      });
-    }
-  );
+
   grunt.registerTask(
     "default",
-    ["build", "uglify", "clean"]
+    ["handlebars", "uglify"]
   );
 };
