@@ -6,4 +6,6 @@ $(function() {
 		e.stopPropagation();
 		$("body").toggleClass("lt");
 	});
+
+	alert(JST["chan"]());
 });

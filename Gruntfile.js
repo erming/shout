@@ -7,6 +7,18 @@ module.exports = function(grunt) {
 	grunt.file.setBase("client/");
 
   grunt.initConfig({
+		clean: {
+			dist: {
+				src: ["dist/tpl.js", "dist/libs.js"]
+			}
+		},
+		concat: {
+			dist: {
+				files: {
+					"dist/shout.min.js": ["dist/libs.js", "js/*.js"]
+				}
+			}
+		},
 		handlebars: {
 			options: {
 				namespace: "JST",
@@ -16,7 +28,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					"dist/tmp/tpl.js": ["tpl/**/*.tpl"]
+					"dist/tpl.js": ["tpl/**/*.tpl"]
 				}
 			}
 		},
@@ -26,24 +38,20 @@ module.exports = function(grunt) {
 			},
       dist: {
 				files: {
-					"dist/shout.min.js": ["js/**/*.js", "dist/tmp/*.js"]
+					"dist/libs.js": ["js/libs/*.js", "dist/tpl.js"]
 				}
 			}
     },
 		watch: {
-      tpl: {
-        files: ["tpl/*.tpl"],
-        tasks: ["handlebars", "uglify"]
-      },
-			js: {
-				files: ["js/**/*.js"],
-				tasks: ["uglify"]
-			}
+      dist: {
+        files: ["tpl/*.tpl", "js/**/*.js"],
+        tasks: ["default"]
+      }
 		}
   });
 
   grunt.registerTask(
     "default",
-    ["handlebars", "uglify"]
+    ["handlebars", "uglify", "concat", "clean"]
   );
 };
