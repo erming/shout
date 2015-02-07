@@ -2,7 +2,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     watch: {
       tpl: {
-        files: "client/tpl/*.tpl",
+        files: "client/tpl/**/*.tpl",
         tasks: ["default"]
       },
       js: {

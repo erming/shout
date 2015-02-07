@@ -2,6 +2,49 @@ html,
 body {
   height: 100%;
 }
+
 body {
-  padding: 50px;
+}
+
+#sidebar {
+	background: #eee;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 240px;
+	padding: 20px;
+}
+
+#main {
+	background: #fff;
+	position: absolute;
+	left: 240px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	transition: left .26s;
+}
+
+#main .lt {
+	background: url(../img/toggle.png) no-repeat;
+	background-position: 5px 5px;
+	display: none;
+	width: 28px;
+	height: 24px;
+	margin: 20px;
+}
+
+@media (max-width: 480px) {
+	#main {
+		left: 0;
+	}
+
+	#main .lt {
+		display: inline-block;
+	}
+
+	.lt #main {
+		left: 240px;
+	}
 }
