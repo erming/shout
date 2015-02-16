@@ -1,8 +1,12 @@
-var test = require("tape");
+var tape = require("tape");
 var config = require("../src/config");
 
-test("get()", function(t) {
-  t.false(config(""), "should be false");
-  t.equal(typeof config("port"), "number");
-  t.end();
+tape("config", function(t) {
+  t.plan(2);
+
+  var n = config("");
+  var p = config("port");
+
+  t.false(n);
+  t.equal(typeof p, "number");
 });
