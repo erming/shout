@@ -33,6 +33,7 @@ function help() {
   console.log("");
   console.log("Options:");
   console.log("  -h, --help");
+  console.log("  -H, --home");
   console.log("  -v, --version");
   console.log("");
   console.log("Example:");
