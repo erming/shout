@@ -1,5 +1,6 @@
 var program = require("commander");
 var version = require("../../package.json").version;
+var helper = require("../helper");
 
 require("./add-user");
 require("./edit-config");
@@ -11,7 +12,8 @@ require("./reset-password");
 require("./start");
 
 program.version(version, "-v, --version");
-program.option("-h, --help", help);
+program.option("-h, --help");
+program.option("-H, --home <path>", "", home);
 
 function help() {
   console.log("");
@@ -38,6 +40,10 @@ function help() {
   console.log("  shout add-user <name>");
   console.log("");
   console.log("shout@" + version);
+}
+
+function home(path) {
+  return helper.HOME = path;
 }
 
 module.exports = {
