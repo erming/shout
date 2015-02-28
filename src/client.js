@@ -23,6 +23,7 @@ Client.prototype = {
   connect: connect,
   open: open,
   quit: quit,
+  exit: exit,
   sort: sort,
   save: save
 };
@@ -37,5 +38,6 @@ function input() {}
 function connect(args) {}
 function open(id) {}
 function quit(network) {}
+function exit() {}
 function sort() {}
 function save() {}
