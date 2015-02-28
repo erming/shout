@@ -8,21 +8,34 @@
 
 - [ ] /action
 - [ ] /ban
+- [ ] /close
 - [ ] /connect
+- [ ] /deop
+- [ ] /devoice
+- [ ] /disconnect
 - [ ] /help
 - [ ] /invite
 - [ ] /join
 - [ ] /kick
 - [ ] /kickban
+- [ ] /leave
 - [ ] /list
+- [ ] /me
 - [ ] /mode
 - [ ] /msg
 - [ ] /nick
 - [ ] /notice
+- [ ] /op
 - [ ] /part
 - [ ] /quit
+- [ ] /quote
 - [ ] /raw
+- [ ] /say
+- [ ] /send
+- [ ] /server
+- [ ] /slap
 - [ ] /topic
+- [ ] /voice
 - [ ] /whois
 
 ### Events
