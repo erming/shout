@@ -17,4 +17,6 @@ tape("join", function(t) {
   };
 
   join(irc, null, null, input);
+
+  t.end();
 });

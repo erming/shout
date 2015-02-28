@@ -1,11 +1,10 @@
 module.exports = function(irc, client, target, input) {
   var cmd = input.cmd;
+  var args = input.args;
 
-  if (cmd !== "join") {
+  if (cmd != "join") {
     return;
   }
-
-  var args = input.args;
 
   if (args.length) {
     irc.join(args[0], args[1]);
