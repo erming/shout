@@ -1,5 +1,7 @@
 var program = require("commander");
 
+module.exports = add;
+
 program
   .command("add-user")
   .action(add);

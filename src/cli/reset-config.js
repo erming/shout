@@ -1,5 +1,7 @@
 var program = require("commander");
 
+module.exports = reset;
+
 program
   .command("reset-config")
   .action(reset);
