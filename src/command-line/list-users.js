@@ -1,6 +1,6 @@
 var program = require("commander");
 
-module.exports = edit;
+module.exports = list;
 
 program
   .command("list-users")
