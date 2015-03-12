@@ -1,6 +1,6 @@
 # shout
 
-[![](https://api.travis-ci.org/erming/shout.svg)](https://travis-ci.org/erming/shout)
+Currently a work in progress.
 
 ## Roadmap
 
