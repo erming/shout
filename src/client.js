@@ -158,20 +158,21 @@ Client.prototype.connect = function(args) {
 
 	var irc = slate(stream);
 	
-	if (config.webirc == true) {
-		var connectedsockets = client.sockets.in(client.id).connected;
-		
-		for (a in connectedsockets) {
-			var clientIP = connectedsockets[a].request.connection.remoteAddress;
+	if (config.webircpasswords && config.webircpasswords[server.host]) {
+		var sockets = client.sockets.sockets;
+		var room = sockets.adapter.rooms[client.id] || [];
+		for (var user in room) {
+			var socket = sockets.adapter.nsp.connected[user],
+			clientIP = socket ? socket.request.connection.remoteAddress : null;
 			if (clientIP) {
 				dns.reverse(clientIP, function(err, clienthost) {
 					if(err || !clienthost.length) return;
 					
 					console.log(clienthost[0], clientIP)
 					
-					irc.write("WEBIRC hitmeinthehead " + username + " " + clienthost[0] + " " + clientIP);
+					irc.write(["WEBIRC", config.webircpasswords[server.host], username, clienthost[0], clientIP].join(" "));
 				})
-				break;
+				break;	
 			}
 		}
 	}
