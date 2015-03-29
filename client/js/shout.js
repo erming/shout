@@ -190,7 +190,12 @@ $(function() {
 		var chan = chat.find(target);
 		var from = data.msg.from;
 
-		chan.find(".messages")
+		var messages = chan.find(".messages");
+		if (!chan.hasClass("unread")) {
+			chan.addClass("unread")
+			messages.append(render("unreadmarker"));
+		}
+		messages
 			.append(render("msg", {messages: [data.msg]}))
 			.trigger("msg", [
 				target,
@@ -471,11 +476,13 @@ $(function() {
 
 		var chan = $(target)
 			.addClass("active")
+			.removeClass("unread")
 			.trigger("show")
 			.css("z-index", top++)
 			.find(".chat")
 			.sticky()
 			.end();
+		chan.find(".unread-marker").slice(0, -1).remove()
 
 		var title = "Shout";
 		if (chan.data("title")) {

@@ -519,6 +519,16 @@ button {
 	display: table;
 	width: 100%;
 }
+#chat .unread-marker {
+ 	display: table-row;
+}
+#chat hr {
+	height: 1px;
+	border: 0; border-top: 1px dotted #ccc;
+	padding: 10px;
+	margin: 1em 0; padding: 0;
+	display: table-cell;
+}
 #chat .msg {
 	display: table-row;
 	word-wrap: break-word;

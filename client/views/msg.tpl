@@ -22,4 +22,5 @@
 		{{/equal}}
 	</span>
 </div>
+{{unread-messages-marker @index ../messages.length ../unread}}
 {{/each}}
