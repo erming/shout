@@ -214,10 +214,20 @@
 							<div class="col-sm-12">
 								<h2>Visual Aids</h2>
 							</div>
-							<div class="col-sm-12">
+							<div class="col-sm-6">
 								<label class="opt">
 									<input type="checkbox" name="colors">
-									Enable colored nicknames
+									Enable colored nicks
+								</label>
+							</div>
+							<div class="col-sm-6">
+								<label class="opt">
+									<select name="theme">
+										<option value="-">Choose theme...</option>
+										<option>example</option>
+										<option>morning</option>
+										<option>zenburn</option>
+									</select>
 								</label>
 							</div>
 							<% if (typeof prefetch === "undefined" || prefetch !== false) { %>
