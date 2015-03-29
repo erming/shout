@@ -224,9 +224,9 @@
 								<label class="opt">
 									<select name="theme">
 										<option value="-">Choose theme...</option>
-										<option>example</option>
-										<option>morning</option>
-										<option>zenburn</option>
+										<% _.each(themes, function(t) { %>
+											<%= "<option>" + t + "</option>" %>
+										<% }); %>
 									</select>
 								</label>
 							</div>

@@ -89,6 +89,14 @@ function index(req, res, next) {
 			// Do nothing if cookie cannot be parsed.
 		}
 		
+		data.themes = [];
+		_.each(fs.readdirSync("client/themes"), function(file) {
+		    var m = file.match(/(.+)\.css/);
+		    if(m) {
+				data.themes.push(m[1]);
+		    }
+		});
+
 		res.setHeader("Content-Type", "text/html");
 		res.writeHead(200);
 		res.end(_.template(
