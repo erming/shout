@@ -27,11 +27,11 @@ function getLines(filename, from, to, callback) {
 
     var lines = [];
     var count = -1;
-    var left = "";
+    var last = "";
 
     stream.on("data", function(data){
-        data = (left+data).split("\n");
-        if (data[data.lnegth-1]) left = data.pop();
+        data = (last+data).split("\n");
+        last = data.pop();
         var next = count + data.length;
         var gtn = next >= from;
         var gtm = next >= to;
