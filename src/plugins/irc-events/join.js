@@ -9,7 +9,10 @@ module.exports = function(irc, network) {
 		var chan = _.find(network.channels, {name: data.channel});
 		if (typeof chan === "undefined") {
 			chan = new Chan({
-				name: data.channel
+				name: data.channel,
+				user: data.nick,
+				network: network.host,
+				channel: data.channel
 			});
 			network.channels.push(chan);
 			client.save();

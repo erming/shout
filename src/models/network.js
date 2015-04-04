@@ -24,7 +24,10 @@ function Network(attr) {
 	this.channels.unshift(
 		new Chan({
 			name: this.name,
-			type: Chan.Type.LOBBY
+			type: Chan.Type.LOBBY,
+			user: this.user,
+			network: this.host,
+			channel: this.host
 		})
 	);
 }
