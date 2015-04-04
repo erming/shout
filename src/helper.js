@@ -38,7 +38,8 @@ function getLines(filename, from, to, callback) {
         if (gtn) lines = lines.concat(data.slice(lines.length ? 0 : from - count - 1));
         if (gtm) {
             stream.removeListener("end", endReached);
-            callback(null, lines.slice(0, to - from));
+            stream.close();
+            return callback(null, lines.slice(0, to - from));
         }
         count = next;
     });
