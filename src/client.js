@@ -257,7 +257,7 @@ Client.prototype.more = function(data) {
 	chan.messages.fetch(Math.max(0, count - 100), count, function(err, messages){
         client.emit("more", {
             chan: chan.id,
-            messages: messages.map(log.parse)
+            messages: messages
         });
     });	
 };

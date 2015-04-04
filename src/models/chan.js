@@ -1,6 +1,7 @@
 var util = require("util");
 var _ = require("lodash");
 var Helper = require("../helper");
+var log = require("../log");
 
 module.exports = Chan;
 
@@ -38,7 +39,7 @@ MessageArray.prototype.fetch = function(from, to, callback) {
     else if (this.log) {
         var linesFrom = from + messages.length;
         Helper.getLines(this.log, linesFrom, to, function(err, lines){
-            callback(null, messages.concat(lines)); 
+            callback(null, messages.concat(lines.map(log.parse))); 
         });
     }
     else callback(null, messages);
