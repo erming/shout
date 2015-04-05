@@ -2,6 +2,7 @@ var _ = require("lodash");
 var Chan = require("../../models/chan");
 var Msg = require("../../models/msg");
 var User = require("../../models/user");
+var log = require("../../log");
 
 module.exports = function(irc, network) {
 	var client = this;
@@ -13,9 +14,16 @@ module.exports = function(irc, network) {
 			});
 			network.channels.push(chan);
 			client.save();
-			client.emit("join", {
-				network: network.id,
-				chan: chan
+
+			log.load(irc.me, client.name, network.host, data.channel, function(messages) {
+				if (typeof messages !== "undefined") {
+					chan.messages = messages.concat(chan.messages);
+				}
+
+				client.emit("join", {
+					network: network.id,
+					chan: chan
+				});
 			});
 		}
 		var users = chan.users;

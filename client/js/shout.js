@@ -179,6 +179,15 @@ $(function() {
 		}
 		whois = false;
 		chan.click();
+
+		if (data.messages) {
+			var messages = chan.find(".messages");
+			messages.scrollTop(messages.scrollHeight());
+
+			if (data.chan.messages.length == 100) {
+				chan.find(".show-more").addClass("show");
+			}
+		}
 	});
 
 	socket.on("msg", function(data) {
