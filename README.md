@@ -6,44 +6,44 @@ Currently a work in progress.
 
 ### Inputs
 
-- [ ] /action
+- [x] /action
 - [ ] /ban
-- [ ] /close
-- [ ] /connect
-- [ ] /deop
-- [ ] /devoice
-- [ ] /disconnect
+- [x] /close
+- [x] /connect
+- [x] /deop
+- [x] /devoice
+- [x] /disconnect
 - [ ] /help
-- [ ] /invite
-- [ ] /join
-- [ ] /kick
+- [x] /invite
+- [x] /join
+- [x] /kick
 - [ ] /kickban
-- [ ] /leave
+- [x] /leave
 - [ ] /list
-- [ ] /me
-- [ ] /mode
-- [ ] /msg
-- [ ] /nick
-- [ ] /notice
-- [ ] /op
-- [ ] /part
-- [ ] /quit
-- [ ] /quote
-- [ ] /raw
-- [ ] /say
-- [ ] /send
-- [ ] /server
-- [ ] /slap
-- [ ] /topic
-- [ ] /voice
-- [ ] /whois
+- [x] /me
+- [x] /mode
+- [x] /msg
+- [x] /nick
+- [x] /notice
+- [x] /op
+- [x] /part
+- [x] /quit
+- [x] /quote
+- [x] /raw
+- [x] /say
+- [x] /send
+- [x] /server
+- [x] /slap
+- [x] /topic
+- [x] /voice
+- [x] /whois
 
 ### Events
 
-- [ ] ctcp
-- [ ] error
-- [ ] join
-- [ ] kick
+- [x] ctcp
+- [x] errors
+- [x] join
+- [x] kick
 - [ ] message
 - [ ] mode
 - [ ] motd
