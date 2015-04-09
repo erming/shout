@@ -26,7 +26,7 @@ tape("action", function(t) {
   };
 
   for (var i in inputs) {
-	action(irc, null, target, inputs[i]);
+    action(irc, null, target, inputs[i]);
   }
 
   t.end();

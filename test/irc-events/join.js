@@ -8,7 +8,6 @@ tape("join", function(t) {
   var irc = new events.EventEmitter();
   irc.me = "foo";
 
-  var i = 0;
   var client = {};
   client.emit = function(e, msg) {
     switch (e) {
@@ -24,7 +23,6 @@ tape("join", function(t) {
       t.pass();
       break;
     }
-    i++;
   };
 
   var network = {
