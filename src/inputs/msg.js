@@ -3,8 +3,8 @@ module.exports = function(irc, client, target, input) {
   var args = input.args;
 
   if ((cmd != "say" && cmd != "msg") || (!args.length || !args[0])) {
-		return;
-	}
+    return;
+  }
 
   var to = "";
   if (cmd == "msg") {
