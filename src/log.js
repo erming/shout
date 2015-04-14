@@ -45,7 +45,7 @@ module.exports.write = function(user, network, chan, msg) {
 };
 
 var redt = /^\[\d{4}\-\d{2}\-\d{2} (\d{2}:\d{2}:\d{2})\] /;
-var rems = /^<([^<]+)> /;
+var rems = /^<([^>]+)> /;
 var reus = /(\S*) */;
 
 module.exports.parse = function(line){
