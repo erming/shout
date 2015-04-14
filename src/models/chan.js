@@ -26,7 +26,7 @@ util.inherits(MessageArray, Array);
 MessageArray.prototype.push = function(message) {
     var config = Helper.getConfig();
     if (config.log === true) {
-        if (this.length > 250) this.splice(50);
+        if (this.length > 50) this.splice(50);
     }
     Array.prototype.push.call(this, message);
     this.count++;
