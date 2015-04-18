@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node index start",
-    "test": "tape 'test/**/*.js' | faucet"
+    "test": "tape 'test/**/*.js'"
   },
   "repository": {
     "type": "git",
@@ -36,7 +36,6 @@
     "socket.io": "~1.0.6"
   },
   "devDependencies": {
-    "faucet": "0.0.1",
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-concat": "^0.5.0",
