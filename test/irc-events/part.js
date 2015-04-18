@@ -11,7 +11,6 @@ tape("part", function(t) {
 
   var client = {};
   client.emit = function(e, msg) {
-    console.log(e);
     switch(e) {
     case "msg":
       t.pass();
