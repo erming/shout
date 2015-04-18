@@ -12,12 +12,19 @@ tape("mode", function(t) {
 
   var client = {};
   client.emit = function(e, msg) {
-    t.pass();
-    var from = msg.msg.from;
-    var text = msg.msg.text;
     switch (e) {
     case "msg":
+      var from = msg.msg.from;
+      var text = msg.msg.text;
       if (from == "bar" && text == "+v foo") {
+        t.pass();
+      }
+      break;
+
+    case "mode":
+      var mode = msg.mode;
+      var user = msg.user;
+      if (mode == "+v" && user == "foo") {
         t.pass();
       }
       break;

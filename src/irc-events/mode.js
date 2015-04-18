@@ -13,10 +13,19 @@ module.exports = function(irc, client, network) {
       }
     }
 
+    var mode = data.mode;
+    var user = data.client;
+
+    client.emit("mode", {
+      chan: chan.id,
+      mode: mode,
+      user: user
+    });
+
     var msg = new Msg({
       type: Msg.Type.MODE,
       from: from,
-      text: data.mode + " " + data.client
+      text: mode + " " + user
     });
     chan.messages.push(msg);
     client.emit("msg", {
