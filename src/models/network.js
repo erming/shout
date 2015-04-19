@@ -8,6 +8,7 @@ function Network(args) {
   _.merge(this, _.extend({
     id: id++,
     irc: null,
+    connected: false,
     name: "",
     host: "",
     port: 6667,
