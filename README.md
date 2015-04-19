@@ -44,17 +44,17 @@ Currently a work in progress.
 - [x] errors
 - [x] join
 - [x] kick
-- [ ] message
-- [ ] mode
-- [ ] motd
-- [ ] names
-- [ ] nick
-- [ ] notice
-- [ ] part
-- [ ] quit
-- [ ] topic
-- [ ] welcome
-- [ ] whois
+- [x] message
+- [x] mode
+- [x] motd
+- [x] names
+- [x] nick
+- [x] notice
+- [x] part
+- [x] quit
+- [x] topic
+- [x] welcome
+- [x] whois
 
 ### Models
 
