@@ -11,7 +11,7 @@ tape("names", function(t) {
 
   var client = {};
   client.emit = function(e, msg) {
-    switch(e) {
+    switch (e) {
     case "users":
       var users = msg.users;
       if (users.length == 3) {

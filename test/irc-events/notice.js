@@ -11,7 +11,7 @@ tape("notice", function(t) {
 
   var client = {};
   client.emit = function(e, msg) {
-    switch(e) {
+    switch (e) {
     case "msg":
       var type = msg.msg.type;
       var text = msg.msg.text;

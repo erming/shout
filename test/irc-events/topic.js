@@ -11,7 +11,7 @@ tape("topic", function(t) {
 
   var client = {};
   client.emit = function(e, msg) {
-    switch(e) {
+    switch (e) {
     case "msg":
       t.pass();
       break;
