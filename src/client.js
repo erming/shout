@@ -133,6 +133,18 @@ Client.prototype.connect = function(args) {
 		server.localAddress = config.bind;
 		if(args.tls) {
 			var socket = net.connect(server);
+
+			// Usually problems with server/connection settings
+			socket.on("error", function(e) {
+				var msg = new Msg({
+					type: Msg.Type.ERROR,
+					text: "Can't connect, is server address correct?"
+				});
+				client.emit("msg", {
+					msg: msg
+				});
+                        });
+
 			server.socket = socket;
 		}
 	}
