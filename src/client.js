@@ -139,6 +139,7 @@ Client.prototype.connect = function(args) {
 	socket.on("error", function(e) {
 		console.log("Client#connect():\n" + e);
 		socket.end();
+
 		var msg = new Msg({
 			type: Msg.Type.ERROR,
 			text: "Connection error. Check the server settings."
@@ -150,9 +151,24 @@ Client.prototype.connect = function(args) {
 
 	// Connection is already complete if not using TLS
 	var stream = socket;
+
 	if(args.tls) {
 		server.socket = socket;
 		stream = tls.connect(server);
+
+		// Problems with TLS, e.g. wrong version number
+		stream.on("error", function(e) {
+			console.log("Client#TLS-connect():\n" + e);
+			socket.end();
+
+			var msg = new Msg({
+				type: Msg.Type.ERROR,
+				text: "Connection error. TLS negotiation failed."
+			});
+			client.emit("msg", {
+				msg: msg
+			});
+		});
 	}
 
 	var nick = args.nick || "shout-user";
