@@ -131,29 +131,14 @@ Client.prototype.connect = function(args) {
 
 	if (config.bind) {
 		server.localAddress = config.bind;
-		if(args.tls) {
-			var socket = net.connect(server);
-
-			// Usually problems with server/connection settings
-			socket.on("error", function(e) {
-				var msg = new Msg({
-					type: Msg.Type.ERROR,
-					text: "Connection error. Check the server settings."
-				});
-				client.emit("msg", {
-					msg: msg
-				});
-                        });
-
-			server.socket = socket;
-		}
 	}
 
-	var stream = args.tls ? tls.connect(server) : net.connect(server);
+	var socket = net.connect(server);
 
-	stream.on("error", function(e) {
+	// Usually problems with server/connection settings
+	socket.on("error", function(e) {
 		console.log("Client#connect():\n" + e);
-		stream.end();
+		socket.end();
 		var msg = new Msg({
 			type: Msg.Type.ERROR,
 			text: "Connection error. Check the server settings."
@@ -162,6 +147,13 @@ Client.prototype.connect = function(args) {
 			msg: msg
 		});
 	});
+
+	// Connection is already complete if not using TLS
+	var stream = socket;
+	if(args.tls) {
+		server.socket = socket;
+		stream = tls.connect(server);
+	}
 
 	var nick = args.nick || "shout-user";
 	var username = args.username || nick.replace(/[^a-zA-Z0-9]/g, '');
