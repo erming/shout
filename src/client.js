@@ -138,7 +138,7 @@ Client.prototype.connect = function(args) {
 			socket.on("error", function(e) {
 				var msg = new Msg({
 					type: Msg.Type.ERROR,
-					text: "Can't connect, is server address correct?"
+					text: "Connection error. Check the server settings."
 				});
 				client.emit("msg", {
 					msg: msg
@@ -156,7 +156,7 @@ Client.prototype.connect = function(args) {
 		stream.end();
 		var msg = new Msg({
 			type: Msg.Type.ERROR,
-			text: "Connection error."
+			text: "Connection error. Check the server settings."
 		});
 		client.emit("msg", {
 			msg: msg
