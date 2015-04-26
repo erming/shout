@@ -12,6 +12,7 @@
     "url": "https://github.com/erming/shout.git"
   },
   "scripts": {
+    "prestart": "gulp default",
     "start": "node index",
     "test": "mocha test/**/*.js"
   },

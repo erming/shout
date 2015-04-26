@@ -14,7 +14,7 @@ gulp.task('uglify', function () {
         .pipe(uglify({
             compress: false,
         }))
-        .pipe(gulp.dest('client/js/'));
+        .pipe(gulp.dest('client/dist/js/'));
 });
 
 gulp.task('build', function () {
@@ -23,7 +23,7 @@ gulp.task('build', function () {
         String(handlebars),
         'client/views/',
         '-e', 'tpl',
-        '-f', 'client/js/shout.templates.js',
+        '-f', 'client/dist/js/shout.templates.js',
     ];
 
     let option = {
