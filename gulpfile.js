@@ -4,14 +4,25 @@ let childProcess = require('child_process');
 let concat = require('gulp-concat');
 let gulp = require('gulp');
 let path = require('path');
-let uglify = require('gulp-uglify');
+let uglify = require('gulp-uglifyjs');
 
-const SRC = 'client/js/libs/**/*.js';
+const SRC = [
+    'client/js/libs/favico.js',
+    'client/js/libs/handlebars.js',
+    'client/js/libs/handlebars/**/*.js',
+    'client/js/libs/jquery.js',
+    'client/js/libs/jquery/**/*.js',
+    'client/js/libs/moment.js',
+    'client/js/libs/notification.js',
+    'client/js/libs/socket.io.js',
+    'client/js/libs/string.contains.js',
+    'client/js/libs/stringcolor.js',
+    'client/js/libs/uri.js',
+];
 
 gulp.task('uglify', function () {
     return gulp.src(SRC)
-        .pipe(concat('libs.min.js'))
-        .pipe(uglify({
+        .pipe(uglify('libs.min.js', {
             compress: false,
         }))
         .pipe(gulp.dest('client/dist/js/'));
