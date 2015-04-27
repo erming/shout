@@ -4,7 +4,7 @@ let childProcess = require('child_process');
 let concat = require('gulp-concat');
 let gulp = require('gulp');
 let path = require('path');
-let uglify = require('gulp-uglify');
+let uglify = require('gulp-uglifyjs');
 
 const SRC = 'client/js/libs/**/*.js';
 
