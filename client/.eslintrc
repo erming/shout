@@ -6,7 +6,8 @@
     "ecmaFeatures": {
         "arrowFunctions": true,
         "blockBindings": true,
-        "modules": true,
+        "classes": true,
+        "modules": true
     },
 
     "env": {

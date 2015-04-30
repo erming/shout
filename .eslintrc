@@ -56,6 +56,7 @@
         }],
         "comma-style": [2, "last"],
         "no-mixed-spaces-and-tabs": 2,
+        "no-underscore-dangle": 0,
         "operator-linebreak": [2, "after"],
         "quotes": [2, "single", "avoid-escape"],
         "semi": [2, "always"],
