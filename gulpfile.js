@@ -81,6 +81,7 @@ gulp.task('jslint', function () {
 
     return gulp.src([
             './gulpfile.js',
+            './client/script/**/*.js',
         ])
         .pipe(eslint(option))
         .pipe(eslint.format())
