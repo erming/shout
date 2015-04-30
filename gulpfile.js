@@ -108,7 +108,9 @@ gulp.task('build2', ['jslint'], function () {
 
     let babel = babelify.configure({
         optional: [
+            'utility.deadCodeElimination',
             'utility.inlineEnvironmentVariables',
+            'utility.inlineExpressions',
         ],
     });
 
