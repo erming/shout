@@ -1,0 +1,72 @@
+{
+    // ESLint Configuration Files enables to include comments.
+    // http://eslint.org/docs/configuring/#comments-in-configuration-files
+
+    "ecmaFeatures": {
+        "blockBindings": true
+    },
+
+    "env": {
+        "node": true
+    },
+
+    "rules": {
+        // Possible Errors
+        "comma-dangle": [0, "never"],
+        "no-constant-condition": 1,
+        "no-debugger": 1,
+        "no-extra-boolean-cast": 0,
+        "no-extra-parens": 0,
+        "valid-jsdoc": [2, {
+            "requireReturn": true,
+            "requireParamDescription": false,
+            "requireReturnDescription": false
+        }],
+
+        // Best Practices
+        "block-scoped-var": 1,
+        "curly": 2,
+        "no-alert": 1,
+        "no-caller": 1,
+        "no-div-regex": 2,
+        "no-eq-null": 2,
+        "no-param-reassign": 1,
+        "no-throw-literal": 2,
+        "no-unused-expressions": 2,
+        "radix": 2,
+
+        // Strict Mode
+        "strict": [2, "global"],
+
+        // Variables
+        "no-shadow": 0,
+        "no-unused-vars": 0,
+        "no-use-before-define": 0,
+
+        // Node.js
+        "no-process-exit": 0,
+
+        // Stylistic Issues
+        "indent": [2, 4, {
+            "indentSwitchCase": true
+        }],
+        "comma-spacing": [2, {
+            "before": false,
+            "after": true
+        }],
+        "comma-style": [2, "last"],
+        "no-mixed-spaces-and-tabs": 2,
+        "operator-linebreak": [2, "after"],
+        "quotes": [2, "single", "avoid-escape"],
+        "semi": [2, "always"],
+        "space-unary-ops": [2, {
+            "words": true,
+            "nonwords": false
+        }],
+        "spaced-line-comment": 2,
+
+        // ECMAScript 6
+        "generator-star-spacing": [2, "after"],
+        "object-shorthand": 0,
+    }
+}

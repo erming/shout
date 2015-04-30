@@ -28,6 +28,7 @@ let babelify = require('babelify');
 let browserify = require('browserify');
 let childProcess = require('child_process');
 let concat = require('gulp-concat');
+let eslint = require('gulp-eslint');
 let gulp = require('gulp');
 let path = require('path');
 let source = require('vinyl-source-stream');
@@ -73,7 +74,20 @@ gulp.task('build', function () {
     childProcess.spawn('node', args, option);
 });
 
-gulp.task('build2', function () {
+gulp.task('jslint', function () {
+    let option = {
+        useEslintrc: true,
+    };
+
+    return gulp.src([
+            './gulpfile.js',
+        ])
+        .pipe(eslint(option))
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+
+gulp.task('build2', ['jslint'], function () {
     const SRC_JS = ['./client/script/shout.js'];
 
     let option = {
