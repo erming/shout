@@ -22,6 +22,10 @@
  * THE SOFTWARE.
  */
 
-import Application from './lib/Application';
+import LogPresenter from '../output/LogPresenter';
 
-var shoutApp = new Application();
+export class Application {
+    constructor() {
+        this._logger = new LogPresenter();
+    }
+}
