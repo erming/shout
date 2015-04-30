@@ -27,7 +27,7 @@ import Rx from 'rx';
 
 let socket = io();
 
-export let SocketIoGateway = Object.freeze({
+let SocketIoGateway = Object.freeze({
 
     /**
      *  @return {!Rx.Observable<?>}
@@ -184,3 +184,5 @@ export let SocketIoGateway = Object.freeze({
     },
 
 });
+
+export default SocketIoGateway;
