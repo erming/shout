@@ -50,6 +50,7 @@
     "gulp-uglifyjs": "^0.6.1",
     "handlebars": "^2.0.0",
     "mocha": "~2.0.1",
+    "socket.io-client": "^1.3.5",
     "vinyl-source-stream": "^1.1.0"
   }
 }
