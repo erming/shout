@@ -1,5 +1,6 @@
 'use strict';
 
+let babelify = require('babelify');
 let browserify = require('browserify');
 let childProcess = require('child_process');
 let concat = require('gulp-concat');
@@ -56,7 +57,14 @@ gulp.task('build2', function () {
         debug: isRelease ? false : true,
     };
 
+    let babel = babelify.configure({
+        optional: [
+            'utility.inlineEnvironmentVariables',
+        ],
+    });
+
     browserify(SRC_JS, option)
+        .transform(babel)
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('client/dist/'));
