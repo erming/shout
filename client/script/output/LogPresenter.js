@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import SocketIoGateWay from '../adopter/SocketIoGateWay';
+import SocketIoGateWay from '../adopter/SocketIoGateway';
 
 export default class LogPresenter {
 
