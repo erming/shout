@@ -40,11 +40,13 @@
     "socket.io": "~1.0.6"
   },
   "devDependencies": {
+    "browserify": "^9.0.8",
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
     "gulp-handlebars": "^4.0.0",
     "gulp-uglifyjs": "^0.6.1",
     "handlebars": "^2.0.0",
-    "mocha": "~2.0.1"
+    "mocha": "~2.0.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

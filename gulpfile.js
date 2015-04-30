@@ -1,10 +1,14 @@
 'use strict';
 
+let browserify = require('browserify');
 let childProcess = require('child_process');
 let concat = require('gulp-concat');
 let gulp = require('gulp');
 let path = require('path');
+let source = require('vinyl-source-stream');
 let uglify = require('gulp-uglifyjs');
+
+const isRelease = process.env.NODE_ENV === 'production';
 
 const SRC = [
     'client/js/libs/favico.js',
@@ -42,6 +46,20 @@ gulp.task('build', function () {
         stdio: 'inherit',
     };
     childProcess.spawn('node', args, option);
+});
+
+gulp.task('build2', function () {
+    const SRC_JS = ['./client/script/shout.js'];
+
+    let option = {
+        insertGlobals: false,
+        debug: isRelease ? false : true,
+    };
+
+    browserify(SRC_JS, option)
+        .bundle()
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest('client/dist/'));
 });
 
 gulp.task('default', ['uglify', 'build']);
