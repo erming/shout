@@ -34,6 +34,7 @@
     "lodash": "~2.4.1",
     "mkdirp": "^0.5.0",
     "moment": "~2.7.0",
+    "react": "^0.13.2",
     "read": "^1.0.5",
     "request": "^2.51.0",
     "rx": "^2.5.2",
@@ -44,6 +45,8 @@
   "devDependencies": {
     "babelify": "^6.0.2",
     "browserify": "^9.0.8",
+    "eslint": "^0.20.0",
+    "eslint-plugin-react": "^2.2.0",
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
     "gulp-eslint": "^0.11.1",

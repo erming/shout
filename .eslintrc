@@ -10,6 +10,10 @@
         "node": true
     },
 
+    "plugins": [
+        "react" // for React/JSX
+    ],
+
     "rules": {
         // Possible Errors
         "comma-dangle": [0, "never"],
@@ -69,5 +73,24 @@
         // ECMAScript 6
         "generator-star-spacing": [2, "after"],
         "object-shorthand": 0,
+
+        // ESLint-plugin-React
+        // https://github.com/yannickcr/eslint-plugin-react
+        "react/display-name": 0, // JSX transpiler creates displayName automatically.
+        "react/jsx-boolean-value": [2, "always"], // Force boolean attribute explicitly.
+        "react/jsx-quotes": [1, "single", "avoid-escape"],
+        "react/jsx-no-undef": 2,
+        "react/jsx-sort-props": 0,
+        "react/jsx-sort-prop-types": 0,
+        "react/jsx-uses-react": 1,
+        "react/jsx-uses-vars": 1,
+        "react/no-did-mount-set-state": 1,
+        "react/no-did-update-set-state": 1,
+        "react/no-multi-comp": 0,
+        "react/no-unknown-property": 2,
+        "react/prop-types": 1,
+        "react/react-in-jsx-scope": 1,
+        "react/self-closing-comp": 2,
+        "react/wrap-multilines": 2
     }
 }
