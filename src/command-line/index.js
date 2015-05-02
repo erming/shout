@@ -6,6 +6,7 @@ require("./add-user");
 require("./edit-config");
 require("./edit-user");
 require("./list-users");
+require("./init");
 require("./remove-user");
 require("./reset-config");
 require("./reset-password");
@@ -24,6 +25,7 @@ function help() {
   console.log("  edit-config");
   console.log("  edit-user");
   console.log("  help");
+  console.log("  init");
   console.log("  list-users");
   console.log("  remove-user");
   console.log("  reset-config");
