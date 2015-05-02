@@ -1,13 +1,23 @@
-module.exports = function(key) {
-  return config[key] || defaultConfig[key] || false;
+var fs = require("fs");
+var configObject;
+
+module.exports = config;
+module.exports.exists = exists;
+
+function config(key) {
+  return (configObject || {})[key] || false;
 };
 
-var config;
-var defaultConfig;
+function exists() {
+  return typeof configObject !== undefined;
+}
 
 function load() {
-  config = {};
-  defaultConfig = require("../defaults/config.json");
+  try {
+    configObject = require("../defaults/config.json");
+  } catch(e) {
+    // ..
+  }
 }
 
 load();
