@@ -28,6 +28,7 @@
     "bcrypt-nodejs": "0.0.3",
     "commander": "^2.3.0",
     "express": "^4.9.5",
+    "glob": "^5.0.5",
     "lodash": "^3.6.0",
     "mkdirp": "^0.5.0",
     "moment": "~2.7.0",
