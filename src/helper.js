@@ -1,7 +1,7 @@
 var helper = {
   HOME: (process.env.HOME || process.env.USERPROFILE) + "/.shout",
   path: path
-}
+};
 
 module.exports = helper;
 

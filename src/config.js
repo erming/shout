@@ -1,20 +1,27 @@
 var fs = require("fs");
-var configObject;
+var helper = require("./helper");
 
 module.exports = config;
-module.exports.exists = exists;
 
+var configObject;
 function config(key) {
   return (configObject || {})[key] || false;
-};
+}
+
+config.exists = exists;
+config.getPath = getPath;
 
 function exists() {
-  return typeof configObject !== undefined;
+  return typeof configObject !== "undefined";
+}
+
+function getPath() {
+  return helper.path("/config.json");
 }
 
 function load() {
   try {
-    configObject = require("../defaults/config.json");
+    configObject = require(getPath());
   } catch(e) {
     // ..
   }
