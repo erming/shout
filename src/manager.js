@@ -15,8 +15,9 @@ function Manager(sockets) {
 Manager.prototype = {
   load: load,
   find: find,
+  list: list,
   add: add,
-  remove: remove
+  remove: remove,
 };
 
 function load(pattern) {
@@ -61,6 +62,15 @@ function find(name) {
   }
 }
 
+function list() {
+  var names = [];
+  var c = this.clients;
+  for (var i in c) {
+    names.push(c[i].name);
+  }
+  return names;
+}
+
 function add(name, password) {
   if (find(name)) {
     return;
@@ -92,6 +102,10 @@ function add(name, password) {
 
 function remove(pattern) {
   var c = 0;
+
+  if (pattern.split(".").pop() != "json") {
+    pattern += ".json";
+  }
 
   var path = helper.path("users/" + pattern);
   var files = glob.sync(path);

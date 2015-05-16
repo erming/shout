@@ -1,4 +1,6 @@
 var program = require("commander");
+var child = require("child_process");
+var helper = require("../helper");
 
 module.exports = edit;
 
@@ -7,5 +9,9 @@ program
   .action(edit);
 
 function edit() {
-  console.log("Command 'add-user' triggered.");
+  child.spawn(
+    process.env.EDITOR || "vi",
+    [require("path").join(helper.HOME, "config.json")],
+		{stdio: "inherit"}
+  );
 }

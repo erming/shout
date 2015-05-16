@@ -1,4 +1,5 @@
 var program = require("commander");
+var Manager = require("../manager");
 
 module.exports = list;
 
@@ -7,5 +8,9 @@ program
   .action(list);
 
 function list() {
-  console.log("Command 'list-users' triggered.");
+  var manager = new Manager();
+  manager.load("*");
+  manager.list().forEach(function(user) {
+    console.log(user);
+  });
 }

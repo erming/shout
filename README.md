@@ -65,14 +65,15 @@ Currently a work in progress.
 
 ### Command Line Interface
 
-- [ ] add-user
-- [ ] edit-config
-- [ ] edit-user
-- [ ] list-users
-- [ ] remove-user
-- [ ] reset-config
-- [ ] reset-password
-- [ ] start
+- [x] add-user
+- [x] edit-config
+- [x] edit-user
+- [x] init
+- [x] list-users
+- [x] remove-user
+- [x] reset-config
+- [x] reset-password
+- [x] start
 
 ## License
 

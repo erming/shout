@@ -1,4 +1,5 @@
 var fs = require("fs");
+var mkdirp = require("mkdirp");
 var helper = require("./helper");
 
 module.exports = config;
@@ -9,10 +10,25 @@ function config(key) {
 }
 
 config.exists = exists;
+config.reset = reset;
 config.getPath = getPath;
+
 
 function exists() {
   return typeof configObject !== "undefined";
+}
+
+function reset() {
+  try {
+    mkdirp.sync(helper.HOME);
+    fs.writeFileSync(
+      getPath(),
+      fs.readFileSync("defaults/config.json")
+    );
+    return true;
+  } catch(e) {
+    return false;
+  }
 }
 
 function getPath() {
