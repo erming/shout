@@ -2,11 +2,11 @@
   <form method="post" action="">
     <label>
       Username<br>
-      <input type="text" class="username">
+      <input class="input username">
     </label>
     <label>
       Password<br>
-      <input type="text" class="password">
+      <input class="input password">
     </label>
     <button type="submit">
       Sign in

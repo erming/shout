@@ -35,7 +35,11 @@ function emit(e, data) {
 }
 
 function input() {}
-function conn(args) {}
+
+function conn(args) {
+  console.log(args);
+}
+
 function open(id) {}
 function quit(network) {}
 function exit() {}

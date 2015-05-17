@@ -1,4 +1,6 @@
 function gui() {
+  sidebar();
+
   var mode = shout.mode;
   if (mode.guest && mode.login) {
     start();
@@ -9,11 +11,17 @@ function gui() {
   }
 }
 
-function start() {
-  var main = $("#main");
-  var html = render("start");
-  main.html(html);
+function sidebar() {
+  var sidebar = $("#sidebar").html(render("sidebar"));
+  var actions = $("#actions");
 
+  actions.find(".connect").on("click", function() {
+    connect();
+  });
+}
+
+function start() {
+  var main = $("#main").html(render("start"));
   var start = $("#start");
 
   start.find(".guest, .login").one("click", function(e) {
@@ -27,10 +35,7 @@ function start() {
 }
 
 function login() {
-  var main = $("#main");
-  var html = render("login");
-  main.html(html);
-
+  var main = $("#main").html(render("login"));
   var login = $("#login");
 
   login.find(".username").focus();
@@ -51,12 +56,27 @@ function login() {
   });
 }
 
-function loginAsGuest() {
-
-}
-
 function connect() {
-  var main = $("#main");
-  var html = render("connect");
-  main.html(html);
+  var main = $("#main").html(render("connect"));
+  var form = $("#connect");
+
+  form.on("submit", function(e) {
+    e.preventDefault();
+
+    var values = {};
+		$.each(form.serializeArray(), function(i, obj) {
+			if (obj.value !== "") {
+				values[obj.name] = obj.value;
+			}
+		});
+
+    socket.emit(
+      "conn", values
+    );
+  });
+
+  form.on("input", ".nick", function() {
+    var nick = $(this).val();
+    form.find(".username").val(nick);
+  });
 }
