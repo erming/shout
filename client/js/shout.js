@@ -3,7 +3,7 @@ $(function() {
 });
 
 var socket = io();
-var shout  = new EventEmitter;
+var events = new EventEmitter;
 
 function init() {
   gui();
