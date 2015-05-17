@@ -20,7 +20,7 @@ function Client(sockets, name, config) {
 Client.prototype = {
   emit: emit,
   input: input,
-  connect: connect,
+  conn: conn,
   open: open,
   quit: quit,
   exit: exit,
@@ -35,7 +35,7 @@ function emit(e, data) {
 }
 
 function input() {}
-function connect(args) {}
+function conn(args) {}
 function open(id) {}
 function quit(network) {}
 function exit() {}

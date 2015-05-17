@@ -1,15 +1,19 @@
+var _ = require("lodash");
 var http = require("http");
 var express = require("express");
 var io = require("socket.io");
 var fs = require("fs");
-var _ = require("lodash");
+var bcrypt = require("bcrypt-nodejs");
 var path = require("path");
 var version = require("../package.json").version;
 var config = require("./config");
+var Manager = require("./manager");
+var Client = require("./client");
 
 module.exports = shout;
 
 var sockets;
+var manager;
 
 function shout() {
   var root = config("root");
@@ -24,6 +28,9 @@ function shout() {
   sockets.on("connect", function(s) {
     init(s);
   });
+
+  manager = new Manager(sockets);
+  manager.load("*");
 
   console.log("");
   console.log("shout@" + version)
@@ -69,6 +76,58 @@ function serve(req, res, next) {
   );
 }
 
-function init(socket) {
-  console.log("Client connect.");
+function init(socket, client) {
+  if (!client) {
+    socket.on("auth", function(data) {
+      auth(socket, data);
+    });
+  } else {
+    socket.on("input", client.input);
+    socket.on("conn", client.conn);
+    socket.on("open", client.open);
+    socket.on("sort", client.sort);
+    socket.join(client.id);
+    socket.emit("init", {
+      networks: client.networks
+    });
+  }
+}
+
+function auth(socket, data) {
+  var mode = data.mode;
+  if (!mode) {
+    return;
+  }
+
+  switch (mode) {
+  case "guest":
+    var client = new Client(sockets);
+    manager.clients.push(client);
+
+    socket.on("disconnect", function() {
+      manager.clients = _.without(manager.clients, client);
+      client.exit();
+		});
+
+    init(socket, client);
+    break;
+
+  case "login":
+    var pass = false;
+    _.each(manager.clients, function(client) {
+      var config = client.config;
+
+      if (config.user == data.user) {
+        if (bcrypt.compareSync(data.password || "", config.password)) {
+          pass = true;
+        }
+      }
+
+      if (pass) {
+        init(socket, client);
+        return false;
+      }
+    });
+    break;
+  }
 }

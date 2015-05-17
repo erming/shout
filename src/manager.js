@@ -36,7 +36,7 @@ function load(pattern) {
       return;
     }
 
-    var name = json.name;
+    var name = json.user;
     if (!name || find(name)) {
       return;
     }
@@ -77,9 +77,9 @@ function add(name, password) {
   }
 
   var path = helper.path("users/");
-  var user = Object.create(require("../defaults/user.json"));
+  var user = _.clone(require("../defaults/user.json"));
 
-  user.name = name;
+  user.user = name;
   user.password = password;
 
   mkdirp(path);

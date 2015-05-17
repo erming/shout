@@ -12,17 +12,16 @@ function gui() {
 function start() {
   var main = $("#main");
   var html = render("start");
-  main.append(html);
+  main.html(html);
 
   var start = $("#start");
 
-  start.find(".guest").one("click", function() {
-    connect();
-    start.remove();
-  });
-
-  start.find(".login").one("click", function() {
-    login();
+  start.find(".guest, .login").one("click", function(e) {
+    if ($(e.target).hasClass("guest")) {
+      socket.emit("auth", {mode: "guest"});
+    } else {
+      login();
+    }
     start.remove();
   });
 }
@@ -30,11 +29,34 @@ function start() {
 function login() {
   var main = $("#main");
   var html = render("login");
-  main.append(html);
+  main.html(html);
+
+  var login = $("#login");
+
+  login.find(".username").focus();
+  login.find("form").on("submit", function(e) {
+    e.preventDefault();
+    var form = $(this);
+
+    var user = form.find(".username").val();
+    var password = form.find(".password").val();
+
+    socket.emit("auth", {
+      mode: "login",
+      user: user,
+      password: password
+    });
+
+    form.find("input").blur();
+  });
+}
+
+function loginAsGuest() {
+
 }
 
 function connect() {
   var main = $("#main");
   var html = render("connect");
-  main.append(html);
+  main.html(html);
 }
