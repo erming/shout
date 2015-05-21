@@ -42,6 +42,9 @@ label {
 	width: 240px;
 	padding: 20px;
 }
+#sidebar button {
+	margin-bottom: 14px;
+}
 #main {
 	background: #fff;
 	position: absolute;

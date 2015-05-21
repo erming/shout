@@ -13,7 +13,6 @@ config.exists = exists;
 config.reset = reset;
 config.getPath = getPath;
 
-
 function exists() {
   return typeof configObject !== "undefined";
 }
