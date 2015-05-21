@@ -82,10 +82,30 @@ function init(socket, client) {
       auth(socket, data);
     });
   } else {
-    socket.on("input", client.input);
-    socket.on("conn", client.conn);
-    socket.on("open", client.open);
-    socket.on("sort", client.sort);
+    socket.on(
+      "input",
+      function(args) {
+        client.input(args);
+      }
+    );
+    socket.on(
+      "conn",
+      function(args) {
+        client.connect(args);
+      }
+    );
+    socket.on(
+      "open",
+      function(args) {
+        client.open(args);
+      }
+    );
+    socket.on(
+      "sort",
+      function(args) {
+        client.sort(args);
+      }
+    );
     socket.join(client.id);
     socket.emit("init", {
       networks: client.networks

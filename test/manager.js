@@ -17,8 +17,8 @@ tape("manager", function(t) {
   t.assert(l >= 2);
   t.assert(m.list().length >= 2);
 
-  t.equals(a.name, "foo");
-  t.equals(c.name, "bar");
+  t.equals(a.user, "foo");
+  t.equals(c.user, "bar");
   t.equals(f.name, "foo");
 
   var rf = m.remove("foo");

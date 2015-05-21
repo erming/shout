@@ -34,7 +34,9 @@ function start() {
       $(this).unbind("click");
       $("#start").remove();
       if ($(e.target).hasClass("guest")) {
-        socket.emit("auth", {mode: "guest"});
+        socket.emit("auth", {
+          mode: "guest"
+        });
       } else {
         login();
       }
@@ -48,7 +50,8 @@ function login() {
     .find(".username")
     .focus()
     .end()
-    .find("form").on("submit", function(e) {
+    .find("form")
+    .on("submit", function(e) {
       e.preventDefault();
       var form = $(this);
       var user = form.find(".username").val();
@@ -68,6 +71,7 @@ function connect() {
     .find("#connect")
     .on("submit", function(e) {
       e.preventDefault();
+      var form = $(this);
       var values = {};
       $.each(form.serializeArray(), function(i, obj) {
         if (obj.value !== "") {
@@ -75,7 +79,7 @@ function connect() {
         }
       });
       socket.emit(
-      "conn", values
+        "conn", values
       );
     }).on("input", ".nick", function() {
       var nick = $(this).val();

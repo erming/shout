@@ -5,9 +5,15 @@ module.exports = function(irc, client, network) {
   irc.on("mode", function(data) {
     var target = data.target;
     var from = data.nick;
-    var chan = _.findWhere(network.channels, {name: target});
+    var chan = _.findWhere(
+      network.channels, {
+        name: target
+      }
+    );
 
-    if (chan) {
+    if (!chan) {
+      return;
+    } else {
       if (from.indexOf(".") !== -1) {
         from = target;
       }

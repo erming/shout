@@ -6,10 +6,14 @@ var socket = io();
 var events = new EventEmitter;
 
 function load() {
-  gui();
   socket.on("init", init);
+  socket.on("network", function(data) {
+    console.log(data);
+  });
+
+  gui();
 }
 
-function init(data) {
-  console.log("'init' sent by server");
+function init() {
+  connect();
 }
