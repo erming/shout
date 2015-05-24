@@ -93,17 +93,18 @@ function init(socket, client, token) {
 		socket.on("auth", auth);
 	} else {
 		var ip = socket.handshake.headers['x-forwarded-for'] || socket.request.connection.remoteAddress;
-		dns.reverse(ip, function(err, clienthost) {
-			var hostname;
-			if(err || !clienthost.length) {
-				hostname = ip;
-			} else {
-				hostname = clienthost[0];
-			}
-		
-			client.host.hostname = hostname;
-			client.host.ip = ip;
-		});
+		client.host.ip = ip;
+		try {
+			dns.reverse(ip, function(err, clienthost) {
+				if(!err && clienthost.length) {
+					client.host.hostname = clienthost[0];
+				} else {
+					client.host.hostname = ip;
+				}
+			});
+		} catch(e) {
+			client.host.hostname = ip;
+		}
 
 		socket.on(
 			"input",
