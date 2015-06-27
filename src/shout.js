@@ -50,7 +50,7 @@ function serve(req, res, next) {
   if (req.url.split("?")[0] != "/") {
     return next();
   }
-
+  
   var model = {
     shout: JSON.stringify({
       version: require("../package.json").version,
@@ -63,15 +63,14 @@ function serve(req, res, next) {
       );
     },
   };
-
+  
   return fs.readFile(
     "client/index.html",
     "utf-8",
     function(err, file) {
-      res.end(_.template(
-        file,
-        model
-      ));
+	  if (!err) {
+		res.end(_.template(file)(model));
+	  }
     }
   );
 }
