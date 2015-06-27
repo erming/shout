@@ -58,7 +58,7 @@ function add(name) {
   }, function(err, password) {
     if (!err) {
       var hash = helper.hash(password);
-      manager.add(name, hash);
+      manager.create(name, hash);
       console.log("");
       console.log("Success!");
       console.log("");

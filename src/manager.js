@@ -16,7 +16,7 @@ Manager.prototype = {
   load: load,
   find: find,
   list: list,
-  add: add,
+  create: create,
   remove: remove,
 };
 
@@ -71,7 +71,7 @@ function list() {
   return names;
 }
 
-function add(name, password) {
+function create(name, password) {
   if (find(name)) {
     return;
   }

@@ -7,9 +7,9 @@ tape("manager", function(t) {
 
   var m = new Manager();
 
-  var a = m.add("foo", "bar");
-  var b = m.add("foo", "bar");
-  var c = m.add("bar", "baz");
+  var a = m.create("foo", "bar");
+  var b = m.create("foo", "bar");
+  var c = m.create("bar", "baz");
 
   var l = m.load("*");
   var f = m.find("foo");
