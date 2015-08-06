@@ -6,7 +6,7 @@ var link = require('../../src/plugins/irc-events/link.js');
 describe('Link plugin', function() {
   before(function(done) {
     this.app = util.createWebserver();
-    this.connection = this.app.listen(9002, done);
+    this.connection = this.app.listen(8000, done);
   });
 
   after(function(done) {
@@ -26,7 +26,7 @@ describe('Link plugin', function() {
     });
 
     this.irc.createMessage({
-      message: 'http://localhost:9002/basic'
+      message: 'http://0.0.0.0:8000/basic'
     });
 
     this.irc.once('toggle', function(data) {
