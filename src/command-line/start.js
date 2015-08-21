@@ -16,7 +16,6 @@ program
 	.description("Start the server")
 	.action(function() {
 		var users = new ClientManager().getUsers();
-                console.log("config", program.conf)
                 var config;
                 if (program.conf) {
                   config = require(program.conf)
@@ -24,7 +23,6 @@ program
                 else  {
 		  config = Helper.getConfig();
                 }
-                console.log(config)
 		var mode = config.public;
 		if (program.public) {
 			mode = true;
