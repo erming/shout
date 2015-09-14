@@ -2,6 +2,7 @@ var _ = require("lodash");
 var Chan = require("./models/chan");
 var crypto = require("crypto");
 var fs = require("fs");
+var util = require('util');
 var identd = require("./identd");
 var log = require("./log");
 var net = require("net");
@@ -9,7 +10,9 @@ var Msg = require("./models/msg");
 var Network = require("./models/network");
 var slate = require("slate-irc");
 var tls = require("tls");
+var EventEmitter = require('events').EventEmitter;
 var Helper = require("./helper");
+var OtrStore = require("./models/OtrStore");
 
 module.exports = Client;
 
@@ -30,7 +33,8 @@ var events = [
 	"quit",
 	"topic",
 	"welcome",
-	"whois"
+	"whois",
+	"otrmessage"
 ];
 var inputs = [
 	"action",
@@ -51,6 +55,8 @@ var inputs = [
 ];
 
 function Client(sockets, name, config) {
+	EventEmitter.call(this);
+	var client = this;
 	_.merge(this, {
 		activeChannel: -1,
 		config: config,
@@ -59,7 +65,7 @@ function Client(sockets, name, config) {
 		networks: [],
 		sockets: sockets
 	});
-	var client = this;
+	this.otrStore = new OtrStore(name, client);
 	crypto.randomBytes(48, function(err, buf) {
 		client.token = buf.toString("hex");
 	});
@@ -73,8 +79,11 @@ function Client(sockets, name, config) {
 		});
 	}
 }
+util.inherits(Client, EventEmitter);
 
+/** An emitter that emits both locally and through network */
 Client.prototype.emit = function(event, data) {
+	EventEmitter.prototype.emit.apply(this, arguments);
 	if (this.sockets !== null) {
 		this.sockets.in(this.id).emit(event, data);
 	}
@@ -190,6 +199,10 @@ Client.prototype.connect = function(args) {
 			irc,
 			network
 		]);
+	});
+
+	this.on("join", function(args) {
+		this.otrStore.initChan(args);
 	});
 
 	irc.once("welcome", function() {

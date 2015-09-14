@@ -1,4 +1,5 @@
 var _ = require("lodash");
+var OTR = require('otr').OTR; // FIXME: remove this import
 
 module.exports = function(network, chan, cmd, args) {
 	if (cmd != "say" && cmd != "msg") {
@@ -19,7 +20,12 @@ module.exports = function(network, chan, cmd, args) {
 		target = chan.name;
 	}
 	var msg = args.join(" ");
-	irc.send(target, msg);
+	var otrSession = client.otrStore.getSession(chan.name, network);
+	if (otrSession && (otrSession.msgstate === OTR.CONST.MSGSTATE_ENCRYPTED)) {
+		otrSession.sendMsg(msg);
+	} else {
+		irc.send(target, msg);
+	}
 	var channel = _.find(network.channels, {name: target});
 	if (typeof channel !== "undefined") {
 		irc.emit("message", {
