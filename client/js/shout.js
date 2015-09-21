@@ -311,6 +311,14 @@ $(function() {
 				toggle.click();
 			}
 			break;
+		case "gfyembed":
+			if (options.jiffify) {
+				$('.gfyitem[data-id=' + data.gfyname + ']').each(function() {
+					gfyObject(this).init();
+				});
+				toggle.click();
+			}
+			break;
 		}
 	});
 
@@ -337,6 +345,7 @@ $(function() {
 		notification: true,
 		part: true,
 		thumbnails: true,
+		jiffify: false,
 		quit: true,
 	}, $.cookie("settings"));
 

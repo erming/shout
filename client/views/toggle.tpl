@@ -4,6 +4,8 @@
 		<a href="{{link}}" target="_blank">
 			<img src="{{link}}">
 		</a>
+	{{else}} {{#equal type "gfyembed"}}
+		<div class="gfyitem" data-title=true data-autoplay=true data-controls=true data-expand=false data-id="{{gfyname}}" ></div>
 	{{else}}
 		<a href="{{link}}" target="_blank">
 			{{#if thumb}}
@@ -14,6 +16,6 @@
 				{{body}}
 			</div>
 		</a>
-	{{/equal}}
+	{{/equal}} {{/equal}}
 </div>
 {{/toggle}}
