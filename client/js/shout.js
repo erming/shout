@@ -37,7 +37,7 @@ $(function() {
 
 	try {
 		var pop = new Audio();
-		pop.src = "/audio/pop.ogg";
+	        pop.src = config.rootpath + "audio/pop.ogg";
 	} catch(e) {
 		var pop = {
 			play: $.noop

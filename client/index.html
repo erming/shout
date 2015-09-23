@@ -11,14 +11,13 @@
 
 	<title>Shout</title>
 
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="<%= rootpath %>css/bootstrap.css">
+	<link rel="stylesheet" href="<%= rootpath %>css/style.css">
 	<link id="theme" rel="stylesheet" href="<%= theme %>">
 
-	<link rel="shortcut icon" href="/img/favicon.png">
-	<link rel="icon" sizes="192x192" href="/img/touch-icon-192x192.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
-
+	<link rel="shortcut icon" href="<%= rootpath %>img/favicon.png">
+	<link rel="icon" sizes="192x192" href="<%= rootpath %>img/touch-icon-192x192.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="<%= rootpath %>img/apple-touch-icon-120x120.png">
 	</head>
 	<body class="<%= public ? "public" : "" %>">
 
@@ -285,9 +284,9 @@
 	</div>
 	</div>
 
-	<script src="js/libs.min.js"></script>
-	<script src="js/shout.templates.js"></script>
-	<script src="js/shout.js"></script>
+	<script src="<%= rootpath %>js/libs.min.js"></script>
+	<script src="<%= rootpath %>js/shout.templates.js"></script>
+	<script src="<%= rootpath %>js/shout.js"></script>
 
 	</body>
 </html>

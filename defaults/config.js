@@ -75,6 +75,18 @@ module.exports = {
 	//
 	displayNetwork: true,
 
+        //
+        // Serving path
+        //
+        // The path at which shout is available.
+        // For example if you set this to /chat,
+        // shout will be available at http://0.0.0.0:9000/chat
+        //
+        // @type     string
+        // @default  "/"
+        //
+        rootpath: "/",
+
 	//
 	// Log settings
 	//
