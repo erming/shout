@@ -596,6 +596,7 @@ button {
 #chat .highlight .from {
 	color: #f00;
 }
+#chat.hide-time .time,
 #chat.hide-join .join span,
 #chat.hide-mode .mode span,
 #chat.hide-motd .motd span,
