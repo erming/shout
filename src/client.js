@@ -67,6 +67,8 @@ function Client(sockets, name, config) {
 		var delay = 0;
 		(config.networks || []).forEach(function(n) {
 			setTimeout(function() {
+				// User-specific bind (localAddress) for networks
+				n.bind = config.bind;
 				client.connect(n);
 			}, delay);
 			delay += 1000;
@@ -126,15 +128,16 @@ Client.prototype.connect = function(args) {
 		name: args.name || "",
 		host: args.host || "irc.freenode.org",
 		port: args.port || (args.tls ? 6697 : 6667),
+		localAddress: args.bind || config.bind || undefined,
 		rejectUnauthorized: false
 	};
+	
+	// XXX: "family" requires nodejs 0.12, but setting it won't hurt
+	server.family = net.isIP(server.localAddress) || undefined;
 
-	if (config.bind) {
-		server.localAddress = config.bind;
-		if(args.tls) {
-			var socket = net.connect(server);
-			server.socket = socket;
-		}
+	if (server.localAddress && args.tls) {
+		var socket = net.connect(server);
+		server.socket = socket;
 	}
 
 	var stream = args.tls ? tls.connect(server) : net.connect(server);

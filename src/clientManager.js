@@ -80,6 +80,7 @@ ClientManager.prototype.addUser = function(name, password) {
 			user: name,
 			password: password || "",
 			log: false,
+			bind: "",
 			networks: []
 		};
 		mkdirp.sync(path);
