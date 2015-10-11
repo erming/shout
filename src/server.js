@@ -92,17 +92,17 @@ function init(socket, client, token) {
 		socket.emit("auth");
 		socket.on("auth", auth);
 	} else {
-		var ip = socket.handshake.headers['x-forwarded-for'] || socket.request.connection.remoteAddress;
+		var ip = config.reverse_proxy ? socket.handshake.headers['x-forwarded-for'] : socket.request.connection.remoteAddress;
 		client.host.ip = ip;
 		try {
 			dns.reverse(ip, function(err, clienthost) {
-				if(!err && clienthost.length) {
+				if (!err && clienthost.length) {
 					client.host.hostname = clienthost[0];
 				} else {
 					client.host.hostname = ip;
 				}
 			});
-		} catch(e) {
+		} catch (e) {
 			client.host.hostname = ip;
 		}
 

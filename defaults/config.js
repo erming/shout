@@ -256,5 +256,17 @@ module.exports = {
 	//
 	webirc: {
 		"irc.example.org": "yourwebircpassword"
-	}
+	},
+
+	//
+	// If you use WEBIRC:
+	//
+	// Set this option to true if you run Shout behind a reverse proxy. Do not
+	// enable this option if Shout is accessed directly. This would allow users
+	// to fake their IP address which makes them immune to bans.
+	//
+	// @type     boolean
+	// @default  false
+	//
+	reverse_proxy: false
 };
