@@ -57,6 +57,7 @@ function Client(sockets, name, config) {
 		id: id++,
 		name: name,
 		networks: [],
+		options: config ? config.options : {},
 		sockets: sockets
 	});
 	var client = this;
@@ -323,6 +324,59 @@ Client.prototype.quit = function() {
 	});
 };
 
+Client.prototype.saveUserConfig = function(data, cb) {
+
+	var path = Helper.HOME + "/users/" + this.name + ".json";
+
+	fs.writeFile(
+		path,
+		JSON.stringify(data, null, "  "),
+		{mode: "0777"},
+		cb
+	);
+
+};
+
+Client.prototype.loadUserConfig = function(cb) {
+
+	var path = Helper.HOME + "/users/" + this.name + ".json";
+
+	fs.readFile(path, "utf-8", function(err, data) {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		try {
+			data = JSON.parse(data);
+		} catch(e) {
+			console.log(e);
+			return;
+		}
+		cb(data);
+	});
+};
+
+
+Client.prototype.saveOptions = function(options) {
+
+	var client = this;
+	var config = Helper.getConfig();
+
+	if(config.public) {
+		return;
+	}
+
+	this.options = options;
+
+	this.loadUserConfig(function(data) {
+
+		data.options = options;
+		client.saveUserConfig(data);
+	});
+
+
+};
+
 var timer;
 Client.prototype.save = function(force) {
 	var client = this;
@@ -340,9 +394,6 @@ Client.prototype.save = function(force) {
 		return;
 	}
 
-	var name = this.name;
-	var path = Helper.HOME + "/users/" + name + ".json";
-
 	var networks = _.map(
 		this.networks,
 		function(n) {
@@ -350,30 +401,14 @@ Client.prototype.save = function(force) {
 		}
 	);
 
-	var json = {};
-	fs.readFile(path, "utf-8", function(err, data) {
-		if (err) {
-			console.log(err);
-			return;
-		}
+	this.loadUserConfig(function(data) {
 
-		try {
-			json = JSON.parse(data);
-			json.networks = networks;
-		} catch(e) {
-			console.log(e);
-			return;
-		}
+		data.networks = networks;
 
-		fs.writeFile(
-			path,
-			JSON.stringify(json, null, "  "),
-			{mode: "0777"},
-			function(err) {
-				if (err) {
-					console.log(err);
-				}
+		client.saveUserConfig(data, function(err) {
+			if (err) {
+				console.log(err);
 			}
-		);
+		});
 	});
 };
