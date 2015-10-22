@@ -346,6 +346,7 @@ $(function() {
 		part: true,
 		thumbnails: true,
 		quit: true,
+		autojoin: false,
 	}, $.cookie("settings"));
 
 	for (var i in options) {
@@ -673,14 +674,22 @@ $(function() {
 
 	forms.on("submit", "form", function(e) {
 		e.preventDefault();
-		var event = "auth";
 		var form = $(this);
 		form.find(".btn")
 			.attr("disabled", true)
 			.end();
 		if (form.closest(".window").attr("id") == "connect") {
-			event = "conn";
+			submitForm(form, 'conn');
+		} else {
+			submitForm(form, 'auth');
 		}
+	});
+
+	if (options.autojoin) {
+		submitForm($('#connect form'), 'conn');
+	}
+
+	function submitForm(form, event) {
 		var values = {};
 		$.each(form.serializeArray(), function(i, obj) {
 			if (obj.value !== "") {
@@ -698,7 +707,7 @@ $(function() {
 		socket.emit(
 			event, values
 		);
-	});
+	}
 
 	forms.on("input", ".nick", function() {
 		var nick = $(this).val();
