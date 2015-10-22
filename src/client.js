@@ -172,6 +172,7 @@ Client.prototype.connect = function(args) {
 		port: server.port,
 		tls: !!args.tls,
 		password: args.password,
+		user: nick,
 		username: username,
 		realname: realname,
 		commands: args.commands
@@ -252,12 +253,13 @@ Client.prototype.more = function(data) {
 		return;
 	}
 	var chan = target.chan;
-	var count = chan.messages.length - (data.count || 0);
-	var messages = chan.messages.slice(Math.max(0, count - 100), count);
-	client.emit("more", {
-		chan: chan.id,
-		messages: messages
-	});
+	var count = chan.messages.count - (data.count || 0);
+	chan.messages.fetch(Math.max(0, count - 100), count, function(err, messages){
+        client.emit("more", {
+            chan: chan.id,
+            messages: messages
+        });
+    });	
 };
 
 Client.prototype.open = function(data) {

@@ -43,3 +43,34 @@ module.exports.write = function(user, network, chan, msg) {
 		}
 	);
 };
+
+var redt = /^\[\d{4}\-\d{2}\-\d{2} (\d{2}:\d{2}:\d{2})\] /;
+var rems = /^<([^>]+)> /;
+var reus = /(\S*) */;
+
+module.exports.parse = function(line){
+	var pmatch = line.match(redt);
+	var datetime = pmatch[1];
+	var msg = { id: 0, time: datetime, self: false };
+	line = line.substr(pmatch[0].length);
+	if (line[0] === "*") {
+		line = line.substr(2);
+		if (line[0] !== " ") {
+			pmatch = line.match(reus);
+			msg.from = pmatch[0];
+			line = line.substr(pmatch[0].length);
+		} else {
+			msg.from = "";
+			line = line.substr(1);
+		}
+		pmatch = line.match(reus);
+		msg.type = pmatch[0];
+		msg.text = line.substr(pmatch[0].length);
+	} else {
+		pmatch = line.match(rems);
+		msg.from = pmatch[1];
+		msg.type = "message";
+		msg.text = line.substr(pmatch[0].length);
+	}
+	return msg;
+};
