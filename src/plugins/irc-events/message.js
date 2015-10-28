@@ -7,7 +7,7 @@ var config = {};
 module.exports = function(irc, network) {
 	var client = this;
 	config = Helper.getConfig();
-	
+
 	irc.on("message", function(data) {
 		if (data.message.indexOf("\u0001") === 0 && data.message.substring(0, 7) !== "\u0001ACTION") {
 			// Hide ctcp messages.
@@ -60,13 +60,13 @@ module.exports = function(irc, network) {
 			text: text,
 			self: self
 		});
-		
+
 		chan.messages.push(msg);
-		
-		if(config.maxHistory > 0 && chan.messages.length > config.maxHistory) {
+
+		if (config.maxHistory > 0 && chan.messages.length > config.maxHistory) {
 			chan.messages.splice(0, chan.messages.length-config.maxHistory);
 		}
-		
+
 		client.emit("msg", {
 			chan: chan.id,
 			msg: msg
