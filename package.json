@@ -14,8 +14,8 @@
   "scripts": {
     "start": "node index",
     "build": "grunt",
-    "test": "HOME=test/fixtures mocha test/**/*.js && npm run lint",
-    "lint": "eslint index.js Gruntfile.js src/ test/ client/ defaults/"
+    "test": "HOME=test/fixtures node_modules/.bin/mocha test/**/*.js && npm run lint",
+    "lint": "node_modules/.bin/eslint index.js Gruntfile.js src/ test/ client/ defaults/"
   },
   "keywords": [
     "browser",
