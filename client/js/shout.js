@@ -347,7 +347,7 @@ $(function() {
 		part: true,
 		thumbnails: true,
 		quit: true,
-		afterComplete: '',
+		afterComplete: "",
 	}, $.cookie("settings"));
 
 	for (var i in options) {
@@ -359,7 +359,7 @@ $(function() {
 	settings.on("change", "input", function() {
 		var self = $(this);
 		var name = self.attr("name");
-		if (self.is(':checkbox')) {
+		if (self.is(":checkbox")) {
 			options[name] = self.prop("checked");
 		} else {
 			options[name] = self.val();
