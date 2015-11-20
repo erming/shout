@@ -757,7 +757,7 @@ $(function() {
 		var maxPatternLength = 32;
 
 		// return early in case word is too long
-		if (word.length() > maxPatternLength) {
+		if (word.length > maxPatternLength) {
 			return [];
 		}
 
@@ -768,6 +768,13 @@ $(function() {
 		var users = chat.find(".active").find(".users");
 		var nicks = users.data("nicks");
 
+		// We need the messages to sort nicks by recent activity
+		var messages = chat.find(".active").find(".message");
+		// retrieve the last senders (up to 50 messages)
+		var recentNicks = new Set(
+			messages.slice(messages.length - 50).find(".user")
+			.map(function() { return $(this).text(); }).get()
+		);
 		if (!nicks) {
 			nicks = [];
 			users.find(".user").each(function() {
@@ -775,6 +782,20 @@ $(function() {
 				nicks.push(nick);
 			});
 			users.data("nicks", nicks);
+		}
+
+		// partition nicks, putting those in recentNicks first
+		var splitPoint = 0;
+		for (i = 0; i < nicks.length; i++) {
+			if (recentNicks.has(nicks[i])) {
+				var tmp = nicks[splitPoint];
+				nicks[splitPoint++] = nicks[i];
+				nicks[i] = tmp;
+			}
+
+			if (splitPoint === recentNicks.size) {
+				break;
+			}
 		}
 
 		for (var i in nicks) {
@@ -793,8 +814,8 @@ $(function() {
 			{
 				shouldSort: true,
 				location: 0,
-				treshold: 0.4,
-				distance: 5,
+				treshold: 0.5,
+				distance: 10,
 				maxPatternLength: maxPatternLength
 			});
 
