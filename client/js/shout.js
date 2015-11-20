@@ -754,7 +754,17 @@ $(function() {
 	}
 
 	function complete(word) {
-		var words = commands.slice();
+		var maxPatternLength = 32;
+
+		// return early in case word is too long
+		if (word.length() > maxPatternLength) {
+			return [];
+		}
+
+		var isAtBeginning = $("#input").val() === word;
+		var isCommand = isAtBeginning && word[0] === "/";
+
+		var words = isCommand ? commands.slice() : [];
 		var users = chat.find(".active").find(".users");
 		var nicks = users.data("nicks");
 
@@ -779,12 +789,27 @@ $(function() {
 				}
 			});
 
-		return $.grep(
-			words,
-			function(w) {
-				return !w.toLowerCase().indexOf(word.toLowerCase());
-			}
-		);
+		var fuse = new Fuse(words,
+			{
+				shouldSort: true,
+				location: 0,
+				treshold: 0.4,
+				distance: 5,
+				maxPatternLength: maxPatternLength
+			});
+
+		return fuse.search(word).map(
+			function(idx) {
+				return words[idx];
+			})
+			.map(function(w) {
+				if (isAtBeginning && !isCommand) {
+					return w + ": ";
+				}
+				else {
+					return w + " ";
+				}
+			});
 	}
 
 	function confirmExit() {
