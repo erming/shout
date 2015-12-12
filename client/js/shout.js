@@ -1,4 +1,5 @@
 $(function() {
+	emoji.img_set = "google";
 	var socket = io();
 	var commands = [
 		"/close",
@@ -55,7 +56,7 @@ $(function() {
 	});
 
 	function render(name, data) {
-		return Handlebars.templates[name](data);
+		return emoji.replace_unified(Handlebars.templates[name](data));
 	}
 
 	Handlebars.registerHelper(
@@ -203,6 +204,7 @@ $(function() {
 		if (text.find("i").size() === 1) {
 			text = text.find("i");
 		}
+		text.html(emoji.replace_unified(text.html()));
 		// Channels names are strings (beginning with a '&' or '#' character)
 		// of length up to 200 characters.
 		// See https://tools.ietf.org/html/rfc1459#section-1.3
