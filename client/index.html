@@ -286,7 +286,15 @@
 	</div>
 	</div>
 
-	<script src="js/libs.min.js"></script>
+    <script src="js/libs.min.js"></script>
+	<script>
+		var shoutPlugins = [];
+	</script>
+
+	<% plugins.forEach(function(file) { %>
+		<script src="plugins/<%= file %>"></script>
+	<% }) %>
+
 	<script src="js/shout.templates.js"></script>
 	<script src="js/shout.js"></script>
 

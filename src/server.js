@@ -13,11 +13,27 @@ var manager = new ClientManager();
 
 module.exports = function(options) {
 	config = Helper.getConfig();
-	config = _.extend(config, options);
+	config = _.extend(config, options, {
+		plugins: []
+	});
 
 	var app = express()
 		.use(index)
 		.use(express.static("client"));
+
+	fs.readdir(Helper.HOME + '/plugins', function(err, files) {
+		if (err) {
+			if (err.code !== 'ENOENT') {
+				console.log(err);
+			}
+			return;
+		}
+		if (files.length) {
+			config.plugins = files;
+			app.use('/plugins', express.static(Helper.HOME + '/plugins'));
+		}
+
+	});
 
 	app.enable("trust proxy");
 
