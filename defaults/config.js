@@ -35,6 +35,19 @@ module.exports = {
 	bind: undefined,
 
 	//
+	// Enable or disable pid file creation
+	//
+	// string values specify the file path to use
+	// boolean values result in the default file path being used
+	//
+	// paths are relative to the 'HOME' folder
+	//
+	// @type     string | boolean
+	// @default  true
+	//
+	pidFile: true,
+
+	//
 	// Set the default theme.
 	//
 	// @type     string
