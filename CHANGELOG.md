@@ -1,3 +1,8 @@
+Unreleased
+==========
+
+* Improve message completion
+
 0.51.2 / 2015-09-18
 ==================
 

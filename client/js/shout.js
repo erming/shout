@@ -347,6 +347,7 @@ $(function() {
 		part: true,
 		thumbnails: true,
 		quit: true,
+		afterComplete: "",
 	}, $.cookie("settings"));
 
 	for (var i in options) {
@@ -358,7 +359,11 @@ $(function() {
 	settings.on("change", "input", function() {
 		var self = $(this);
 		var name = self.attr("name");
-		options[name] = self.prop("checked");
+		if (self.is(":checkbox")) {
+			options[name] = self.prop("checked");
+		} else {
+			options[name] = self.val();
+		}
 		$.cookie(
 			"settings",
 			options, {
@@ -377,6 +382,9 @@ $(function() {
 		}
 		if (name === "colors") {
 			chat.toggleClass("no-colors", !self.prop("checked"));
+		}
+		if (name === "afterComplete") {
+			initTabCompletion();
 		}
 	}).find("input")
 		.trigger("change");
@@ -404,8 +412,14 @@ $(function() {
 	});
 
 	var input = $("#input")
-		.history()
-		.tab(complete, {hint: false});
+		.history();
+
+	initTabCompletion();
+
+	function initTabCompletion() {
+		var settings = $.cookie("settings") || {};
+		$("#input").tab(complete, {hint: false, after: settings.afterComplete});
+	}
 
 	var form = $("#form");
 
