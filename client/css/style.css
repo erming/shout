@@ -562,7 +562,7 @@ button {
 #chat .show-more {
 	display: none;
 	padding: 10px;
-	position: absolute;
+	position: relative;
 	width: 100%;
 }
 #chat .show-more.show + .messages .msg:first-child {
