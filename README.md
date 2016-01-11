@@ -32,6 +32,21 @@ shout --help
 
 For more information, read the [documentation](http://shout-irc.com/docs/).
 
+## HTTPS support with letsencrypt (recommended)
+
+To enable https in the easiest way, use letsencrypt.
+
+```
+git clone https://github.com/letsencrypt/letsencrypt
+cd letsencrypt/
+./letsencrypt-auto certonly --standalone --email you@email.com -d domain.com -d www.domain.com
+```
+
+Follow the instructions, and you should have your new certificate (remember to set an alarm for a few days before the date it tells you, to update your certificates).
+
+Finally, edit your shout config, enable https support, add the file "privkey.pem" as the key, and add the cert.pem as the certificate. (Bear in mind that letsencrypt will create your /etc/letsencrypt folder as root, so you might have to change the owner to the user that runs shout).
+
+
 ## Development setup
 
 To run the app from source, just clone the code and run this in your terminal:
