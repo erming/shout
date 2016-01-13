@@ -47,6 +47,10 @@ body {
   color: #dcdccc;
 }
 
+#settings select {
+  background: inherit;
+}
+
 #sidebar {
   background: #2b2b2b;
   bottom: 48px;

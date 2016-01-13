@@ -418,6 +418,23 @@ $(function() {
 		}
 	});
 
+	settings.on("change", "select", function() {
+		var self = $(this);
+		var name = self.attr("name");
+		if(self.val() == "-") {
+			return;
+		}
+
+		options[name] = self.val();
+		$.cookie(
+			"settings",
+			options, {
+				expires: expire(365)
+			}
+		);
+		$("#theme").prop("href", "themes/" + self.val() + ".css");
+	});
+
 	var viewport = $("#viewport");
 
 	viewport.on("click", ".lt, .rt", function(e) {
