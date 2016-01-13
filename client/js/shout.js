@@ -194,6 +194,11 @@ $(function() {
 		var chan = chat.find(target);
 		var from = data.msg.from;
 
+
+		if (highlights.some(function(h) {return data.msg.text.indexOf(h) > -1;})){
+			data.msg.type += " highlight";
+		}
+
 		if ([
 			"join",
 			"mode",
@@ -421,15 +426,30 @@ $(function() {
 	}, $.cookie("settings"));
 
 	for (var i in options) {
-		if (options[i]) {
+		if (options[i] === true) {
 			settings.find("input[name=" + i + "]").prop("checked", true);
+		} else if (options[i] !== false) {
+			settings.find("input[name=" + i + "]").val(options[i]);
 		}
 	}
+
+	var highlights = [];
+
+	$("#highlights").on("change", function() {
+		var string = $(this).val();
+		highlights = string.split(",").map(function(h) {
+			return h.trim();
+		});
+	});
 
 	settings.on("change", "input", function() {
 		var self = $(this);
 		var name = self.attr("name");
-		options[name] = self.prop("checked");
+		if (self.is(":checkbox")) {
+			options[name] = self.prop("checked");
+		} else {
+			options[name] = self.val();
+		}
 		$.cookie(
 			"settings",
 			options, {
