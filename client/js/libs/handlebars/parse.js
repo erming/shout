@@ -81,10 +81,10 @@ var styles = [
 
 //http://www.mirc.com/colors.html
 var colourMap = {};
-for (var colour = 0; colour < 16; colour++) {
+for (var colour = 0; colour < 32; colour++) {
     colourMap[colour] = {
-        fore: "irc-fg" + colour,
-        back: "irc-bg" + colour
+        fore: "irc-fg" + (colour % 16),
+        back: "irc-bg" + (colour % 16)
     };
 }
 
