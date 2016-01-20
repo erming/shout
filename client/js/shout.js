@@ -50,6 +50,8 @@ $(function() {
 
 	$(".tse-scrollable").TrackpadScrollEmulator();
 
+	FastClick.attach(document.body);
+
 	var favico = new Favico({
 		animation: "none"
 	});
