@@ -1,0 +1,263 @@
+/*
+Good On Our Discomfort
+Dark colors + appearance tweaks
+
+Installation instructions can be found here
+http://shout-irc.com/docs/server/configuration.html#theme
+
+Author: Mac Carrithers
+GitHub: https://github.com/easymac
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:200,600,900);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900);
+
+body {
+    background-color: #1a1a1a;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+#windows .chan, #windows .window {
+    background: #2b2b2b;
+}
+#form {
+    background: #2b2b2b;
+    border-top: none;
+}
+#form #input {
+    border: none;
+    border-radius: 0;
+    background: rgba(0,0,0,0.13);
+}
+#form .input {
+    margin-right: 173px;
+}
+#form #nick {
+    background: transparent;
+}
+
+#chat .sidebar {
+    bottom: -48px;
+    top: 0;
+}
+
+#chat .input {
+    margin-right: 194px;
+}
+#chat .from {
+    border-right: 1px solid #272935;
+}
+
+#main {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 220px;
+    color: #e6e1dc;
+    border-radius: 0;
+}
+
+#windows .window:before, #windows .chan:before {
+    display: none;
+}
+
+#chat, #windows .header {
+    font-family: 'Source Code Pro', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    border-bottom: none;
+}
+#chat .time {
+    color: #3a4055;
+}
+#chat .sidebar {
+    background-color: #2b2b2b;
+    border-left: none;
+}
+#chat .count {
+    background-color: #2b2b2b;
+}
+#chat .search {
+    color: #fff;
+    background-color: rgba(0,0,0,0.13);
+}
+#chat .search::-webkit-input-placeholder {
+    color: #d4cfc9;
+}
+
+#chat .search:-moz-placeholder { /* Firefox 18- */
+    color: #d4cfc9;
+}
+
+#chat .search::-moz-placeholder {  /* Firefox 19+ */
+    color: #d4cfc9;
+}
+
+#chat .search:-ms-input-placeholder {
+    color: #d4cfc9;
+}
+#chat .user-mode:before {
+    border-bottom: none;
+}
+#chat a {
+    color: #a5c261;
+}
+#chat .error, #chat .error .from, #chat .highlight, #chat .highlight .from {
+    color: #da4939;
+}
+
+
+
+#sidebar .chan {
+    color: #ffc66d;
+}
+#sidebar .chan:hover {
+    color: #e6AD54;
+}
+
+#sidebar .networks {
+    padding-top: 6px;
+}
+#sidebar .network {
+    margin-bottom: 10px;
+}
+
+#sidebar .chan:first-child {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #da4939;
+}
+#sidebar .chan:first-child:hover, #sidebar .chan:first-child.active {
+    color: #f46353
+}
+
+#sidebar .badge {
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: #272935;
+}
+#sidebar .badge.highlight {
+    background: #f9f7f3;
+    color: #000;
+}
+
+
+#footer .icon {
+    color: #da4939;
+}
+#footer .icon:hover {
+    color: #f46353;
+}
+
+#footer {
+    bottom: 0;
+    left: 0;
+    width: 220px;
+    background: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+    #main {
+        left: 0;
+        right: 0;
+    }
+}
+@media (min-width: 769px) {
+    .button.close {
+        display: none;
+    }
+    #submit {
+        display: none;
+    }
+}
+
+
+#windows .header .topic {
+    display: inline;
+}
+
+
+/* SCROLLBARS */
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0.65em;
+    margin-right: 2px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.13);
+    border-radius: 999px;
+    width: 0.65em;
+}
+
+
+#chat .show-more-button, #form #submit {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+#chat .show-more-button {
+    background: transparent none;
+    border: 2px solid #3c3c3c;
+}
+
+#chat .toggle-content, #chat .toggle-button {
+    background-color: rgba(0,0,0,0.13);
+    font-family: 'Source Sans Pro', sans-serif;
+}
+#chat .toggle-content a, #chat .toggle-button {
+    color: #6d9cbe;
+}
+
+#chat .self .text {
+    color: #d4cfc9;
+}
+
+#windows .header .title {
+    font: 14px 'Source Sans Pro';
+    color: #6d9cbe;
+}
+
+#chat .msg .type {
+    color: #5a647e;
+}
+
+#windows .header .topic {
+    color: #5a647e;
+}
+
+
+
+/* Nickname colors & chat colors */
+.irc-fg0 { color: #f5f5f5; }
+.irc-fg1 { color: #151515; }
+.irc-fg2 { color: #6a9fb5; }
+.irc-fg3 { color: #90a959; }
+.irc-fg4 { color: #DF7475; }
+.irc-fg5 { color: #ac4142; }
+.irc-fg6 { color: #aa759f; }
+.irc-fg7 { color: #d28445; }
+.irc-fg8 { color: #f4bf75; }
+.irc-fg9 { color: #C3DC8C; }
+.irc-fg10 { color: #75b5aa; }
+.irc-fg11 { color: #A8E8DD; }
+.irc-fg12 { color: #9DD2E8; }
+.irc-fg13 { color: #DDA8D2; }
+.irc-fg14 { color: #e0e0e0; }
+.irc-fg15 { color: #b0b0b0; }
+
+.irc-bg0 { background: #f5f5f5; }
+.irc-bg1 { background: #151515; }
+.irc-bg2 { background: #6a9fb5; }
+.irc-bg3 { background: #90a959; }
+.irc-bg4 { background: #DF7475; }
+.irc-bg5 { background: #ac4142; }
+.irc-bg6 { background: #aa759f; }
+.irc-bg7 { background: #d28445; }
+.irc-bg8 { background: #f4bf75; }
+.irc-bg9 { background: #C3DC8C; }
+.irc-bg10 { background: #75b5aa; }
+.irc-bg11 { background: #A8E8DD; }
+.irc-bg12 { background: #9DD2E8; }
+.irc-bg13 { background: #DDA8D2; }
+.irc-bg14 { background: #e0e0e0; }
+.irc-bg15 { color: #b0b0b0; }
