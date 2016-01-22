@@ -63,38 +63,46 @@
 			hint = select;
 			break;
 		}
+
+		generateMatches = function(input) {
+			var word = input.split(/ |\n/).pop();
+			var words = []
+			if (typeof args === "function") {
+				// If the user supplies a function, invoke it
+				// and keep the result.
+				words = args(word);
+			} else {
+				// Otherwise, call the .match() function.
+				words = match(word, args, options.caseSensitive);
+			}
+
+			// Append 'after' to each word.
+			if (options.after) {
+				words = $.map(words, function(w) { return w + options.after; });
+			}
+
+			return words;
+		}
+
 		
 		this.on("input.tabcomplete", function() {
 			var input = self.val();
-			var word = input.split(/ |\n/).pop();
 			
 			// Reset iteration.
 			i = -1;
 			last = "";
 			words = [];
 			
-			// Check for matches if the current word is the last word.
-			if (self[0].selectionStart == input.length
-				&& word.length) {
-				if (typeof args === "function") {
-					// If the user supplies a function, invoke it
-					// and keep the result.
-					words = args(word);
-				} else {
-					// Otherwise, call the .match() function.
-					words = match(word, args, options.caseSensitive);
-				}
-				
-				// Append 'after' to each word.
-				if (options.after) {
-					words = $.map(words, function(w) { return w + options.after; });
-				}
-			}
-			
-			// Emit the number of matching words with the 'match' event.
-			self.trigger("match", words.length);
-			
 			if (options.hint) {
+				// Check for matches if the current word is the last word.
+				if (self[0].selectionStart == input.length
+						&& word.length && options.hint) {
+					words = generateMatches(word);
+				}
+
+				// Emit the number of matching words with the 'match' event.
+				self.trigger("match", words.length);
+
 				if (!(options.hint == "select" && backspace) && word.length >= options.minLength) {
 					// Show hint.
 					hint.call(self, words[0]);
@@ -115,6 +123,10 @@
 			if (key == keys.tab
 				|| (options.arrowKeys && (key == keys.up || key == keys.down))) {
 				
+				if (!options.generateMatches && words.length == 0) {
+					words = generateMatches(self.val());
+				}
+
 				// Don't lose focus on tab click.
 				e.preventDefault();
 				

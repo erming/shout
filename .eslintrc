@@ -28,5 +28,6 @@ globals:
   Handlebars: false
   io: false
   Mousetrap: false
+  Fuse: false
 
 extends: eslint:recommended
