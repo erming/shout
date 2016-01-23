@@ -374,18 +374,34 @@ $(function() {
 		thumbnails: true,
 		quit: true,
 		notifyAllMessages: false,
+		timestamp: "HH:mm"
 	}, $.cookie("settings"));
 
+	$("#timestamp").on("change", function() {
+		var self = $(this);
+		window.timestamp = self.val();
+		$(".time").each(function() {
+			var newtime = Handlebars.helpers.tz(self.attr("data-time"));
+			self.html(newtime);
+		});
+	});
+
 	for (var i in options) {
-		if (options[i]) {
+		if (options[i] === true) {
 			settings.find("input[name=" + i + "]").prop("checked", true);
+		} else if (options[i] !== false) {
+			settings.find("input[name=" + i + "]").val(options[i]);
 		}
 	}
 
 	settings.on("change", "input", function() {
 		var self = $(this);
 		var name = self.attr("name");
-		options[name] = self.prop("checked");
+		if (self.is(":checkbox")) {
+			options[name] = self.prop("checked");
+		} else {
+			options[name] = self.val();
+		}
 		$.cookie(
 			"settings",
 			options, {

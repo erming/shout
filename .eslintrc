@@ -27,6 +27,7 @@ globals:
   Favico: false
   Handlebars: false
   io: false
+  moment: false
   Mousetrap: false
 
 extends: eslint:recommended

@@ -1,8 +1,10 @@
+var timestamp = window.timestamp;
+
 Handlebars.registerHelper(
 	"tz", function(time) {
 		if (time) {
-			var utc = moment.utc(time, "HH:mm:ss").toDate();
-			return moment(utc).format("HH:mm");
+			var utc = moment.utc(time).toDate();
+			return moment(utc).format(timestamp);
 		} else {
 			return "";
 		}

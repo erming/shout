@@ -1,6 +1,6 @@
 {{#each messages}}
 <div class="msg {{type}} {{#if self}}self{{/if}}">
-	<span class="time">
+	<span class="time" data-time="{{time}}">
 		{{tz time}}
 	</span>
 	<span class="from">
