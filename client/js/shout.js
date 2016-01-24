@@ -463,6 +463,8 @@ $(function() {
 	});
 
 	var viewport = $("#viewport");
+	var contextMenuContainer = $("#context-menu-container");
+	var contextMenu = $("#context-menu");
 
 	viewport.on("click", ".lt, .rt", function(e) {
 		var self = $(this);
@@ -473,6 +475,61 @@ $(function() {
 				viewport.removeClass("lt");
 			});
 		}
+	});
+
+	function positionContextMenu(e) {
+		var top, left;
+		var menuWidth = contextMenu.offsetWidth + 4;
+		var menuHeight = contextMenu.offsetHeight + 4;
+
+		if ((window.innerWidth - e.pageX) < menuWidth) {
+			left = window.innerWidth - menuWidth;
+		} else {
+			left = e.pageX;
+		}
+
+		if ((window.innerHeight - e.pageY) < menuHeight) {
+			top = window.innerHeight - menuHeight;
+		} else {
+			top = e.pageY;
+		}
+
+		return {left: left, top: top};
+	}
+
+	viewport.on("contextmenu", ".user, .network .chan", function(e) {
+		var target = $(e.currentTarget);
+		var output = "";
+
+		if (target.hasClass("user")) {
+			output = render("contextmenu_item", {
+				class: "user",
+				text: target.text()
+			});
+		}
+		else if (target.hasClass("chan")) {
+			output = render("contextmenu_item", {
+				class: "chan",
+				text: target.data("title")
+			});
+			output += render("contextmenu_item", {
+				class: "close",
+				text: target.hasClass("lobby") ? "Leave network" : "Leave channel",
+				data: target.data("target")
+			});
+		}
+
+		contextMenu
+			.html(output)
+			.css(positionContextMenu(e));
+		contextMenuContainer.show();
+
+		return false;
+	});
+
+	contextMenuContainer.on("click contextmenu", function() {
+		contextMenuContainer.hide();
+		return false;
 	});
 
 	var input = $("#input")
@@ -601,6 +658,10 @@ $(function() {
 			opacity: 0.4
 		});
 		return false;
+	});
+
+	contextMenu.on("click", ".context-menu-close", function() {
+		$(".networks .chan[data-target=" + $(this).data("data") + "] .close").click();
 	});
 
 	chat.on("input", ".search", function() {
@@ -811,6 +872,12 @@ $(function() {
 			clear();
 			e.preventDefault();
 		}
+	});
+
+	Mousetrap.bind([
+		"escape"
+	], function() {
+		contextMenuContainer.hide();
 	});
 
 	setInterval(function() {
