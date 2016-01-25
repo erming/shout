@@ -1030,6 +1030,9 @@ button, .user {
 .context-menu-close:before {
 	content: "\f057";
 }
+.context-menu-settings:before {
+    content: "\f013";
+}
 
 /**
   * IRC Message Styling

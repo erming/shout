@@ -504,17 +504,26 @@ $(function() {
 		if (target.hasClass("user")) {
 			output = render("contextmenu_item", {
 				class: "user",
-				text: target.text()
+				text: target.text(),
+				data: target.data("name")
 			});
 		}
 		else if (target.hasClass("chan")) {
 			output = render("contextmenu_item", {
 				class: "chan",
-				text: target.data("title")
+				text: target.data("title"),
+				data: target.data("target")
 			});
+			if (target.hasClass("channel")) {
+				output += render("contextmenu_item", {
+					class: "settings",
+					text: "Settings",
+					data: target.data("target")
+				});
+			}
 			output += render("contextmenu_item", {
 				class: "close",
-				text: target.hasClass("lobby") ? "Leave network" : "Leave channel",
+				text: target.hasClass("lobby") ? "Disconnect" : target.hasClass("query") ? "Close" : "Leave",
 				data: target.data("target")
 			});
 		}
@@ -660,8 +669,21 @@ $(function() {
 		return false;
 	});
 
-	contextMenu.on("click", ".context-menu-close", function() {
-		$(".networks .chan[data-target=" + $(this).data("data") + "] .close").click();
+	contextMenu.on("click", ".context-menu-item", function() {
+		switch ($(this).data("action")) {
+		case "close":
+			$(".networks .chan[data-target=" + $(this).data("data") + "] .close").click();
+			break;
+		case "chan":
+			$(".networks .chan[data-target=" + $(this).data("data") + "]").click();
+			break;
+		case "user":
+			$(".channel.active .users .user[data-name=" + $(this).data("data") + "]").click();
+			break;
+		case "settings":
+			alert("Not yet supported!");
+			break;
+		}
 	});
 
 	chat.on("input", ".search", function() {
