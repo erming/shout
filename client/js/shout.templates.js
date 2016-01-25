@@ -83,9 +83,9 @@ templates['contextmenu_item'] = template({"1":function(depth0,helpers,partials,d
     + "\"";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.data : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + ">\r\n	"
+  return buffer + ">\n	"
     + escapeExpression(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"text","hash":{},"data":data}) : helper)))
-    + "\r\n</li>\r\n";
+    + "\n</li>\n";
 },"useData":true});
 templates['msg'] = template({"1":function(depth0,helpers,partials,data) {
   return "self";

@@ -996,33 +996,25 @@ button, .user {
     position: absolute;
     list-style: none;
     margin: 0;
-    padding: 4px 0;
-    width: 240px;
+    padding: 0;
+    min-width: 160px;
+    font-size: 14px;
     background-color: #fff;
-    border: solid 1px #dfdfdf;
-	box-shadow: 0 0 20px 0 rgba(0,0,0,.2);
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+    border: 1px solid rgba(61,70,77,0.1);
 }
-.context-menu-item {
-    display: block;
-    margin-bottom: 4px;
-}
-.context-menu-item:last-child {
-    margin-bottom: 0;
-}
+
 .context-menu-item:first-child {
-    padding-bottom: 4px;
-    border-bottom: 1px solid #dfdfdf;
+    border-bottom: 1px solid rgba(61,70,77,0.1);
 }
 .context-menu-item {
     cursor: pointer;
     display: block;
-    padding: 4px 12px;
+    padding: 6px 8px;
     color: #333;
-    text-decoration: none;
 }
 .context-menu-item:hover {
-    color: #fff;
-    background-color: #0066aa;
+    background-color: #e3f2ff;
 }
 .context-menu-item:before {
     font-family: FontAwesome;
