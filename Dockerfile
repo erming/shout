@@ -2,24 +2,42 @@
 # Thanks to @Xe for the Dockerfile template
 # https://github.com/Shuo-IRC/Shuo/pull/87/files
 #
+FROM node:4.2-onbuild
 
-FROM node:4.0-onbuild
+# SHOUT_USERNAME: The user we will run shout as.
+ENV SHOUT_USERNAME=shout
 
+# Use npm link so we have the shout command available in our shell
+# Update apt so we can install packages
+# Install vim so shout config works
+# Remove apt database caches (save disk space)
+# Clean up temporary files from our apt install (save disk space)
 # Create a non-root user for shout to run in.
-RUN useradd --create-home shout
-
-# Needed for setup of Node.js
-ENV HOME /home/shout
-
-# Customize this to specify where Shout puts its data.
-# To link a data container, have it expose /home/shout/data
-ENV SHOUT_HOME /home/shout/data
-
-# Expose HTTP
-EXPOSE 9000
+RUN npm link \
+    && apt-get update \
+    && apt-get install -y vim \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+              /tmp/* \
+              /var/tmp/* \
+    && useradd --create-home $SHOUT_USERNAME
 
 # Drop root.
-USER shout
+USER $SHOUT_USERNAME
+
+# HOME: Needed for setup of Node.js
+# SHOUT_HOME: Used by shout for a data directory.
+ENV HOME=/home/$SHOUT_USERNAME \
+    SHOUT_HOME=/home/$SHOUT_USERNAME/data
+
+# Create our SHOUT_HOME directory
+RUN mkdir $SHOUT_HOME
+
+# Expose our SHOUT_HOME as a volume mount
+VOLUME $SHOUT_HOME
+
+# Expose Listening Port
+EXPOSE 9000
 
 # Don't use an entrypoint here. It makes debugging difficult.
-CMD node index.js --home $SHOUT_HOME
+CMD node index.js
