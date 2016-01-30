@@ -536,7 +536,7 @@ $(function() {
 		return false;
 	});
 
-	contextMenuContainer.on("click contextmenu", function() {
+	contextMenuContainer.on("mousedown", function() {
 		contextMenuContainer.hide();
 		return false;
 	});
