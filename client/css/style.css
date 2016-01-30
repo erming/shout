@@ -339,6 +339,12 @@ button, .user {
 	top: 2px;
 	right: 3px;
 }
+#sidebar, #footer {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
 #footer {
 	background: rgba(0, 0, 0, .06);
 	border-radius: 2px;
