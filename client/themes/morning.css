@@ -25,15 +25,6 @@ QUIT #d0907d
   background: #333c4a;
 }
 
-#main #chat,
-#main #form,
-#form .input,
-#chat,
-#windows .header {
-  font-family: 'Open Sans', sans-serif !important;
-  font-size: 13px;
-}
-
 #settings, #sign-in, #connect {
   color: #cccccc;
 }

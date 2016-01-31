@@ -29,15 +29,6 @@ body {
   background: #3f3f3f;
 }
 
-#main #chat,
-#main #form,
-#form .input,
-#chat,
-#windows .header {
-  font-family: 'Open Sans', sans-serif !important;
-  font-size: 13px;
-}
-
 #settings, #sign-in, #connect {
   color: #dcdccc;
 }
