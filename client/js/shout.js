@@ -655,7 +655,7 @@ $(function() {
 				favico.badge("!");
 				if (settings.badge && Notification.permission === "granted") {
 					var notify = new Notification(msg.from + " says:", {
-						body: msg.text.trim(),
+						body: msg.text.replace(/\x02|\x1D|\x1F|\x16|\x0F|\x03(?:[0-9]{1,2}(?:,[0-9]{1,2})?)?/, "").trim(),
 						icon: "/img/logo-64.png",
 						tag: target
 					});
