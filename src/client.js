@@ -158,13 +158,31 @@ Client.prototype.connect = function(args) {
 	var irc = slate(stream);
 	identd.hook(stream, username);
 
-	if (args.password) {
-		irc.pass(args.password);
-	}
+
 
 	irc.me = nick;
-	irc.nick(nick);
-	irc.user(username, realname);
+	if (args.sasl) {
+		irc.cap_req("sasl");
+		irc.nick(nick);
+		irc.user(username, realname);
+		irc.once("cap", function() {
+			irc.authenticate("PLAIN");
+			irc.once("authenticate", function() {
+				irc.authenticate64(username, args.password);
+				irc.once("saslsuccess", function() {
+					irc.cap_end();
+				});
+			});
+		});
+	} else {
+		if (args.password) {
+			irc.pass(args.password);
+		}
+		irc.nick(nick);
+		irc.user(username, realname);
+	}
+
+
 
 	var network = new Network({
 		name: server.name,

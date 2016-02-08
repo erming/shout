@@ -161,6 +161,14 @@ module.exports = {
 		tls: true,
 
 		//
+		// Enable SASL
+		//
+		// @type     boolean
+		// @default  true
+		//
+		sasl: true,
+
+		//
 		// Nick
 		//
 		// @type     string
