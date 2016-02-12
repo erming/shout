@@ -1,9 +1,4 @@
-![#shout-irc IRC channel on freenode](https://img.shields.io/badge/irc%20channel-%23shout--irc%20on%20freenode-blue.svg)
-[![npm version](https://img.shields.io/npm/v/shout.svg)](https://www.npmjs.org/package/shout)
-[![Build Status](https://travis-ci.org/erming/shout.svg?branch=master)](https://travis-ci.org/erming/shout)
-[![Dependency Status](https://david-dm.org/erming/shout.svg)](https://david-dm.org/erming/shout)
-
-# Shout
+# Shout [![Build Status](https://travis-ci.org/erming/shout.svg?branch=master)](https://travis-ci.org/erming/shout)
 
 ### [Try the Demo](http://demo.shout-irc.com/)
 
@@ -46,5 +41,3 @@ npm start
 ## License
 
 Available under the [MIT License](http://mths.be/mit).
-
-Some fonts licensed under [SIL OFL](http://scripts.sil.org/OFL) and the [Apache License](http://www.apache.org/licenses/).
