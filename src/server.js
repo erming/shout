@@ -130,6 +130,10 @@ function init(socket, client, token) {
 	}
 }
 
+function local_auth(client, user, password, callback) {
+	callback(bcrypt.compareSync(password || "", client.config.password));
+}
+
 function auth(data) {
 	var socket = this;
 	if (config.public) {
@@ -147,11 +151,13 @@ function auth(data) {
 			token = client.token;
 		}
 		if (client) {
-			if (bcrypt.compareSync(data.password || "", client.config.password)) {
-				init(socket, client, token);
-			} else {
-				socket.emit("auth");
-			}
+			local_auth(client, data.user, data.password, function(passed) {
+				if (passed) {
+					init(socket, client, token);
+				} else {
+					socket.emit("auth");
+				}
+			});
 		}
 		else {
 			socket.emit("auth");
