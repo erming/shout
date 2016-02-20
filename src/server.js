@@ -141,27 +141,19 @@ function auth(data) {
 		});
 		init(socket, client);
 	} else {
-		var success = false;
-		_.each(manager.clients, function(client) {
-			if (data.token) {
-				if (data.token === client.token) {
-					success = true;
-				}
-			} else if (client.config.user === data.user) {
-				if (bcrypt.compareSync(data.password || "", client.config.password)) {
-					success = true;
-				}
-			}
-			if (success) {
-				var token;
-				if (data.remember || data.token) {
-					token = client.token;
-				}
+		var client = manager.findClient(data.user, data.token);
+		var token;
+		if (data.remember || data.token) {
+			token = client.token;
+		}
+		if (client) {
+			if (bcrypt.compareSync(data.password || "", client.config.password)) {
 				init(socket, client, token);
-				return false;
+			} else {
+				socket.emit("auth");
 			}
-		});
-		if (!success) {
+		}
+		else {
 			socket.emit("auth");
 		}
 	}
