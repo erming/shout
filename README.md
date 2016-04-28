@@ -28,15 +28,9 @@ shout --help
 
 For more information, read the [documentation](http://shout-irc.com/docs/).
 
-## Development setup
+## Official forks
 
-To run the app from source, just clone the code and run this in your terminal:
-
-```
-npm install
-npm run build
-npm start
-```
+Check out [The Lounge](https://github.com/thelounge) which is an actively maintained fork: https://github.com/thelounge
 
 ## License
 
