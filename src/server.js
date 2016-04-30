@@ -5,6 +5,7 @@ var ClientManager = require("./clientManager");
 var express = require("express");
 var fs = require("fs");
 var io = require("socket.io");
+var dns = require("dns");
 var Helper = require("./helper");
 var config = {};
 
@@ -91,6 +92,20 @@ function init(socket, client, token) {
 		socket.emit("auth");
 		socket.on("auth", auth);
 	} else {
+		var ip = config.reverse_proxy ? socket.handshake.headers['x-forwarded-for'] : socket.request.connection.remoteAddress;
+		client.host.ip = ip;
+		try {
+			dns.reverse(ip, function(err, clienthost) {
+				if (!err && clienthost.length) {
+					client.host.hostname = clienthost[0];
+				} else {
+					client.host.hostname = ip;
+				}
+			});
+		} catch (e) {
+			client.host.hostname = ip;
+		}
+
 		socket.on(
 			"input",
 			function(data) {

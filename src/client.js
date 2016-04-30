@@ -75,6 +75,8 @@ function Client(sockets, name, config) {
 	}
 }
 
+Client.prototype.host = {};
+
 Client.prototype.emit = function(event, data) {
 	if (this.sockets !== null) {
 		this.sockets.in(this.id).emit(event, data);
@@ -158,6 +160,10 @@ Client.prototype.connect = function(args) {
 
 	var irc = slate(stream);
 	identd.hook(stream, username);
+
+	if (config.webirc[server.host]) {
+		irc.write("WEBIRC " + config.webirc[server.host] + " " + username + " " + this.host.hostname + " " + this.host.ip);
+	}
 
 	if (args.password) {
 		irc.pass(args.password);
