@@ -76,6 +76,16 @@ module.exports = {
 	prefetchMaxImageSize: 512,
 
 	//
+	// Prefetch URLs Image Preview with undefined size
+	//
+	// If prefetch is enabled, Shout will display images with unknown size too.
+	//
+	// @type     boolean
+	// @default  false
+	//
+	prefetchUndefinedImageSize: false,
+
+	//
 	// Display network
 	//
 	// If set to false Shout will not expose network settings in login
