@@ -274,6 +274,11 @@ $(function() {
 	function renderChannelMessages(data) {
 		var documentFragment = buildChannelMessages(data.id, data.messages);
 		chat.find("#chan-" + data.id + " .messages").append(documentFragment);
+		data.messages.forEach(function(e) {
+			if (e.type === "toggle" && e.toggle !== undefined) {
+				showToggle(e.toggle, false);
+			}
+		});
 	}
 
 	socket.on("msg", function(data) {
@@ -297,6 +302,11 @@ $(function() {
 		if (data.messages.length !== 100) {
 			chan.find(".show-more").removeClass("show");
 		}
+		data.messages.forEach(function(e) {
+			if (e.type === "toggle" && e.toggle !== undefined) {
+				showToggle(e.toggle, false);
+			}
+		});
 	});
 
 	socket.on("network", function(data) {
@@ -371,21 +381,7 @@ $(function() {
 	});
 
 	socket.on("toggle", function(data) {
-		var toggle = $("#toggle-" + data.id);
-		toggle.parent().after(render("toggle", {toggle: data}));
-		switch (data.type) {
-		case "link":
-			if (options.links) {
-				toggle.click();
-			}
-			break;
-
-		case "image":
-			if (options.thumbnails) {
-				toggle.click();
-			}
-			break;
-		}
+		showToggle(data, true);
 	});
 
 	socket.on("topic", function(data) {
@@ -951,6 +947,26 @@ $(function() {
 		}
 		array.splice(new_index, 0, array.splice(old_index, 1)[0]);
 		return array;
+	}
+
+	function showToggle(data, renderNeeded) {
+		var toggle = $("#toggle-" + data.id);
+		if (renderNeeded) {
+			toggle.parent().after(render("toggle", {toggle: data}));
+		}
+		switch (data.type) {
+		case "link":
+			if (options.links) {
+				toggle.click();
+			}
+			break;
+
+		case "image":
+			if (options.thumbnails) {
+				toggle.click();
+			}
+			break;
+		}
 	}
 
 	document.addEventListener(
