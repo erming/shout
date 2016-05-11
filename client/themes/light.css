@@ -1,0 +1,54 @@
+/*
+Light theme for Shout.
+
+Installation instructions can be found here
+http://shout-irc.com/docs/server/configuration.html#theme
+
+Author: Bews
+GitHub: https://github.com/bews
+*/
+
+body { background: #4D5250 !important; }
+
+.toggle-content { transition: opacity .2s; }
+.toggle-content a:hover { opacity: .85 !important; }
+
+.chan:before { display: none !important; }
+
+#chat  { font-size: 14px; }
+#chat .self .text, #chat .self .from, #chat .self .time { border-bottom: 1px dotted rgb(17,204,186); }
+#chat .self .text {color: #222;}
+#chat .time { width: 81px !important; color: #CCC !important; padding-right: 10px; }
+#chat .from {position: relative; right: 1px; width: 135px !important;}
+#chat .chat, #chat .sidebar { top: 48px !important; }
+#chat .msg > span {border-top: 1px dotted #EEE;}
+#chat .toggle > span {border-top: none;}
+#chat .show-more { z-index: 1; background: #ffffff; }
+#chat .user-mode:before
+{
+	border-bottom: none;
+	margin-bottom: 0;
+	border-top: 1px solid #eee;
+	margin-top: 10px;
+}
+#chat .names .inner { margin-top: -10px; }
+#chat button { transition: opacity .2s; }
+
+#windows .header .title { font-size: 18px !important; }
+#windows .header { font-size: 15px !important; }
+
+#form #submit, #windows .header .button, #chat .show-more-button
+{
+	transition: all .3s;
+	background-size: auto 200%;
+	background-position: 0 100%;
+	background-image: linear-gradient(#FEFEFE, #ececec);
+}
+
+#form #submit { background-image: linear-gradient(#FFF, #ececec) !important; }
+#form #submit:hover, #windows .header .button:hover, #chat .show-more-button:hover { background-position: 0 0; }
+
+#footer .icon { transition: color .2s; }
+#footer .icon:hover { color: #fff; }
+
+::-webkit-scrollbar-thumb:vertical { background: rgba(0,0,0,0.3); }
