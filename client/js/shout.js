@@ -497,7 +497,7 @@ $(function() {
 		});
 	});
 
-	chat.on("click", ".messages", function() {
+	chat.on("click", ".messages, .show-more", function() {
 		setTimeout(function() {
 			var text = "";
 			if (window.getSelection) {
@@ -812,6 +812,24 @@ $(function() {
 		if (e.target === input[0]) {
 			clear();
 			e.preventDefault();
+		}
+	});
+
+	Mousetrap.bind([
+		"pageup",
+		"pagedown"
+	], function(e, keys) {
+		var el = $('.active > .chat');
+		switch (keys) {
+			case "pageup":
+				var offset = el.scrollTop() - 24 * 3;
+				el.finish().animate({ scrollTop: offset }, "fast" , "linear");
+				break;
+
+			case "pagedown":
+				var offset = el.scrollTop() + 24 * 3;
+				el.finish().animate({ scrollTop: offset }, "fast" , "linear");
+				break;
 		}
 	});
 
