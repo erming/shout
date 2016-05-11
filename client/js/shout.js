@@ -819,17 +819,17 @@ $(function() {
 		"pageup",
 		"pagedown"
 	], function(e, keys) {
-		var el = $('.active > .chat');
+		var el = $(".active > .chat");
 		switch (keys) {
-			case "pageup":
-				var offset = el.scrollTop() - 24 * 3;
-				el.finish().animate({ scrollTop: offset }, "fast" , "linear");
-				break;
+		case "pageup":
+			var offsetUp = el.scrollTop() - 24 * 3;
+			el.finish().animate({scrollTop: offsetUp}, "fast" , "linear");
+			break;
 
-			case "pagedown":
-				var offset = el.scrollTop() + 24 * 3;
-				el.finish().animate({ scrollTop: offset }, "fast" , "linear");
-				break;
+		case "pagedown":
+			var offsetDown = el.scrollTop() + 24 * 3;
+			el.finish().animate({scrollTop: offsetDown}, "fast" , "linear");
+			break;
 		}
 	});
 
