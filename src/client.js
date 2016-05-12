@@ -221,16 +221,12 @@ Client.prototype.connect = function(args) {
 				});
 			}
 			setTimeout(function() {
-				irc.write("PING " + network.host);
+				var join = (args.join || "");
+				if (join) {
+					join = join.replace(/\,/g, " ").split(/\s+/g);
+					irc.join(join);
+				}
 			}, delay);
-		});
-
-		irc.once("pong", function() {
-			var join = (args.join || "");
-			if (join) {
-				join = join.replace(/\,/g, " ").split(/\s+/g);
-				irc.join(join);
-			}
 		});
 	};
 
