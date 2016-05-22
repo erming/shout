@@ -26,18 +26,19 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "commander": "^2.3.0",
-    "express": "^4.9.5",
-    "glob": "^5.0.5",
-    "lodash": "^3.6.0",
-    "mkdirp": "^0.5.0",
-    "moment": "~2.7.0",
-    "read": "^1.0.5",
-    "slate-irc": "~0.7.3",
-    "socket.io": "~1.0.6"
+    "bcrypt-nodejs": "^0.0.3",
+    "commander": "^2.9.0",
+    "express": "^4.13.4",
+    "glob": "^7.0.3",
+    "lodash": "^4.12.0",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.13.0",
+    "read": "^1.0.7",
+    "slate-irc": "^0.8.1",
+    "socket.io": "^1.4.6",
+    "tape": "^4.5.1"
   },
   "devDependencies": {
-    "tape": "^3.5.0"
+    "tape": "*"
   }
 }
