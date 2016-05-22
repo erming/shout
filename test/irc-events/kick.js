@@ -15,7 +15,7 @@ tape("kick", function(t) {
 	client.emit = function(e, msg) {
 		if (e == "msg") {
 			if (msg.msg.type == Msg.Type.KICK) {
-				t.pass()
+				t.pass();
 			}
 			return;
 		} else if (e != "users") {

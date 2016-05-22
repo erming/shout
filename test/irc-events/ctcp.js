@@ -9,7 +9,6 @@ tape("ctcp", function(t) {
 	var irc = new events.EventEmitter();
 	irc.me = "foo";
 	irc.ctcp = function(a, b) {
-		console.log(b);
 		if (b.indexOf("VERSION") == 0 || b.indexOf("PING") == 0) {
 			t.pass();
 		}
