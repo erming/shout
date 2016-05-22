@@ -11,11 +11,11 @@ Chan.Type = {
 var id = 0;
 
 function Chan(args) {
-  _.merge(this, _.extend({
-    id: id++,
-    messages: [],
-    users: [],
-    type: Chan.Type.CHANNEL,
-    name: ""
-  }, args));
+	_.merge(this, _.extend({
+		id: id++,
+		messages: [],
+		users: [],
+		type: Chan.Type.CHANNEL,
+		name: ""
+	}, args));
 }

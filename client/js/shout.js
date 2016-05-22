@@ -1,19 +1,19 @@
 $(function() {
-  load();
+	load();
 });
 
 var socket = io();
 var events = new EventEmitter;
 
 function load() {
-  socket.on("init", init);
-  socket.on("network", function(data) {
-    console.log(data);
-  });
+	socket.on("init", init);
+	socket.on("network", function(data) {
+		console.log(data);
+	});
 
-  gui();
+	gui();
 }
 
 function init() {
-  connect();
+	connect();
 }
