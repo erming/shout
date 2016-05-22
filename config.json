@@ -1,0 +1,22 @@
+{
+  "host": "0.0.0.0",
+  "port": 8080,
+  "root": "/",
+  "mode": {
+    "login": true,
+    "guest": true
+  },
+  "default": {
+    "name": "Freenode",
+    "host": "irc.freenode.org",
+    "port": 6667,
+    "tls": false,
+    "nick": "shout-user",
+    "realname": "Shout User",
+    "join": "#shout-irc"
+  },
+  "identd": {
+    "enable": false,
+    "port": 113
+  }
+}
