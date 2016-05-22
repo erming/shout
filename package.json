@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node index start",
-    "test": "tape 'test/**/*.js'"
+    "test": "tape test/**/*.js"
   },
   "repository": {
     "type": "git",
