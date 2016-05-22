@@ -4,9 +4,7 @@ var helper = require("../helper");
 
 module.exports = reset;
 
-program
-	.command("reset-password <name>")
-	.action(reset);
+program.command("reset-password <name>").action(reset);
 
 function reset(name) {
 	var path = helper.path("users/" + name + ".json");

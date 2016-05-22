@@ -4,9 +4,7 @@ var helper = require("../helper");
 
 module.exports = edit;
 
-program
-	.command("edit-config")
-	.action(edit);
+program.command("edit-config").action(edit);
 
 function edit() {
 	child.spawn(

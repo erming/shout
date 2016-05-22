@@ -5,9 +5,7 @@ var helper = require("../helper");
 
 module.exports = edit;
 
-program
-	.command("edit-user <name>")
-	.action(edit);
+program.command("edit-user <name>").action(edit);
 
 function edit(name) {
 	var manager = new Manager();

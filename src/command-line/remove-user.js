@@ -3,9 +3,7 @@ var Manager = require("../manager");
 
 module.exports = remove;
 
-program
-	.command("remove-user <name>")
-	.action(remove);
+program.command("remove-user <name>").action(remove);
 
 function remove(name) {
 	var remove = new Manager().remove(name);

@@ -6,9 +6,7 @@ var helper = require("../helper");
 
 module.exports = reset;
 
-program
-	.command("reset-config")
-	.action(reset);
+program.command("reset-config").action(reset);
 
 function reset() {
 	var path = config.getPath();

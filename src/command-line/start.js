@@ -4,9 +4,7 @@ var config = require("../config");
 
 module.exports = start;
 
-program
-	.command("start")
-	.action(start);
+program.command("start").action(start);
 
 function start() {
 	shout();

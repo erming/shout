@@ -6,9 +6,7 @@ var helper = require("../helper");
 
 module.exports = init;
 
-program
-	.command("init")
-	.action(init);
+program.command("init").action(init);
 
 function init() {
 	var path = config.getPath();

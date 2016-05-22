@@ -7,9 +7,7 @@ var helper = require("../helper");
 
 module.exports = add;
 
-program
-	.command("add-user <name>")
-	.action(add);
+program.command("add-user <name>").action(add);
 
 function add(name) {
 	var path = helper.HOME + "/users";
