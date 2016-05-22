@@ -29,11 +29,8 @@
     "bcrypt-nodejs": "^0.0.3",
     "commander": "^2.9.0",
     "express": "^4.13.4",
-    "glob": "^7.0.3",
     "lodash": "^4.12.0",
-    "mkdirp": "^0.5.1",
     "moment": "^2.13.0",
-    "read": "^1.0.7",
     "slate-irc": "^0.8.1",
     "socket.io": "^1.4.6",
     "tape": "^4.5.1"

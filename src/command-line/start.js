@@ -1,6 +1,5 @@
 var program = require("commander");
 var shout = require("../shout");
-var config = require("../config");
 
 module.exports = start;
 
