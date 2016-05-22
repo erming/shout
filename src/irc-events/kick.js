@@ -4,7 +4,7 @@ var Msg = require("../models/msg");
 module.exports = function(irc, client, network) {
 	irc.on("kick", function(data) {
 		var from = data.nick;
-		var chan = _.findWhere(
+		var chan = _.find(
 			network.channels, {name: data.channel}
 		);
 
@@ -17,7 +17,7 @@ module.exports = function(irc, client, network) {
 		} else {
 			chan.users = _.without(
 				chan.users,
-				_.findWhere(chan.users, {name: data.client})
+				_.find(chan.users, {name: data.client})
 			);
 		}
 

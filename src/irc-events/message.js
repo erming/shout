@@ -16,7 +16,7 @@ module.exports = function(irc, client, network) {
 			target = from;
 		}
 
-		var chan = _.findWhere(
+		var chan = _.find(
 			network.channels, {name: target}
 		);
 		if (!chan) {

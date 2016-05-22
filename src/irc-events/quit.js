@@ -5,7 +5,7 @@ module.exports = function(irc, client, network) {
 	irc.on("quit", function(data) {
 		network.channels.forEach(function(chan) {
 			var nick = data.nick;
-			var user = _.findWhere(chan.users, {name: nick});
+			var user = _.find(chan.users, {name: nick});
 			if (!user) {
 				return;
 			}

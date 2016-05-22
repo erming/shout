@@ -5,7 +5,7 @@ module.exports = function(irc, client, network) {
 	irc.on("mode", function(data) {
 		var target = data.target;
 		var from = data.nick;
-		var chan = _.findWhere(
+		var chan = _.find(
 			network.channels, {
 				name: target
 			}

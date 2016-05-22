@@ -8,7 +8,7 @@ module.exports = function(irc, client, network) {
 			to = data.from;
 		}
 
-		var chan = _.findWhere(
+		var chan = _.find(
 			network.channels,
 			{name: to}
 		);

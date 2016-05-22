@@ -23,7 +23,7 @@ module.exports = function(irc, client, network) {
 		}
 
 		network.channels.forEach(function(chan) {
-			var user = _.findWhere(chan.users, {name: prev});
+			var user = _.find(chan.users, {name: prev});
 			if (!user) {
 				return;
 			} else {

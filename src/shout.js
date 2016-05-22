@@ -13,9 +13,9 @@ function shout() {
 	var app = express()
 		.use(root, serve)
 		.use(root, express.static("client"));
-
+	
 	var server = http.createServer(app).listen(config("port"));
-
+	
 	var sockets = io(server);
 	sockets.on("connect", function(s) {
 		// ..
