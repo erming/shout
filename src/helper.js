@@ -5,12 +5,15 @@ module.exports = {
 	compareHash: compareHash
 };
 
-function hash(str) {
+function hash(str, fn) {
 	var salt = bcrypt.genSaltSync(8);
-	var hash = bcrypt.hashSync(str, salt);
-	return hash;
+	bcrypt.hash(str, salt, null, function(err, hash) {
+		fn(hash);
+	});
 }
 
-function compareHash(str, hash) {
-	return bcrypt.compareSync(str, hash);
+function compareHash(str, hash, fn) {
+	return bcrypt.compare(str, hash, function(err, match) {
+		fn(match);
+	});
 }

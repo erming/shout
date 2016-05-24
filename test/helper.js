@@ -2,12 +2,17 @@ var tape = require("tape");
 var helper = require("../src/helper");
 
 tape("helper", function(t) {
-	t.plan(1);
+	t.plan(2);
 	
-	var hash = helper.hash("foo");
-	var compare = helper.compareHash("foo", hash);
+	helper.hash("foo", function(hash) {
+		helper.compareHash("foo", hash, function(match) {
+			t.true(match);
+		});
+	});
 	
-	t.true(compare);
-	
-	t.end();
+	helper.hash("bar", function(hash) {
+		helper.compareHash("foo", hash, function(match) {
+			t.false(match);
+		});
+	});
 });

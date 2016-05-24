@@ -4,24 +4,28 @@ var express = require("express");
 var fs = require("fs");
 var io = require("socket.io");
 var config = require("./config");
+var Client = require("./client");
 
 module.exports = shout;
+
+var sockets;
+var clients = [];
 
 function shout() {
 	var root = config("root");
 	var port = config("port");
 	
 	var app = express()
-		.use(root, express.static("client"))
-		.use(root, serve);
+		.use(root, serve)
+		.use(root, express.static("client"));
 	
 	var server = http.createServer(app);
 	
 	server.listen(port);
 	
-	var sockets = io(server);
+	sockets = io(server);
 	sockets.on("connect", function(s) {
-		// ..
+		init(s);
 	});
 	
 	console.log("");
@@ -43,7 +47,7 @@ function serve(req, res, next) {
 	}
 	
 	var model = {
-		shout: JSON.stringify({
+		"shout": JSON.stringify({
 			version: require("../package.json").version,
 			mode: config("mode")
 		})
@@ -58,4 +62,24 @@ function serve(req, res, next) {
 			}
 		}
 	);
+}
+
+function init(socket) {
+	socket.emit("auth");
+	socket.on("auth", function(data) {
+		auth(socket, data);
+	});
+}
+
+function auth(socket, data) {
+	var client;
+	
+	if (data == "guest") {
+		client = new Client(sockets)
+	} else {
+		client = new Client(sockets, "username");
+	}
+	
+	clients.push(client);
+	console.log(clients.length);
 }
