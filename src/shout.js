@@ -3,18 +3,21 @@ var http = require("http");
 var express = require("express");
 var fs = require("fs");
 var io = require("socket.io");
-var version = require("../package.json").version;
 var config = require("./config");
 
 module.exports = shout;
 
 function shout() {
 	var root = config("root");
-	var app = express()
-		.use(root, serve)
-		.use(root, express.static("client"));
+	var port = config("port");
 	
-	var server = http.createServer(app).listen(config("port"));
+	var app = express()
+		.use(root, express.static("client"))
+		.use(root, serve);
+	
+	var server = http.createServer(app);
+	
+	server.listen(port);
 	
 	var sockets = io(server);
 	sockets.on("connect", function(s) {
@@ -22,12 +25,12 @@ function shout() {
 	});
 	
 	console.log("");
-	console.log("shout@" + version)
+	console.log("shout@" + require("../package.json").version)
 	console.log("");
 	console.log("host  " + config("host"));
 	console.log("port  " + config("port"));
 	console.log("root  " + config("root"));
-	console.log("mode  " + _.keys(_.pick(config("mode"), function(mode) { return mode; })).join(", "));
+	console.log("mode  " + _.keys(_.pickBy(config("mode"))).join(", "));
 	console.log("");
 	console.log("Server started!");
 	console.log("Press ctrl-c to stop");
@@ -41,7 +44,7 @@ function serve(req, res, next) {
 	
 	var model = {
 		shout: JSON.stringify({
-			version: version,
+			version: require("../package.json").version,
 			mode: config("mode")
 		})
 	};
