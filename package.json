@@ -32,10 +32,9 @@
     "lodash": "^4.12.0",
     "moment": "^2.13.0",
     "slate-irc": "^0.8.1",
-    "socket.io": "^1.4.6",
-    "tape": "^4.5.1"
+    "socket.io": "^1.4.6"
   },
   "devDependencies": {
-    "tape": "*"
+    "tape": "^4.5.1"
   }
 }
