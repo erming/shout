@@ -1,5 +1,6 @@
 $(function() {
 	init();
+	auth();
 });
 
 var socket = io();
@@ -10,7 +11,7 @@ function init() {
 	socket.on(
 		"auth",
 		function(data) {
-			auth();
+			console.log("auth");
 		}
 	);
 }
@@ -21,7 +22,6 @@ function auth() {
 	login.on("click", "button", function() {
 		var self = $(this);
 		var type = self.data("type");
-		
 		if (type) {
 			socket.emit("auth", type);
 		}

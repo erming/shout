@@ -4,12 +4,12 @@ var express = require("express");
 var fs = require("fs");
 var io = require("socket.io");
 var config = require("./config");
-var Client = require("./client");
+var Manager = require("./manager");
 
 module.exports = shout;
 
-var sockets;
-var clients = [];
+var sockets = null;
+var manager = new Manager();
 
 function shout() {
 	var root = config("root");
@@ -67,19 +67,9 @@ function serve(req, res, next) {
 function init(socket) {
 	socket.emit("auth");
 	socket.on("auth", function(data) {
-		auth(socket, data);
+		var login = manager.login(sockets, data);
+		if (!login) {
+			socket.emit("auth");
+		}
 	});
-}
-
-function auth(socket, data) {
-	var client;
-	
-	if (data == "guest") {
-		client = new Client(sockets)
-	} else {
-		client = new Client(sockets, "username");
-	}
-	
-	clients.push(client);
-	console.log(clients.length);
 }
