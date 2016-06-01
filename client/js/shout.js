@@ -223,6 +223,14 @@ $(function() {
 			msg = $(render("msg", data.msg));
 		}
 
+		if (!options.seconds) {
+			var time = msg.find(".time");
+			if (time.html().trim()) {
+				var time_parts = time.html().split(":");
+				time.html(time_parts[0] + ":" + time_parts[1]);
+			}
+		}
+
 		var text = msg.find(".text");
 		if (text.find("i").size() === 1) {
 			text = text.find("i");
