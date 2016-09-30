@@ -7,6 +7,7 @@ Currently a work in progress.
 ### Inputs
 
 - [x] /action
+- [ ] /away
 - [ ] /ban
 - [x] /close
 - [x] /connect
@@ -14,6 +15,7 @@ Currently a work in progress.
 - [x] /devoice
 - [x] /disconnect
 - [ ] /help
+- [ ] /ignore
 - [x] /invite
 - [x] /join
 - [x] /kick
@@ -27,6 +29,8 @@ Currently a work in progress.
 - [x] /notice
 - [x] /op
 - [x] /part
+- [ ] /partall
+- [ ] /query
 - [x] /quit
 - [x] /quote
 - [x] /raw
@@ -34,12 +38,14 @@ Currently a work in progress.
 - [x] /send
 - [x] /server
 - [x] /slap
+- [ ] /unignore
 - [x] /topic
 - [x] /voice
 - [x] /whois
 
 ### Events
 
+- [ ] away
 - [x] ctcp
 - [x] errors
 - [x] join
