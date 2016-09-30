@@ -81,6 +81,11 @@ Currently a work in progress.
 - [x] reset-password
 - [x] start
 
+### Other
+
+- [ ] Identd
+- [ ] WEBIRC support
+
 ## License
 
 Available under [the MIT license](http://mths.be/mit).
