@@ -1,6 +1,6 @@
 var tape = require("tape");
 var events = require("events");
-var nick = require("../../src/irc-events/nick");
+var nick = require("../../src/irc/nick");
 var Chan = require("../../src/models/chan");
 var User = require("../../src/models/user");
 

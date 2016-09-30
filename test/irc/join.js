@@ -1,6 +1,6 @@
 var tape = require("tape");
 var events = require("events");
-var join = require("../../src/irc-events/join");
+var join = require("../../src/irc/join");
 
 tape("join", function(t) {
 	t.plan(5);

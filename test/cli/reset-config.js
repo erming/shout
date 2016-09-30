@@ -1,5 +1,5 @@
 var tape = require("tape");
-var reset = require("../../src/command-line/reset-config");
+var reset = require("../../src/cli/reset-config");
 
 tape("reset-config", function(t) {
 	t.end();

@@ -1,6 +1,6 @@
 var tape = require("tape");
 var events = require("events");
-var message = require("../../src/irc-events/message");
+var message = require("../../src/irc/message");
 var Chan = require("../../src/models/chan");
 
 tape("message", function(t) {

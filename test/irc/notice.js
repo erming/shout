@@ -1,6 +1,6 @@
 var tape = require("tape");
 var events = require("events");
-var notice = require("../../src/irc-events/notice");
+var notice = require("../../src/irc/notice");
 var Msg = require("../../src/models/msg");
 
 tape("notice", function(t) {

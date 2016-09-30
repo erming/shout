@@ -1,10 +1,10 @@
 var tape = require("tape");
 var events = require("events");
-var whois = require("../../src/irc-events/whois");
+var topic = require("../../src/irc/topic");
 var Chan = require("../../src/models/chan");
 
-tape("whois", function(t) {
-	t.plan(4);
+tape("topic", function(t) {
+	t.plan(2);
 
 	var irc = new events.EventEmitter();
 	irc.me = "foo";
@@ -14,6 +14,12 @@ tape("whois", function(t) {
 		switch (e) {
 		case "msg":
 			t.pass();
+			break;
+
+		case "topic":
+			if (msg.topic == "foo") {
+				t.pass();
+			}
 			break;
 		}
 	};
@@ -25,15 +31,12 @@ tape("whois", function(t) {
 		})]
 	};
 
-	whois(irc, client, network);
+	topic(irc, client, network);
 
-	irc.emit("whois", null, {
-		hostname: "freenode.org",
-		nickname: "foo",
-		username: "foo",
-		realname: "John Doe",
-		channels: "#bar",
-		server: "irc.freenode.org"
+	irc.emit("topic", {
+		channel: "#bar",
+		nick: "",
+		topic: "foo"
 	});
 
 	t.end();

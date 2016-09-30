@@ -1,6 +1,6 @@
 var tape = require("tape");
 var events = require("events");
-var kick = require("../../src/irc-events/kick");
+var kick = require("../../src/irc/kick");
 var Msg = require("../../src/models/msg");
 var User = require("../../src/models/user");
 

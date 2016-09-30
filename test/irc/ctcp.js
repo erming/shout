@@ -1,6 +1,6 @@
 var tape = require("tape");
 var events = require("events");
-var ctcp = require("../../src/irc-events/ctcp");
+var ctcp = require("../../src/irc/ctcp");
 var pkg = require("../../package.json");
 
 tape("ctcp", function(t) {

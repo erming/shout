@@ -2,5 +2,6 @@
 
 process.chdir(__dirname);
 
-var cli = require("./src/command-line");
-cli.run();
+(function() {
+	require("./src");
+})();

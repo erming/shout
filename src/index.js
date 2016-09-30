@@ -1,14 +1,14 @@
 var program = require("commander");
-var version = require("../../package.json").version;
+var version = require("../package.json").version;
 
-require("./add-user");
-require("./edit-config");
-require("./edit-user");
-require("./list-users");
-require("./remove-user");
-require("./reset-config");
-require("./reset-password");
-require("./start");
+require("./cli/add-user");
+require("./cli/edit-config");
+require("./cli/edit-user");
+require("./cli/list-users");
+require("./cli/remove-user");
+require("./cli/reset-config");
+require("./cli/reset-password");
+require("./cli/start");
 
 program.version(version, "-v, --version");
 program.option("-h, --help");
@@ -39,11 +39,7 @@ function help() {
 	console.log("shout@" + version);
 }
 
-module.exports = {
-	run: function() {
-		var result = program.parse(process.argv);
-		if (!result.args.length) {
-			help();
-		}
-	}
-};
+var result = program.parse(process.argv);
+if (!result.args.length) {
+	help();
+}

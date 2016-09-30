@@ -1,10 +1,10 @@
 var tape = require("tape");
 var events = require("events");
-var motd = require("../../src/irc-events/motd");
+var names = require("../../src/irc/names");
 var Chan = require("../../src/models/chan");
 
-tape("motd", function(t) {
-	t.plan(4);
+tape("names", function(t) {
+	t.plan(1);
 
 	var irc = new events.EventEmitter();
 	irc.me = "foo";
@@ -12,8 +12,9 @@ tape("motd", function(t) {
 	var client = {};
 	client.emit = function(e, msg) {
 		switch (e) {
-		case "msg":
-			if (msg.msg.text) {
+		case "users":
+			var users = msg.users;
+			if (users.length == 3) {
 				t.pass();
 			}
 			break;
@@ -27,10 +28,15 @@ tape("motd", function(t) {
 		})]
 	};
 
-	motd(irc, client, network);
+	names(irc, client, network);
 
-	irc.emit("motd", {
-		motd: ["this", "is", "the", "motd"]
+	irc.emit("names", {
+		channel: "#bar",
+		names: [
+			{name: "foo", mode: ""},
+			{name: "bar", mode: ""},
+			{name: "baz", mode: ""}
+		]
 	});
 
 	t.end();

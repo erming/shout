@@ -1,6 +1,6 @@
 var tape = require("tape");
 var events = require("events");
-var error = require("../../src/irc-events/errors");
+var error = require("../../src/irc/errors");
 
 tape("error", function(t) {
 	t.plan(3);

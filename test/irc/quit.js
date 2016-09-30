@@ -1,6 +1,6 @@
 var tape = require("tape");
 var events = require("events");
-var quit = require("../../src/irc-events/quit");
+var quit = require("../../src/irc/quit");
 var Chan = require("../../src/models/chan");
 
 tape("quit", function(t) {
