@@ -10,6 +10,7 @@ var Network = require("./models/network");
 var slate = require("slate-irc");
 var tls = require("tls");
 var Helper = require("./helper");
+var dns = require("dns");
 
 module.exports = Client;
 
@@ -157,6 +158,26 @@ Client.prototype.connect = function(args) {
 	var realname = args.realname || "Shout User";
 
 	var irc = slate(stream);
+	
+	if (config.webircpasswords && config.webircpasswords[server.host]) {
+		var sockets = client.sockets.sockets;
+		var room = sockets.adapter.rooms[client.id] || [];
+		for (var user in room) {
+			var socket = sockets.adapter.nsp.connected[user],
+			clientIP = socket ? socket.request.connection.remoteAddress : null;
+			if (clientIP) {
+				dns.reverse(clientIP, function(err, clienthost) {
+					if(err || !clienthost.length) return;
+					
+					console.log(clienthost[0], clientIP)
+					
+					irc.write(["WEBIRC", config.webircpasswords[server.host], username, clienthost[0], clientIP].join(" "));
+				})
+				break;	
+			}
+		}
+	}
+	
 	identd.hook(stream, username);
 
 	if (args.password) {
