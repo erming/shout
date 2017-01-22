@@ -110,7 +110,7 @@ ClientManager.prototype.removeUser = function(name) {
 ClientManager.prototype.autoload = function(/* sockets */) {
 	var self = this;
 	setInterval(function() {
-		var loaded = _.pluck(
+		var loaded = _.map(
 			self.clients,
 			"name"
 		);
