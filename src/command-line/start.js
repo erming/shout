@@ -2,6 +2,7 @@ var ClientManager = new require("../clientManager");
 var program = require("commander");
 var shout = require("../server");
 var Helper = require("../helper");
+var fs = require("fs");
 
 program
 	.option("-H, --host <ip>"   , "host")
@@ -9,11 +10,18 @@ program
 	.option("-B, --bind <ip>"   , "bind")
 	.option("    --public"      , "mode")
 	.option("    --private"     , "mode")
+        .option("    --conf <file>" , "conf")
 	.command("start")
 	.description("Start the server")
 	.action(function() {
 		var users = new ClientManager().getUsers();
-		var config = Helper.getConfig();
+                var config;
+                if (program.conf) {
+                  config = require(program.conf)
+                }
+                else  {
+		  config = Helper.getConfig();
+                }
 		var mode = config.public;
 		if (program.public) {
 			mode = true;

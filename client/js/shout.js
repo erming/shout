@@ -428,6 +428,17 @@ $(function() {
 		}
 	}
 
+	if($.cookie("theme") != null) {
+		$('#themeselect').val($.cookie("theme")).change();
+	}
+
+	$('#theme').attr('href',$('#themeselect').val());
+
+	$('#themeselect').on('change', function() {
+		$('#theme').attr('href',$(this).val());
+		$.cookie("theme", $(this).val()), options, {expires: expire(365)};
+	});
+
 	settings.on("change", "input", function() {
 		var self = $(this);
 		var name = self.attr("name");
