@@ -195,6 +195,9 @@ button, .user {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+#viewport .rt:before {
+	content: "\f0c0";
+}
 #viewport .rt {
 	display: block;
 	float: right;
