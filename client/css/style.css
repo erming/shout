@@ -562,7 +562,7 @@ button, .user {
 #chat .show-more {
 	display: none;
 	padding: 10px;
-	position: absolute;
+	position: relative;
 	width: 100%;
 }
 #chat .show-more.show + .messages .msg:first-child {
@@ -973,18 +973,18 @@ button, .user {
 	width: 100%;
 }
 #form #submit {
-	background: #f4f4f4;
-	background-image: linear-gradient(#f4f4f4, #ececec);
-	border: 1px solid #d7d7d7;
-	border-bottom-color: #b7b7b7;
-	border-radius: 2px;
-	font: 12px Lato, sans-serif;
-	color: #555;
-	height: 34px;
-	position: absolute;
-	right: 0;
-	transition: opacity .3s;
-	width: 58px;
+        background: #f4f4f4;
+        background-image: linear-gradient(#f4f4f4, #ececec);
+        border: 1px solid #d7d7d7;
+        border-bottom-color: #b7b7b7;
+        border-radius: 2px;
+        font: 12px Lato, sans-serif;
+        color: #555;
+        height: 34px;
+        position: fixed;
+        right: 10px;
+        transition: opacity .3s;
+        width: 58px;
 }
 
 
