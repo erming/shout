@@ -32,6 +32,7 @@
     "commander": "^2.3.0",
     "event-stream": "^3.1.7",
     "express": "^4.9.5",
+    "forever-monitor": "^1.7.0",
     "lodash": "~2.4.1",
     "mkdirp": "^0.5.0",
     "moment": "~2.7.0",
