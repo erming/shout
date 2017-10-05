@@ -206,17 +206,20 @@ $(function() {
 			"topic",
 			"action",
 		].indexOf(type) !== -1) {
-			switch (type) {
-			case "invite": data.msg.formattedAction = "invited " + data.msg.target + " to"; break;
-			case "join": data.msg.formattedAction = "has joined the channel"; break;
-			case "mode": data.msg.formattedAction = "sets mode"; break;
-			case "kick": data.msg.formattedAction = "has kicked"; break;
-			case "nick": data.msg.formattedAction = "is now known as"; break;
-			case "part": data.msg.formattedAction = "has left the channel"; break;
-			case "quit": data.msg.formattedAction = "has quit"; break;
-			case "topic": data.msg.formattedAction = "has changed the topic to:"; break;
-			default: data.msg.formattedAction = "";
-			}
+
+			if(type in data.msg.formattedAction)
+				data.msg.formattedAction = {
+					"invite": "invited " + data.msg.target + " to",
+					"join": "has joined the channel",
+					"mode": "sets mode",
+					"kick": "has kicked",
+					"nick": "is now known as",
+					"part": "has left the channel",
+					"quit": "has quit",
+					"topic": "has changed the topic to:"
+				}[type];
+			else
+				data.msg.formattedAction = "";
 
 			msg = $(render("msg_action", data.msg));
 		} else {
