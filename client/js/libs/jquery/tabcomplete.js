@@ -54,11 +54,15 @@
 		var hint = $.noop;
 		
 		// Determine what type of hinting to use.
-		hint = {
-			"placeholder": placeholder,
-			"select": select
-		}[options.hint];
-
+		switch (options.hint) {
+		case "placeholder":
+			hint = placeholder;
+			break;
+		
+		case "select":
+			hint = select;
+			break;
+		}
 		
 		this.on("input.tabcomplete", function() {
 			var input = self.val();
