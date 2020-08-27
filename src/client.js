@@ -31,7 +31,8 @@ var events = [
 	"quit",
 	"topic",
 	"welcome",
-	"whois"
+	"whois",
+	"ping"
 ];
 var inputs = [
 	"action",
@@ -138,34 +139,9 @@ Client.prototype.connect = function(args) {
 		}
 	}
 
-	var stream = args.tls ? tls.connect(server) : net.connect(server);
-
-	stream.on("error", function(e) {
-		console.log("Client#connect():\n" + e);
-		stream.end();
-		var msg = new Msg({
-			type: Msg.Type.ERROR,
-			text: "Connection error."
-		});
-		client.emit("msg", {
-			msg: msg
-		});
-	});
-
 	var nick = args.nick || "shout-user";
 	var username = args.username || nick.replace(/[^a-zA-Z0-9]/g, "");
 	var realname = args.realname || "Shout User";
-
-	var irc = slate(stream);
-	identd.hook(stream, username);
-
-	if (args.password) {
-		irc.pass(args.password);
-	}
-
-	irc.me = nick;
-	irc.nick(nick);
-	irc.user(username, realname);
 
 	var network = new Network({
 		name: server.name,
@@ -178,47 +154,83 @@ Client.prototype.connect = function(args) {
 		commands: args.commands
 	});
 
-	network.irc = irc;
-
 	client.networks.push(network);
 	client.emit("network", {
 		network: network
 	});
 
-	events.forEach(function(plugin) {
-		var path = "./plugins/irc-events/" + plugin;
-		require(path).apply(client, [
-			irc,
-			network
-		]);
-	});
+	var reconnect = function(args) {
+		network = _.find(client.networks, {id: network.id});
 
-	irc.once("welcome", function() {
-		var delay = 1000;
-		var commands = args.commands;
-		if (Array.isArray(commands)) {
-			commands.forEach(function(cmd) {
-				setTimeout(function() {
-					client.input({
-						target: network.channels[0].id,
-						text: cmd
-					});
-				}, delay);
-				delay += 1000;
+		var stream = args.tls ? tls.connect(server) : net.connect(server);
+
+		stream.on("error", function(e) {
+			console.log("Client#connect():\n" + e);
+			if (e.message.indexOf("write after end") !== -1) {
+				return; // fix exponential reconnection attempts
+			}
+			stream.end();
+			var msg = new Msg({
+				type: Msg.Type.ERROR,
+				text: "Connection error. Reconnecting in 15 seconds."
 			});
-		}
-		setTimeout(function() {
-			irc.write("PING " + network.host);
-		}, delay);
-	});
+			var lobby = network.channels[0];
+			lobby.messages.push(msg);
+			client.emit("msg", {
+				chan: lobby.id,
+				msg: msg
+			});
+			setTimeout(function() {
+				reconnect(args);
+			}, 15000);
+		});
 
-	irc.once("pong", function() {
-		var join = (args.join || "");
-		if (join) {
-			join = join.replace(/\,/g, " ").split(/\s+/g);
-			irc.join(join);
+		var irc = slate(stream);
+		identd.hook(stream, username);
+
+		if (args.password) {
+			irc.pass(args.password);
 		}
-	});
+
+		irc.me = nick;
+		irc.nick(nick);
+		irc.user(username, realname);
+
+		network.irc = irc;
+
+		events.forEach(function(plugin) {
+			var path = "./plugins/irc-events/" + plugin;
+			require(path).apply(client, [
+				irc,
+				network
+			]);
+		});
+
+		irc.once("welcome", function() {
+			var delay = 1000;
+			var commands = args.commands;
+			if (Array.isArray(commands)) {
+				commands.forEach(function(cmd) {
+					setTimeout(function() {
+						client.input({
+							target: network.channels[0].id,
+							text: cmd
+						});
+					}, delay);
+					delay += 1000;
+				});
+			}
+			setTimeout(function() {
+				var join = (args.join || "");
+				if (join) {
+					join = join.replace(/\,/g, " ").split(/\s+/g);
+					irc.join(join);
+				}
+			}, delay);
+		});
+	};
+
+	reconnect(args);
 };
 
 Client.prototype.input = function(data) {
