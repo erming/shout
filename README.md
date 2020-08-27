@@ -1,6 +1,6 @@
 # (~~Shout~~) DEPRECATED
 
-Use this very active fork instead: https://github.com/thelounge
+Use this very active fork instead: https://github.com/thelounge/thelounge
 
 ## Install
 
