@@ -46,7 +46,7 @@
     "grunt-cli": "^0.1.13",
     "grunt-contrib-uglify": "~0.5.0",
     "grunt-contrib-watch": "^0.6.1",
-    "handlebars": "^2.0.0",
+    "handlebars": "^4.7.6",
     "mocha": "~2.0.1"
   }
 }
