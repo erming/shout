@@ -162,6 +162,10 @@ function auth(data) {
 			}
 		});
 		if (!success) {
+			if (data.user !== undefined && config.authErrorCmd) {
+				var error_cmd = require("child_process");
+				error_cmd.execSync(config.authErrorCmd.replace(/\{user}/g, data.user));
+			}
 			socket.emit("auth");
 		}
 	}

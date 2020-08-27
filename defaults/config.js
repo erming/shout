@@ -11,6 +11,16 @@ module.exports = {
 	public: true,
 
 	//
+	// Exec command when invalid password was entered.
+	// Keyword {user} will be replaced with login name.
+	// Use it to report bad login attempts.
+	//
+	// @type     string
+	// @default  ""
+	//
+	authErrorCmd: "",
+
+	//
 	// Allow connections from this host.
 	//
 	// @type     string
