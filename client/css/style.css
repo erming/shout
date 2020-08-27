@@ -367,11 +367,13 @@ button, .user {
 	display: inline-block;
 }
 .signed-out #footer .connect,
+.signed-out #footer .profile,
 .signed-out #footer .sign-out {
 	display: none;
 }
 .public #footer .sign-in,
-.public #footer .sign-out {
+.public #footer .sign-out,
+.public #footer .profile {
 	display: none;
 }
 #footer .sign-in {
@@ -386,8 +388,11 @@ button, .user {
 #footer .settings:before {
 	content: "\f013";
 }
+#footer .profile:before {
+	content: "\f007";
+}
 #footer .sign-out:before {
-	content: "\f13e";
+	content: "\f08b";
 }
 #main {
 	background: #fff;
@@ -919,6 +924,17 @@ button, .user {
 	font-size: 14px;
 	padding-top: 2px;
 	line-height: 1.8;
+}
+#profile .title {
+	margin-bottom: -10px;
+}
+#profile .opt {
+	display: block;
+	padding: 5px 0 10px 1px;
+}
+#profile .opt input {
+	float: left;
+	margin: 4px 10px 0 0;
 }
 #form {
 	background: #e4eaee;

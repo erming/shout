@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 	<head>
 
@@ -37,6 +37,7 @@
 			<button class="icon sign-in" data-target="#sign-in" data-title="Sign in" data-placement="top" title="Sign in to Shout"></button>
 			<button class="icon connect" data-target="#connect" data-title="Connect" data-placement="top" title="Connect to network"></button>
 			<button class="icon settings" data-target="#settings" data-title="Settings" data-placement="top" title="Client settings"></button>
+			<button class="icon profile" data-target="#profile" data-title="Profile" data-placement="top" title="My Profile"></button>
 			<button id="sign-out" class="icon sign-out" data-placement="top" title="Sign out"></button>
 		</footer>
 		<div id="main">
@@ -160,6 +161,42 @@
 								<button type="submit" class="btn">
 									Connect
 								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div id="profile" data-title="My Profile" class="window">
+					<div class="header">
+						<button class="lt"></button>
+					</div>
+					<form class="container" action="">
+						<div class="row">
+							<div class="col-sm-12">
+								<h1 class="title">My Profile</h1>
+							</div>
+							<div class="col-sm-12">
+								<h2>Change password</h2>
+							</div>
+							<div class="col-sm-12">
+								<label aria-label="Enter current password">
+									<span class="sr-only">Enter current password</span>
+								</label>
+								<input class="input" type="password" name="old_password" placeholder="Enter current password">
+							</div>
+							<div class="col-sm-12">
+								<label aria-label="Enter desired new password">
+									<span class="sr-only">Enter desired new password</span>
+								</label>
+								<input type="password" name="new_password" class="input" placeholder="Enter desired new password">
+							</div>
+							<div class="col-sm-12">
+								<label aria-label="Repeat new password">
+									<span class="sr-only">Repeat new password</span>
+								</label>
+								<input type="password" name="verify_password" class="input" placeholder="Repeat new password">
+							</div>
+							<div class="col-sm-12">
+								<button type="submit" class="btn">Change password</button>
 							</div>
 						</div>
 					</form>

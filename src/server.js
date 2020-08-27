@@ -110,6 +110,49 @@ function init(socket, client, token) {
 			}
 		);
 		socket.on(
+			"profile",
+			function(data) {
+				var old = data.old_password;
+				var p1 = data.new_password;
+				var p2 = data.verify_password;
+				if (typeof old === "undefined" || old === "") {
+					socket.emit("profile", {
+						error: "Please enter your current password"
+					});
+					return;
+				}
+				if (typeof p1 === "undefined" || p1 === "") {
+					socket.emit("profile", {
+						error: "Please enter a new password"
+					});
+					return;
+				}
+				if (p1 !== p2) {
+					socket.emit("profile", {
+						error: "Both new password fields must match"
+					});
+					return;
+				}
+				if (!bcrypt.compareSync(old || "", client.config.password)) {
+					socket.emit("profile", {
+						error: "The current password field does not match your account password"
+					});
+					return;
+				}
+				var salt = bcrypt.genSaltSync(8);
+				var hash = bcrypt.hashSync(p1, salt);
+				if (client.setPassword(hash)) {
+					socket.emit("profile", {
+						success: "Successfully updated your password"
+					});
+					return;
+				}
+				socket.emit("profile", {
+					error: "Failed to update your password"
+				});
+			}
+		);
+		socket.on(
 			"open",
 			function(data) {
 				client.open(data);
