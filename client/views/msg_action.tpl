@@ -4,7 +4,7 @@
 	</span>
 	<span class="from"></span>
 	<span class="text">
-		<a href="#" class="user">{{mode}}{{from}}</a>
+		<a href="#" class="user" style="color:#{{stringcolor from}}">{{mode}}{{from}}</a>
 		{{formattedAction}}
 		{{{parse text}}}
 	</span>
