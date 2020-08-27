@@ -562,14 +562,8 @@ button, .user {
 #chat .show-more {
 	display: none;
 	padding: 10px;
-	position: absolute;
+	position: relative;
 	width: 100%;
-}
-#chat .show-more.show + .messages .msg:first-child {
-	padding-top: 47px !important;
-}
-#chat .show-more.show + .messages .msg:first-child > span {
-	padding-top: 52px !important;
 }
 #chat .show-more-button {
 	background: #f4f4f4;
@@ -593,9 +587,6 @@ button, .user {
 #chat .msg {
 	display: table-row;
 	word-wrap: break-word;
-}
-#chat .msg:first-child > span {
-	padding-top: 10px;
 }
 #chat .msg:last-child {
 	height: 100%;
