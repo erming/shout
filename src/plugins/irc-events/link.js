@@ -84,7 +84,8 @@ function parse(msg, url, res, client) {
 	case "image/gif":
 	case "image/jpg":
 	case "image/jpeg":
-		if (res.size < (config.prefetchMaxImageSize * 1024)) {
+		if ((res.size === undefined && config.prefetchUndefinedImageSize) ||
+			(res.size < (config.prefetchMaxImageSize * 1024))) {
 			toggle.type = "image";
 		}
 		else {
