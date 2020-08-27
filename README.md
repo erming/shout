@@ -1,14 +1,6 @@
-# Shout [![Build Status](https://travis-ci.org/erming/shout.svg?branch=master)](https://travis-ci.org/erming/shout)
+# (~~Shout~~) DEPRECATED
 
-__What is it?__
-Shout is a web IRC client that you host on your own server.
-
-__What features does it have?__
-- Multiple user support
-- Stays connected even when you close the browser
-- Connect from multiple devices at once
-- Responsive layout — works well on your smartphone
-- _.. and more!_
+Use this very active fork instead: https://github.com/thelounge
 
 ## Install
 
