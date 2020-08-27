@@ -330,6 +330,7 @@ button, .user {
 	right: 0;
 	transition: all .2s;
 	width: 18px;
+	display: none;
 }
 #sidebar .close:hover {
 	background-color: rgba(0, 0, 0, .1);
