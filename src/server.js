@@ -6,6 +6,7 @@ var express = require("express");
 var fs = require("fs");
 var io = require("socket.io");
 var Helper = require("./helper");
+var LdapAuth = require("ldapauth");
 var config = {};
 
 var sockets = null;
@@ -130,6 +131,24 @@ function init(socket, client, token) {
 	}
 }
 
+function local_auth(client, user, password, callback) {
+	callback(bcrypt.compareSync(password || "", client.config.password));
+}
+
+function ldap_auth(client, user, password, callback) {
+	ldap = new LdapAuth(config.ldap);
+	ldap.authenticate(user, password, function(err, ldap_user){
+		if (!err && !client) {
+			// we've authenticated, but having no client means we
+			// have a valid LDAP user that doesn't exist locally.
+			if (!manager.addUser(user, null)) {
+				console.log("Unable to create new user", user);
+			}
+		}
+		callback(!err);
+	});
+}
+
 function auth(data) {
 	var socket = this;
 	if (config.public) {
@@ -141,27 +160,34 @@ function auth(data) {
 		});
 		init(socket, client);
 	} else {
-		var success = false;
-		_.each(manager.clients, function(client) {
-			if (data.token) {
-				if (data.token === client.token) {
-					success = true;
+		var client = manager.findClient(data.user, data.token);
+		var token;
+		var auth_func;
+		if (data.remember || data.token) {
+			token = client.token;
+		}
+
+		if (client || config.ldap.enabled) {
+			auth_func = ldap_auth;
+		} else if (client) {
+			auth_func = local_auth;
+		}
+
+		if (auth_func) {
+			auth_func(client, data.user, data.password, function(passed) {
+				if (passed) {
+					if (!client) {
+						//LDAP auth just created a user
+						manager.loadUser(data.user);
+						client = manager.findClient(data.user);
+					}
+					init(socket, client, token);
+				} else {
+					socket.emit("auth");
 				}
-			} else if (client.config.user === data.user) {
-				if (bcrypt.compareSync(data.password || "", client.config.password)) {
-					success = true;
-				}
-			}
-			if (success) {
-				var token;
-				if (data.remember || data.token) {
-					token = client.token;
-				}
-				init(socket, client, token);
-				return false;
-			}
-		});
-		if (!success) {
+			});
+		}
+		else {
 			socket.emit("auth");
 		}
 	}

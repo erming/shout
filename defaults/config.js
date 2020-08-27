@@ -87,6 +87,56 @@ module.exports = {
 	displayNetwork: true,
 
 	//
+	// LDAP authentication settings (only available if public=false)
+	// @type    object
+	// @default {}
+	ldap: {
+		//
+		// Enable LDAP user authentication
+		//
+		// @type     boolean
+		// @default  false
+		//
+		enabled: false,
+
+		//
+		// LDAP server URL
+		//
+		// @type     string
+		//
+		//url: "ldaps://example.com",
+
+		//
+		// LDAP bind user
+		//
+		// @type     string
+		//
+		//adminDn: "cn=user,ou=binders,dc=example,dc=com",
+
+		//
+		// LDAP bind password
+		//
+		// @type     string
+		//
+		//adminPassword: "superS3cr3t",
+
+		//
+		// LDAP search base
+		//
+		// @type     string
+		//
+		//searchBase: "ou=accounts,dc=example,dc=com",
+
+		//
+		// LDAP search filter
+		//
+		// @type     string
+		// @default  "(uid={{username}})"
+		//
+		searchFilter: "(uid={{username}})"
+	},
+
+	//
 	// Log settings
 	//
 	// Logging has to be enabled per user. If enabled, logs will be stored in
