@@ -296,6 +296,13 @@
 	<script src="js/libs.min.js"></script>
 	<script src="js/shout.templates.js"></script>
 	<script src="js/shout.js"></script>
-
+    <script src="js/ifvisible.js"></script>
+    <script>
+        ifvisible.on("focus", function() { 
+            if (document.title.indexOf("+") !== -1) {
+                document.title = document.title.replace(/^\s*\+\s+/,"");
+            }
+        });
+    </script>
 	</body>
 </html>

@@ -673,6 +673,10 @@ $(function() {
 			}
 		}
 
+        if (!document.hasFocus() && document.title.indexOf("+") == -1) {
+            document.title = " + " + document.title;
+        }
+
 		button = button.filter(":not(.active)");
 		if (button.length === 0) {
 			return;
