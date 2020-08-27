@@ -409,6 +409,7 @@ $(function() {
 	var settings = $("#settings");
 	var options = $.extend({
 		badge: false,
+		desktopNotifications: false,
 		colors: false,
 		join: true,
 		links: true,
@@ -455,7 +456,7 @@ $(function() {
 	}).find("input")
 		.trigger("change");
 
-	$("#badge").on("change", function() {
+	$("#desktopNotifications").on("change", function() {
 		var self = $(this);
 		if (self.prop("checked")) {
 			if (Notification.permission !== "granted") {
@@ -654,8 +655,10 @@ $(function() {
 				if (settings.notification) {
 					pop.play();
 				}
-				favico.badge("!");
-				if (settings.badge && Notification.permission === "granted") {
+				if (settings.badge) {
+					favico.badge("!");
+				}
+				if (settings.desktopNotifications && Notification.permission === "granted") {
 					var notify = new Notification(msg.from + " says:", {
 						body: msg.text.trim(),
 						icon: "/img/logo-64.png",
