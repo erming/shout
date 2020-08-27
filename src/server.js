@@ -70,6 +70,15 @@ module.exports = function(options) {
 	}
 };
 
+function reqHeader(req, header, defValue) {
+	var headerValue = req.get(header)
+	if (headerValue) {
+		return headerValue
+	} else {
+		return defValue
+	}
+}
+
 function index(req, res, next) {
 	if (req.url.split("?")[0] !== "/") return next();
 	return fs.readFile("client/index.html", "utf-8", function(err, file) {
@@ -77,6 +86,11 @@ function index(req, res, next) {
 			require("../package.json"),
 			config
 		);
+
+		data.defaults.username = reqHeader(req, 'X-Forwarded-User', data.defaults.username);
+		data.defaults.nick = reqHeader(req, 'X-Forwarded-Nick', data.defaults.nick);
+		data.defaults.realname = reqHeader(req, 'X-Forwarded-Realname', data.defaults.realname);
+
 		res.setHeader("Content-Type", "text/html");
 		res.writeHead(200);
 		res.end(_.template(
